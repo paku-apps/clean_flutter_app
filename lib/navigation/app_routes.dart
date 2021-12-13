@@ -1,5 +1,5 @@
-import 'package:clean_app/pages/demo_page.dart';
-import 'package:clean_app/pages/login/login_page.dart';
+import 'package:clean_app/features/demo_page.dart';
+import 'package:clean_app/features/login/login_page.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {

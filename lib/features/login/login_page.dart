@@ -8,6 +8,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    
     return GetBuilder<LoginController>(
       init: LoginController(),
       builder: (controller) => const Scaffold(
