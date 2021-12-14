@@ -1,6 +1,12 @@
+import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/controllers/login/login_controller.dart';
+import 'package:clean_app/widgets/background_color.dart';
+import 'package:clean_app/widgets/buttons/rounded_button.dart';
+import 'package:clean_app/widgets/inputs/rounded_input_field.dart';
+import 'package:clean_app/widgets/inputs/rounded_input_pass.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -13,9 +19,32 @@ class LoginPage extends StatelessWidget {
     
     return GetBuilder<LoginController>(
       init: LoginController(),
-      builder: (controller) => const Scaffold(
-        body: Center(
-          child: Text("Login Page")
+      builder: (controller) => Scaffold(
+        body: BackgroundColor(
+          colorBackground: colorBackgroundWhite,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [    
+                SvgPicture.asset(
+                  "assets/images/rocket_app.svg",
+                  height: size.height * 0.25,
+                ),
+                SizedBox(height: size.height * 0.10),
+                RoundedInputField(
+                  hintText: "Correo Electronico",
+                  icon: Icons.account_circle_rounded,
+                  onChanged: (value) {},
+                ),
+                RoundedPasswordField(
+                  icon: Icons.lock,
+                  onChanged: (value) {},
+                ),
+                SizedBox(height: size.height * 0.05),
+                RoundedButton(text: "Iniciar Sesión", press: () => {})
+              ],
+            ),
+          ),
         ),
       ),
     );
