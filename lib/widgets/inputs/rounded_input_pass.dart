@@ -4,11 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RoundedPasswordField extends StatelessWidget {
+
   final ValueChanged<String> onChanged;
   final IconData icon;
-  const RoundedPasswordField({
+  bool showPassword;
+  Function functionTapIcon;
+
+  RoundedPasswordField({
     Key? key,
     this.icon = Icons.lock,
+    this.showPassword = false,
+    required this.functionTapIcon,
     required this.onChanged,
   }) : super(key: key);
 
@@ -16,20 +22,25 @@ class RoundedPasswordField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextField(
-        obscureText: true,
-        style: TextStyle(color: Colors.white),
+        obscureText: !showPassword,
+        style: TextStyle(color: primaryColor),
         onChanged: onChanged,
         cursorColor: primaryColor,
         decoration: InputDecoration(
           hintText: "Contraseña",
-          hintStyle: TextStyle(color: Colors.white70),
+          hintStyle: TextStyle(color: primaryColor),
           icon: Icon(
             icon,
-            color: whiteColor,
+            color: primaryColor,
           ),
-          suffixIcon: Icon(
-            Icons.visibility,
-            color: whiteColor,
+          suffixIcon: IconButton(
+            icon: Icon( 
+              !showPassword ? Icons.visibility : Icons.visibility_off,
+              color: primaryColor
+            ),
+            onPressed: () {
+              functionTapIcon();
+            },
           ),
           border: InputBorder.none,
         ),

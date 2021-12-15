@@ -1,6 +1,4 @@
-
-
-import 'package:clean_app/controllers/demo_controller.dart';
+import 'package:clean_app/features/demo/demo_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

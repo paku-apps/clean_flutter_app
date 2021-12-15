@@ -7,6 +7,16 @@ class LoginController extends GetxController {
 
   final AuthenticationController _authenticationController = Get.find();
 
+
+  bool _showPassword = false;
+
+  bool get passVisibility => _showPassword;
+
+  void changePassVisibility(){
+    _showPassword = !_showPassword;
+    update();
+  }
+
   final _loginStateStream = LoginState().obs;
 
   LoginState get state => _loginStateStream.value;

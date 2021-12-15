@@ -1,5 +1,7 @@
 import 'package:clean_app/constants/constants.dart';
-import 'package:clean_app/controllers/login/login_controller.dart';
+import 'package:clean_app/features/login/auth/authentication_controller.dart';
+import 'package:clean_app/features/login/auth/authentication_service.dart';
+import 'package:clean_app/features/login/login_controller.dart';
 import 'package:clean_app/widgets/background_color.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_field.dart';
@@ -11,11 +13,10 @@ import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
-
+    
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     
     return GetBuilder<LoginController>(
       init: LoginController(),
@@ -26,6 +27,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [    
+                SizedBox(height: size.height * 0.10),
                 SvgPicture.asset(
                   "assets/images/rocket_app.svg",
                   height: size.height * 0.25,
@@ -39,9 +41,13 @@ class LoginPage extends StatelessWidget {
                 RoundedPasswordField(
                   icon: Icons.lock,
                   onChanged: (value) {},
+                  showPassword: controller.passVisibility,
+                  functionTapIcon: () {
+                    controller.changePassVisibility();
+                  },
                 ),
-                SizedBox(height: size.height * 0.05),
-                RoundedButton(text: "Iniciar Sesión", press: () => {})
+                RoundedButton(text: "Iniciar Sesión", color: accentColor, press: () => {}),
+                SizedBox(height: size.height * 0.10),
               ],
             ),
           ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 //Theme Colors App
-const primaryColor = Color(0xFF39a290);
-const accentColor = Color(0xFFfbca03);
-const whiteColor = Color(0xFFFFFFFF);
-const woodColor = Color(0xFFf59961);
-const fuchsia = Color(0xFFf41c4f);
+const primaryColor = Color(0xFF111183);
+const secondaryColor = Color(0xFFF8A445);
+const accentColor = Color(0xFFdb001d);
+const whiteColor = Color(0xFFF5EEEE);
+const primaryColorLight = Color(0xFF9AB5F0);
 
-const colorBackgroundWhite  = Color(0xF0F0F3);
+const colorBackgroundWhite  = Color(0xFFF0F0F3);
