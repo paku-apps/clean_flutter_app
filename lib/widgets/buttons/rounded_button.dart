@@ -1,4 +1,5 @@
 import 'package:clean_app/constants/constants.dart';
+import 'package:clean_app/constants/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,10 @@ class RoundedButton extends StatelessWidget {
 
   const RoundedButton({
     Key? key,
-    required this.text,
-    required this.press,
     this.color = primaryColor,
     this.textColor = Colors.white,
+    required this.text,
+    required this.press,
   }) : super(key: key);
 
   @override
@@ -24,7 +25,7 @@ class RoundedButton extends StatelessWidget {
       width: size.width * 0.8,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
-        child: newElevatedButton(press),
+        child: newElevatedButton(),
       ),
     );
   }
@@ -32,13 +33,13 @@ class RoundedButton extends StatelessWidget {
   //Used:ElevatedButton as FlatButton is deprecated.
   //Here we have to apply customizations to Button by inheriting the styleFrom
 
-  Widget newElevatedButton(Function press) {
+  Widget newElevatedButton() {
     return ElevatedButton(
       child: Text(
         text,
-        style: TextStyle(color: textColor),
+        style: TextStyle(color: textColor, fontSize: textSizeButtonApp),
       ),
-      onPressed: () => press,
+      onPressed: () => press(),
       style: ElevatedButton.styleFrom(
           primary: color,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),

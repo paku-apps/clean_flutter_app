@@ -34,10 +34,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Obx(() {
         if(controller.state is Authenticated){
-          return LoginPage();
+          return DemoPage();
         }
         if(controller.state is UnAuthenticated){
-          return DemoPage();
+          return LoginPage();
         }
         return DemoPage();
       }),
