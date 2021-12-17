@@ -1,13 +1,15 @@
 import 'package:clean_app/constants/constants.dart';
-import 'package:clean_app/constants/dimentsions.dart';
+import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/features/login/auth/authentication_service.dart';
 import 'package:clean_app/features/login/login_controller.dart';
+import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/background_color.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_normal.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
+import 'package:clean_app/widgets/labels/label_tap.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,6 +66,20 @@ class LoginPage extends StatelessWidget {
                     press: () => controller.checkLogin() 
                     //controller.checkLogin
                   ),
+                  SizedBox(height: size.height * 0.05),
+                  TextLabelTap(
+                    press: () => {
+                      openBrowser("https://paku.pe/")
+                    },
+                    textLabel: loginPageTextTapForgotPass
+                  ), 
+                  SizedBox(height: size.height * 0.01),
+                  TextLabelTap(
+                    press: () => {
+                      openBrowser("https://villamaria.edu.pe/")
+                    },
+                    textLabel: loginPageTextTapNewAccountPickup
+                  ), 
                   SizedBox(height: size.height * 0.10),
                 ],
               ),

@@ -29,7 +29,7 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
       child: TextFormField(
         obscureText: showPassword,
         controller: controller,
-        style: TextStyle(color: primaryColor),
+        style: const TextStyle(color: primaryColor),
         cursorColor: primaryColor,
         onSaved: (value) {
           valueData = value!;
@@ -40,7 +40,7 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
         decoration: InputDecoration(
           hintText: "Correo electrónico",
           hoverColor: primaryColor,
-          hintStyle: TextStyle(color: primaryColor),
+          hintStyle: const TextStyle(color: primaryColor),
           filled: true,
           fillColor: primaryColorLight,
           prefixIcon: leftIcon != null ?Icon(
