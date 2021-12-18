@@ -58,13 +58,14 @@ class LoginController extends GetxController {
     isSubmitted = true;
     update();
     final isValid = loginFormkey.currentState!.validate();
-    print(emailController.text);
-    print(passwordController.text);
     if(!isValid){
       return;
     }
     loginFormkey.currentState!.save();
+    login(emailController.text, passwordController.text);
   }
+
+  
 
   final _loginStateStream = LoginState().obs;
 

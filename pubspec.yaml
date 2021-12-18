@@ -32,6 +32,10 @@ dependencies:
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.0.17
 
+  # Flutter Https
+  # https://pub.dev/packages/http
+  http: ^0.13.4
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

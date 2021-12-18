@@ -30,8 +30,8 @@ class LoginPage extends StatelessWidget {
             colorBackground: colorBackgroundWhite,
             child: SingleChildScrollView(
               child: Form(
-                //autovalidateMode: controller.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
-                autovalidateMode:AutovalidateMode.onUserInteraction,
+                autovalidateMode: controller.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+                //autovalidateMode:AutovalidateMode.onUserInteraction,
                 key: controller.loginFormkey,
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

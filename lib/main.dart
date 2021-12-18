@@ -15,7 +15,7 @@ void main() {
 
 void initialize(){
   //Load all controllers
-  Get.lazyPut(() => AuthenticationController(Get.put(FakeAuthenticationService())),);
+  Get.lazyPut(() => AuthenticationController(Get.put(AuthenticationServiceImpl())),);
 }
 
 class MyApp extends StatelessWidget {

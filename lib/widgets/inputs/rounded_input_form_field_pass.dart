@@ -32,7 +32,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
       child: TextFormField(
-        obscureText: showPassword,
+        obscureText: !showPassword,
         controller: controller,
         style: const TextStyle(color: primaryColor),
         cursorColor: primaryColor,
@@ -54,7 +54,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
           ) : null,
           suffixIcon: IconButton(
             icon: Icon( 
-              showPassword ? Icons.visibility : Icons.visibility_off,
+              !showPassword ? Icons.visibility : Icons.visibility_off,
               color: primaryColor
             ),
             onPressed: () => functionTapIcon(),
