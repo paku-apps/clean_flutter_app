@@ -15,6 +15,7 @@ class AppBarDrawerApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: primaryColor,
       title: Text(title, style: const TextStyle(color: whiteColor, fontSize: textSizeNormalLabel),),
       leading: IconButton(
         onPressed: () => {

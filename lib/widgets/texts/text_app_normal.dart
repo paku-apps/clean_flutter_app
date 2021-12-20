@@ -6,9 +6,11 @@ class TextAppNormal extends StatelessWidget {
 
   String text;
   Color color;
+  bool noPaddingVertical;
 
   TextAppNormal({
     Key? key,
+    this.noPaddingVertical = false,
     required this.text,
     required this.color
     }) : super(key: key);
@@ -16,7 +18,7 @@ class TextAppNormal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+      padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
       child: Text(text, style: const TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: whiteColor),),
     );
   }

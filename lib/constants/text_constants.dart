@@ -4,6 +4,7 @@ const emptySpace = " ";
 
 //Message App
 const messageNotLaunchUrl = "No se puede abrir la página";
+const closeSession = "Cerrar sesión";
 
 
 //Login Page Texts
@@ -23,3 +24,7 @@ const homeChargerPageTitle = "Autorizaciones";
 
 //Home Supervisor Page Texts
 const homeSupervisorPageTitle = "Escanear Código QR";
+
+
+//Drawer Profiles Texts
+const drawerOptionAuthorizations = "Autorizaciones creadas";

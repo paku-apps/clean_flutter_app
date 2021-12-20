@@ -34,19 +34,22 @@ class HeaderFooterDrawerApp extends StatelessWidget {
                   children: [
                     AvatarCircleInitials(firstName: user.name, lastName: user.lastName),
                     TextAppTitle(text: user.name+ emptySpace +user.lastName, color: whiteColor),
-                    TextAppNormal(text: user.email, color: whiteColor)
+                    TextAppNormal(text: user.email, color: whiteColor, noPaddingVertical: true)
                   ],
                 ),
               )
             ),
             ListTile(
-              title: const Text('Item 1'),
+              leading: const Icon(Icons.list),
+              title: const Text(drawerOptionAuthorizations),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
+            const Divider(), //here is a divider
             ListTile(
-              title: const Text('Item 2'),
+              leading: const Icon(Icons.logout),
+              title: const Text(closeSession),
               onTap: () {
                 Navigator.pop(context);
               },

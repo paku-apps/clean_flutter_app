@@ -18,7 +18,7 @@ class AvatarCircleInitials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(dimenSmall),
+      padding: const EdgeInsets.all(dimenSmall),
       decoration: const BoxDecoration(
             color: accentColor,
             shape: BoxShape.circle
