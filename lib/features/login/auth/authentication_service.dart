@@ -20,7 +20,11 @@ class AuthenticationServiceImpl extends AuthenticationService {
 
   @override
   Future<User> signInEmailAndPassword(String username, String password) async {
-    var demo = User("nombrecito", "apellidito", "correito");
+    var demo = User(
+      name: "nombrecito", 
+      lastName: "apellidito", 
+      email: "correito"
+    );
     var url = Uri.parse(pathServer+stage+loginService);
     var response = await client.post(
       url, 
@@ -73,7 +77,11 @@ class FakeAuthenticationService extends AuthenticationService {
       throw AuthenticationException(message: 'Wrong username or password');
     }
 
-    return User('Test User','LastanmeTest ', "test@email.com");
+    return User(
+      name: 'Test User',
+      lastName: 'LastanmeTest',
+      email:  "test@email.com"
+    );
 
   }
 

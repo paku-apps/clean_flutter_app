@@ -36,6 +36,10 @@ dependencies:
   # https://pub.dev/packages/http
   http: ^0.13.4
 
+  # SharedPreferences
+  # https://pub.dev/packages/shared_preferences
+  shared_preferences: ^2.0.11
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

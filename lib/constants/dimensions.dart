@@ -14,4 +14,6 @@ const dimenExtraBig = 40.0;
 
 //FontSize App
 const textSizeButtonApp = 20.0;
+const textSizeTitleApp = 20.0;
 const textSizeNormalLabel = 16.0;
+const textSizeAvatar = 20.0;

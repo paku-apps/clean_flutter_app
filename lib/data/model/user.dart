@@ -1,13 +1,13 @@
 class User {
 
-  final String username;
-  final String lastName;
-  final String email;
+  String name;
+  String lastName;
+  String email;
 
-  const User(
-    this.username,
-    this.lastName,
-    this.email
-  );
+  User({
+    this.name = "",
+    this.lastName = "",
+    this.email = ""
+  });
 
 }

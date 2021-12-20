@@ -6,3 +6,7 @@ void openBrowser(
 ) async {
   if(!await launch(urlString)) throw messageNotLaunchUrl;
 }
+
+String getInitialString(String text){
+  return text[0];
+}
