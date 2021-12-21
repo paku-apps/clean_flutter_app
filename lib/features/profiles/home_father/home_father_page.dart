@@ -22,8 +22,25 @@ class HomeFatherPage extends StatelessWidget {
         )
       ),
       drawer: HeaderFooterDrawerApp(user: User(name: "Primero", lastName: "Segundo", email: "Correo"),),
-      body: const Center(
-        child: Text('Profile Father'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Profile Father'),
+          Obx(() {
+            return ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              itemCount: controllerPage.listChildren.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Center(child: Text('Entry ${controllerPage.listChildren[index].name}')),
+                );
+              }
+            );
+          })
+        ]
       ),
     );
   }

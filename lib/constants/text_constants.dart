@@ -15,7 +15,7 @@ const loginPageTextTapForgotPass = "Olvidé la contraseña";
 const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
 
 //Home Father Page Texts
-const homeFatherPageTitle = "Autorizaciones";
+const homeFatherPageTitle = "Autorización";
 
 
 //Home Charger Page Texts
