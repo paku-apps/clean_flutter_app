@@ -16,6 +16,9 @@ const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
 
 //Home Father Page Texts
 const homeFatherPageTitle = "Autorización";
+const homeFatherPageTextQr = "Muestra este código QR al supervisor";
+const homeFatherPageGenerateQrButton = "Generar QR";
+const homeFatherPageChildren = "Este QR te autoriza a recoger a los siguientes estudiantes";
 
 
 //Home Charger Page Texts

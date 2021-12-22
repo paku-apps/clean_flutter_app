@@ -19,7 +19,7 @@ class TextAppNormal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-      child: Text(text, style: const TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: whiteColor),),
+      child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
     );
   }
 }
