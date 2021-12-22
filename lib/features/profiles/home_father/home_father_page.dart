@@ -39,11 +39,17 @@ class HomeFatherPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RoundedButton(
-                    text: homeFatherPageGenerateQrButton,
-                    color: primaryColor, 
-                    press: () => { controllerPage.getQRPrincipal() } 
-                ),
+                Obx(() {
+                  if(controllerPage.showQR == true){
+                    return Text("Mostrar QR TRUE");
+                  } else {
+                    return RoundedButton(
+                      text: homeFatherPageGenerateQrButton,
+                      color: primaryColor, 
+                      press: () => { controllerPage.getQRPrincipal() } 
+                    );
+                  }
+                }),
               ],
             ),
           ),

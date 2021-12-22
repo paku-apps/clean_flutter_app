@@ -40,6 +40,14 @@ dependencies:
   # https://pub.dev/packages/shared_preferences
   shared_preferences: ^2.0.11
 
+  # Display QR
+  # https://pub.dev/packages/qr_flutter
+  qr_flutter: ^4.0.0
+
+  # Scannable QR
+  # https://pub.dev/packages/qr_code_scanner
+  qr_code_scanner: ^0.6.1
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
