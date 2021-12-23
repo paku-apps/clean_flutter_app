@@ -9,7 +9,9 @@ class HomeFatherController extends GetxController {
 
   var usuarioLogged = User().obs;
   var listChildren = List<Child>.empty().obs;
+  var showQRLoading = false.obs;
   var showQR = false.obs;
+  var qrPrincipal = "".obs;
 
   @override
   void onInit(){
@@ -33,9 +35,14 @@ class HomeFatherController extends GetxController {
   }
 
   Future<String?> getQRPrincipal() async {
+    showQRLoading.value = true;
     QRRepository qrRespository = QRRepositoryImpl();
     var qr = await qrRespository.getQRPrincipal();
     showQR.value = true;
+    showQRLoading.value = false;
+    if(qr!=null){
+      qrPrincipal.value = qr;
+    }
     return qr;
   }
 
