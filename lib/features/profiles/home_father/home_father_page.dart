@@ -3,7 +3,8 @@ import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_controller.dart';
-import 'package:clean_app/widgets/appBars/app_bar.dart';
+import 'package:clean_app/navigation/app_routes.dart';
+import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/background_color.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
@@ -86,7 +87,14 @@ class HomeFatherPage extends StatelessWidget {
             ),
           )
         )
-      )       
+      ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: primaryColor,
+          child: const Icon(Icons.add, size: 36),
+          onPressed: () {
+            Get.toNamed(AppLinks.NEW_ASSIGN);
+          }
+      ),
     );
   }
 }

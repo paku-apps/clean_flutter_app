@@ -1,9 +1,9 @@
+
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RoundedTextFormFieldNormal extends StatelessWidget {
+class TextFormFieldIconNormal extends StatelessWidget {
 
   final ValueChanged<String> onChanged;
   bool showPassword;
@@ -12,7 +12,7 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
   String valueData;
   IconData? leftIcon;
 
-  RoundedTextFormFieldNormal({
+  TextFormFieldIconNormal({
     Key? key,
     required this.onChanged,
     this.showPassword = false,
@@ -25,7 +25,7 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
+      padding: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, 0),
       child: TextFormField(
         controller: controller,
         style: const TextStyle(color: primaryColor),
@@ -41,17 +41,11 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
           hoverColor: primaryColor,
           hintStyle: const TextStyle(color: primaryColor),
           filled: true,
-          fillColor: primaryColorLight,
+          fillColor: whiteColor,
           prefixIcon: leftIcon != null ?Icon(
             leftIcon,
             color: primaryColor
           ) : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.0),
-            borderSide: const BorderSide(
-              color: primaryColorLight
-            ),
-          ),
         ),
       )
     );
