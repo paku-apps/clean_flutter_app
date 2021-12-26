@@ -52,6 +52,10 @@ dependencies:
   # https://pub.dev/packages/flutter_typeahead
   flutter_typeahead: ^3.2.4
 
+  # Calendar Sync
+  # https://pub.dev/packages/syncfusion_flutter_datepicker
+  syncfusion_flutter_datepicker: ^19.4.38
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

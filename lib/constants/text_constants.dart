@@ -36,3 +36,5 @@ const drawerOptionAuthorizations = "Autorizaciones creadas";
 //Home Father Page Texts
 const assignPageTitle = "Asignar Responsable";
 const assignInputCharge = "Ingresar nombre del responsable";
+const assignInputFrecuency = "Ingresar Frecuencia";
+const registerAssignButton = "Registrar";
