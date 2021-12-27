@@ -27,6 +27,7 @@ const homeChargerPageTitle = "Autorizaciones";
 
 //Home Supervisor Page Texts
 const homeSupervisorPageTitle = "Escanear Código QR";
+const homeSupervisorScanQR = "Escanear QR";
 
 
 //Drawer Profiles Texts
@@ -38,3 +39,8 @@ const assignPageTitle = "Asignar Responsable";
 const assignInputCharge = "Ingresar nombre del responsable";
 const assignInputFrecuency = "Ingresar Frecuencia";
 const registerAssignButton = "Registrar";
+
+//Info Authorization
+const infoAuthorizationTitle = "Información de Autorización";
+const infoAuthorizationCharger = "Responsable de recojo";
+const infoAuthorizationChildren = "Estudiantes a recoger";
