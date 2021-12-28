@@ -30,7 +30,12 @@ class HomeFatherPage extends StatelessWidget {
           title: homeFatherPageTitle,
         )
       ),
-      drawer: HeaderFooterDrawerApp(user: User(name: "Primero", lastName: "Segundo", email: "Correo"),),
+      drawer: HeaderFooterDrawerApp(
+        user: User(name: "Primero", lastName: "Segundo", email: "Correo"),
+        listIcons: [Icon(Icons.home), Icon(Icons.list)],
+        listNames: const [draweroptionsHome, drawerOptionAuthorizations],
+        listFunctions: [() => {Navigator.pop(context)},() => {Get.offAndToNamed(AppLinks.LIST_ASSIGNS)}, ],
+      ),
       body: SafeArea(
           child: BackgroundColorSafe(
             colorBackground: colorBackgroundWhite,

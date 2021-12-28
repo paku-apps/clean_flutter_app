@@ -17,7 +17,7 @@ class HomeChargePage extends StatelessWidget {
           title: homeChargerPageTitle,
         )
       ),
-      drawer: HeaderFooterDrawerApp(user: User(name: "Primero", lastName: "Segundo", email: "Correo"),),
+      //drawer: HeaderFooterDrawerApp(user: User(name: "Primero", lastName: "Segundo", email: "Correo"),),
       body: const Center(
         child: Text('Profile Charge'),
       ),

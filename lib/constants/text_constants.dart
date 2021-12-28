@@ -30,6 +30,7 @@ const homeSupervisorPageTitle = "Escanear Código QR";
 
 
 //Drawer Profiles Texts
+const draweroptionsHome = "Inicio";
 const drawerOptionAuthorizations = "Autorizaciones creadas";
 
 
@@ -38,3 +39,7 @@ const assignPageTitle = "Asignar Responsable";
 const assignInputCharge = "Ingresar nombre del responsable";
 const assignInputFrecuency = "Ingresar Frecuencia";
 const registerAssignButton = "Registrar";
+
+
+//Home Father Page List Assign
+const listAssignsTitle = "Autorizaciones creadas";

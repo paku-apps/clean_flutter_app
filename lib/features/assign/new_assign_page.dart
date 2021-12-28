@@ -38,7 +38,6 @@ class AssignPage extends StatelessWidget {
         child: BackgroundColorSafe(
           colorBackground: colorBackgroundWhite,
           child: SingleChildScrollView(
-            child: SingleChildScrollView(
               child: Form(
                 autovalidateMode: controllerAssign.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
                 //autovalidateMode:AutovalidateMode.onUserInteraction,
@@ -157,7 +156,6 @@ class AssignPage extends StatelessWidget {
             )
           )
         )
-      )
     );
   }
 }
