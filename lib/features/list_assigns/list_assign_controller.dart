@@ -1,16 +1,30 @@
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:get/get.dart';
 
 class ListAssignController extends GetxController {
 
-  var isLoading = false;
-  var listChildren = List<Child>.empty().obs;
+  var isLoading = false.obs;
+  var listAssign = List<Child>.empty().obs;
 
   @override
   void onInit(){
     super.onInit();
-    getChildren();
+    mockAuthorization();
+    //getChildren();
+  }
+
+  void mockAuthorization(){
+    //listAssign.value.add(Assign)
+  }
+
+  void goToUpdateAssign() {
+    Get.toNamed(AppLinks.NEW_ASSIGN);
+  }
+
+  Future<bool> deleteAssign() async {
+    return true;
   }
 
    
@@ -18,7 +32,7 @@ class ListAssignController extends GetxController {
     ChildRepository repo = ChildRepositoryImpl();
     var list = await repo.getListChild();
     if(list!=null){
-      listChildren.value = list;
+      listAssign.value = list;
     }
     return await repo.getListChild();
   }

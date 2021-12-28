@@ -43,6 +43,10 @@ const registerAssignButton = "Registrar";
 
 //Home Father Page List Assign
 const listAssignsTitle = "Autorizaciones creadas";
+const listAssignsEditTitle = "Eliminar asignación";
+const listAssignsEditMessage = "¿Está seguro de eliminar la asignación?";
+const listAssignsEditOk = "Eliminar";
+const listAssignsEditCancel = "Cancelar";
 
 //Info Authorization
 const infoAuthorizationTitle = "Información de Autorización";

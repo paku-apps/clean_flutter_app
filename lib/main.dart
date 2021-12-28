@@ -6,7 +6,6 @@ import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/features/demo/demo_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
   initialize();
