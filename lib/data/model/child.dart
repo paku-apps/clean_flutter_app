@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class Child {
 
   String id;
@@ -5,13 +7,15 @@ class Child {
   String lastname;
   String grade;
   String level;
+  bool isChecked;
 
   Child({
     this.id = "0",
     this.name = "",
     this.lastname = "",
     this.grade = "",
-    this.level = ""
+    this.level = "",
+    this.isChecked = false
   });
 
 }

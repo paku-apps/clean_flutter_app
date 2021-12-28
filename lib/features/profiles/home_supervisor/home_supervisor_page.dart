@@ -28,31 +28,37 @@ class HomeSupervisorPage extends StatelessWidget {
           title: homeSupervisorPageTitle,
         )
       ),
-      //drawer: HeaderFooterDrawerApp(user: User(name: "Primero", lastName: "Segundo", email: "Correo"),),
+      drawer: HeaderFooterDrawerApp(
+        user: User(name: "Primero", lastName: "Segundo", email: "Correo"),
+        listIcons: [Icon(Icons.home)],
+        listNames: const [draweroptionsHome],
+        listFunctions: [() => {Navigator.pop(context)}],
+      ),
       body: SafeArea(
           child: BackgroundColorSafe(
             colorBackground: colorBackgroundWhite,
-            child: SingleChildScrollView(
-              child: Obx(() {
-                return Column(
-                  children: [
-                    RoundedButton(
-                      text: homeSupervisorScanQR, 
-                      press: () async {
-                        String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                                                      '#ff6666', 
-                                                      "Cancelar", 
-                                                      false, 
-                                                      ScanMode.QR);
-                      }
-                    ),
-                    Text(controllerPage.valueQR.value),
-                    TextLabelTap(press: () => {Get.toNamed(AppLinks.INFO_AUTH)}, textLabel: "Detail Authorization")
-                  
-                   ]
+            child: Obx(() {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      RoundedButton(
+                        text: homeSupervisorScanQR, 
+                        press: () async {
+                          String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                                                        '#ff6666', 
+                                                        "Cancelar", 
+                                                        false, 
+                                                        ScanMode.QR);
+                        }
+                      ),
+                      Text(controllerPage.valueQR.value),
+                      TextLabelTap(press: () => {Get.toNamed(AppLinks.INFO_AUTH)}, textLabel: "Detail Authorization")
+                     ]
+                  )
                 );
               })
-            )
           )
       ),
     );

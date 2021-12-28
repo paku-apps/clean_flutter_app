@@ -18,12 +18,17 @@ class AvatarCircleInitials extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 60,
+      width: 60,
       padding: const EdgeInsets.all(dimenSmall),
       decoration: const BoxDecoration(
             color: accentColor,
             shape: BoxShape.circle
       ),
-      child: TextAppAvatar(first: firstName, second: lastName),
+      child: FittedBox(
+        fit: BoxFit.cover,
+        child: Center(child: TextAppAvatar(first: firstName, second: lastName))
+      ),
     );
   }
 

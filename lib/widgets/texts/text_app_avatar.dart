@@ -18,7 +18,7 @@ class TextAppAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-      child: Text(getInitialString(first)+getInitialString(second), style: const TextStyle(fontSize: textSizeAvatar, fontWeight: FontWeight.bold, color: whiteColor),),
+      child: Text(getInitialString(first)+getInitialString(second), style: const TextStyle(fontWeight: FontWeight.bold, color: whiteColor),),
     );
   }
 }

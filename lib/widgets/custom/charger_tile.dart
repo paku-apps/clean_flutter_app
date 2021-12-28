@@ -6,13 +6,15 @@ import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 
-class ChildTile extends StatelessWidget {
+class ChargerTile extends StatelessWidget {
 
-  Child child;
+  String name;
+  String lastName;
 
-  ChildTile({
+  ChargerTile({
     Key? key,
-    required this.child
+    required this.name,
+    required this.lastName
   }) : super(key: key);
 
   @override
@@ -23,15 +25,14 @@ class ChildTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AvatarCircleInitials(firstName: child.name, lastName: child.lastname),
+          AvatarCircleInitials(firstName: name, lastName: lastName),
           Container(
             padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextAppNormal(text: child.name + emptySpace + child.lastname, color: textPrimaryColor, noPaddingVertical: true),
-                TextAppNormal(text: child.grade + emptySpace + child.level, color: textPrimaryColor, noPaddingVertical: true)
+                TextAppNormal(text: name + emptySpace + lastName, color: textPrimaryColor, noPaddingVertical: true)
               ],
             )
           )

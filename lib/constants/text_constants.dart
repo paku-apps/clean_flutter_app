@@ -48,3 +48,4 @@ const listAssignsTitle = "Autorizaciones creadas";
 const infoAuthorizationTitle = "Información de Autorización";
 const infoAuthorizationCharger = "Responsable de recojo";
 const infoAuthorizationChildren = "Estudiantes a recoger";
+const infoAuthorizationConfirm = "Confirmar";

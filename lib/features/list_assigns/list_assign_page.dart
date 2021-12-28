@@ -38,7 +38,7 @@ class ListAssignPage extends StatelessWidget {
               if(controllerAssign.isLoading == true){
                 return CircularProgressIndicator();
               } else {
-                
+                return Center();
               }
             })
           )

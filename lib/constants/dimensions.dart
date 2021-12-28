@@ -3,7 +3,7 @@
 //Dimensions App 
 const dimenEmpty = 0.0;
 const dimenTiny = 2.0;
-const dimenLittle = 2.0;
+const dimenLittle = 4.0;
 const dimenSmall = 8.0;
 const dimenMedium = 12.0;
 const dimenNormal = 16.0;
