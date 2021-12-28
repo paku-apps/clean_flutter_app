@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         if(controller.state is UnAuthenticated){
           return LoginPage();
         }
-        return DemoPage();
+        return const CircularProgressIndicator();
       }),
     );
   }

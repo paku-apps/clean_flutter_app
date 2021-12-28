@@ -41,7 +41,7 @@ class AuthenticationServiceImpl extends AuthenticationService {
     } else {
       throw AuthenticationException(message: 'Wrong username or password');
     }
-
+    
 
     return demo;
   }
