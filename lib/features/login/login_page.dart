@@ -70,14 +70,14 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: size.height * 0.05),
                   TextLabelTap(
                     press: () => {
-                      openBrowser("https://paku.pe/")
+                      openBrowser("https://villamaria.edu.pe/")
                     },
                     textLabel: loginPageTextTapForgotPass
                   ), 
                   SizedBox(height: size.height * 0.01),
                   TextLabelTap(
                     press: () => {
-                      openBrowser("https://villamaria.edu.pe/")
+                      Get.toNamed(AppLinks.REGISTER_CHARGER)
                     },
                     textLabel: loginPageTextTapNewAccountPickup
                   ), 

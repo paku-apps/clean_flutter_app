@@ -53,3 +53,6 @@ const infoAuthorizationTitle = "Información de Autorización";
 const infoAuthorizationCharger = "Responsable de recojo";
 const infoAuthorizationChildren = "Estudiantes a recoger";
 const infoAuthorizationConfirm = "Confirmar";
+
+//Register Charger Authorization
+const registerAuthorization = "Crear cuenta para recojo";
