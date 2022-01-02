@@ -60,6 +60,9 @@ dependencies:
   # https://pub.dev/packages/syncfusion_flutter_datepicker
   syncfusion_flutter_datepicker: ^19.4.38
 
+  # Image Picker
+  image_picker: ^0.8.4+4
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
