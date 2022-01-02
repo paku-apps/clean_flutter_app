@@ -56,3 +56,19 @@ const infoAuthorizationConfirm = "Confirmar";
 
 //Register Charger Authorization
 const registerAuthorization = "Crear cuenta para recojo";
+const registerChargerFieldName = "Nombres";
+const registerChargerFieldLastName = "Apellidos";
+const registerChargerFieldEmail = "Correo Electrónico";
+const registerChargerFieldNumDoc = "DNI/CEX";
+const registerChargerFieldPass = "Contraseña";
+const registerChargerFieldRePass = "Repetir contraseña";
+
+const registerChargerFieldHintName = "Juán Sebástian";
+const registerChargerFieldHintLastName = "Perez Luna";
+const registerChargerFieldHintEmail = "jPerez@gmail.com";
+const registerChargerFieldHintNumDoc = "12345678";
+const registerChargerFieldHintPass = "Contraseña";
+const registerChargerFieldHintRePass = "Repetir contraseña";
+
+const registerChargerButton = "Registrar";
+

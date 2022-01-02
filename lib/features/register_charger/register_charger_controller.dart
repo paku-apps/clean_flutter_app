@@ -51,7 +51,21 @@ class RegisterChargerController extends GetxController{
   
   String? validateNombres(String value){
     if(GetUtils.isNullOrBlank(value)!){
-      return "Ingresar nombres";
+      return "Debe ingresar este campo";
+    }
+    return null;
+  }
+
+  String? validateEmail(String value){
+    if(!GetUtils.isEmail(value)){
+      return "Ingresar un correo válido";
+    }
+    return null;
+  }
+
+  String? validateDoc(String value){
+    if(!GetUtils.isLengthGreaterOrEqual(value, 8)){
+      return "Ingresar un mínimo de 8 carácteres";
     }
     return null;
   }
