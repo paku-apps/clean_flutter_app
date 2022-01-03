@@ -94,8 +94,7 @@ class RegisterChargerPage extends StatelessWidget {
                       text: registerChargerButton, 
                       press: () {}
                     ),
-                    SizedBox(height: size.height * 0.05),
-                    
+                    SizedBox(height: size.height * 0.05)
                   ]
                 )
               )

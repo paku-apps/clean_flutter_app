@@ -69,7 +69,7 @@ class HeaderFooterDrawerApp extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text(closeSession),
               onTap: () {
-                Navigator.pop(context);
+                Get.offAllNamed(AppLinks.LOGIN);
               },
             )
           ],

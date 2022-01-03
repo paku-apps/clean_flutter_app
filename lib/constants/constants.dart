@@ -17,3 +17,4 @@ const errorSnackbar = Color(0xFFCF3232);
 //Text Color 
 const textPrimaryColor = Color(0xFF0E0F0F);
 const textPrimaryColorDisable = Color(0xFF4F5050);
+const textPrimaryColorUnselected = Color(0xFF787A7A);
