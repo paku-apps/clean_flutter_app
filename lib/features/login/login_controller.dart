@@ -1,6 +1,7 @@
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/features/login/auth/authentication_service.dart';
 import 'package:clean_app/features/login/login_state.dart';
+import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -10,9 +11,11 @@ class LoginController extends GetxController {
 
   final GlobalKey<FormState> loginFormkey = GlobalKey<FormState>();
   late TextEditingController emailController, passwordController;
+  var isLoading = false.obs();
   var email = "";
   var password = "";
   var isSubmitted = false;
+  var loginSuccessfull = false.obs();
 
   //To Validate show or hide the password
   bool _showPassword = false;
@@ -48,7 +51,7 @@ class LoginController extends GetxController {
   }
 
   String? validatePassword(String value){
-    if(value.length<=6){
+    if(value.length<6){
       return "Contraseña debe tener al menos 6 caracteres";
     }
     return null;
@@ -73,12 +76,18 @@ class LoginController extends GetxController {
 
   void login(String username, String password) async {
     _loginStateStream.value = LoginLoading();
+    isLoading = true;
 
     try{
       await _authenticationController.signIn(username, password);
       _loginStateStream.value = LoginState();
+      isLoading = false;
+      showSuccessSnackbar("Bienvenido", "Colegio Villa Maria los saluda");
     } on AuthenticationException catch(e) {
       _loginStateStream.value = LoginFailure(error: e.message);
+      isLoading = false;
+      showErrorSnackbar("Ingreso fallido", "Por favor, verifique su usuario y contraseña");
+      update();
     }
   }
 

@@ -18,4 +18,6 @@ samples, guidance on mobile development, and a full API reference.
 ## Steps
 
 - Check the versions of the library
-- if(lib>flutter_native_splash) -> flutter pub run flutter_native_splash:create --path=splash_screen/flutter_native_splash.yaml
+- Move to folder flutter_native_splash
+- Run this command
+  > flutter pub run flutter_native_splash:create --path=splash_screen/flutter_native_splash.yaml

@@ -43,9 +43,9 @@ class HeaderFooterDrawerApp extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AvatarCircleInitials(firstName: user.name, lastName: user.lastName),
-                    TextAppTitle(text: user.name+ emptySpace +user.lastName, color: whiteColor),
-                    TextAppNormal(text: user.email, color: whiteColor, noPaddingVertical: true)
+                    AvatarCircleInitials(firstName: user.nombres, lastName: user.apellidoPaterno),
+                    TextAppTitle(text: user.nombres+ emptySpace +user.apellidoPaterno, color: whiteColor),
+                    TextAppNormal(text: user.correo, color: whiteColor, noPaddingVertical: true)
                   ],
                 ),
               )

@@ -6,23 +6,23 @@ String apiResultResponseToJson(ApiResultResponse data) => json.encode(data.toJso
 
 class ApiResultResponse {
     ApiResultResponse({
-        this.code = "",
+        this.status = false,
         this.message = "",
         this.data
     });
 
-    String code;
+    bool status;
     String message;
     dynamic data;
 
     factory ApiResultResponse.fromJson(Map<String, dynamic> json) => ApiResultResponse(
-        code: json["code"],
+        status: json["status"],
         message: json["message"],
         data: json["data"],
     );
 
     Map<String, dynamic> toJson() => {
-        "code": code,
+        "status": status,
         "message": message,
         "data": data.toJson(),
     };

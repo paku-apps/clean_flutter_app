@@ -45,7 +45,7 @@ class HomeChargePage extends StatelessWidget {
           )
         ),
         drawer: HeaderFooterDrawerApp(
-          user: User(name: "Primero", lastName: "Segundo", email: "Correo"),
+          user: User(),
           listIcons: [Icon(Icons.home)],
           listNames: const [draweroptionsHome],
           listFunctions: [() => {Navigator.pop(context)}],

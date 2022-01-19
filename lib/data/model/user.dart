@@ -1,13 +1,25 @@
 class User {
 
-  String name;
-  String lastName;
-  String email;
+  int id;
+  String nombres;
+  String apellidoPaterno;
+  String apellidoMaterno;
+  String numerodDocumento;
+  String correo;
+  String foto;
+  bool activo;
+  int perfil;
 
   User({
-    this.name = "",
-    this.lastName = "",
-    this.email = ""
+    this.id = 0,
+    this.nombres = "",
+    this.apellidoPaterno = "",
+    this.apellidoMaterno = "",
+    this.numerodDocumento = "",
+    this.correo = "",
+    this.foto = "",
+    this.activo = false,
+    this.perfil = 999,
   });
 
 }

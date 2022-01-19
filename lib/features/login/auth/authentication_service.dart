@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:clean_app/data/converters/user_model_from_user_response.dart';
 import 'package:clean_app/data/model/user.dart';
+import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/auth/authentication_data.dart';
 import 'package:clean_app/data/response/path_services.dart';
@@ -20,11 +22,8 @@ class AuthenticationServiceImpl extends AuthenticationService {
 
   @override
   Future<User> signInEmailAndPassword(String username, String password) async {
-    var demo = User(
-      name: "nombrecito", 
-      lastName: "apellidito", 
-      email: "correito"
-    );
+    
+    var userLogged = User();
     var url = Uri.parse(pathServer+stage+loginService);
     var response = await client.post(
       url, 
@@ -35,56 +34,30 @@ class AuthenticationServiceImpl extends AuthenticationService {
       })
     );
     if(response.statusCode == 200){
+      UserRepository repo = UserRepositoryImpl();
       var jsonResponse = response.body;
       var appResponse = apiResultResponseFromJson(jsonResponse);
       var dataResponse = AuthenticationData.fromJson(appResponse.data);
+      await repo.saveToken(dataResponse.authenticationResult.idToken);
+      userLogged =  getUserFromUserBD(dataResponse.userBd);
+      await repo.saveUser(dataResponse.userBd);
     } else {
       throw AuthenticationException(message: 'Wrong username or password');
     }
-    
 
-    return demo;
+    return userLogged;
   }
 
   
   @override
   Future<User?> getCurrentUser() async {
-    await Future.delayed(Duration(seconds: 2));
-    return null;
+    UserRepository repo = UserRepositoryImpl();
+    return await repo.getCurrentUser();
+    //await Future.delayed(Duration(seconds: 2));
+    //return null;
   }
 
   
-  @override
-  Future<void> signOut() async {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
-}
-
-class FakeAuthenticationService extends AuthenticationService {
-  @override
-  Future<User?> getCurrentUser() async {
-    await Future.delayed(Duration(seconds: 2));
-    return null;
-  }
-
-  @override
-  Future<User> signInEmailAndPassword(String username, String password) async {
-    
-    await Future.delayed(Duration(seconds: 2));
-
-    if (username.toLowerCase() != 'test@domain.com' || password != 'testpass123') {
-      throw AuthenticationException(message: 'Wrong username or password');
-    }
-
-    return User(
-      name: 'Test User',
-      lastName: 'LastanmeTest',
-      email:  "test@email.com"
-    );
-
-  }
-
   @override
   Future<void> signOut() async {
     // TODO: implement signOut

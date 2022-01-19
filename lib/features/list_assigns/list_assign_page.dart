@@ -45,7 +45,7 @@ class ListAssignPage extends StatelessWidget {
         )
       ),
       drawer: HeaderFooterDrawerApp(
-        user: User(name: "Primero", lastName: "Segundo", email: "Correo"),
+        user: User(),
         listIcons: [Icon(Icons.home), Icon(Icons.list)],
         listNames: const [draweroptionsHome, drawerOptionAuthorizations],
         listFunctions: [() => {Get.offAndToNamed(AppLinks.HOME_FATHER)},() => {Navigator.pop(context)}, ],

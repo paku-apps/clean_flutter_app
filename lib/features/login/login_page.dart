@@ -37,12 +37,8 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [    
-                  SizedBox(height: size.height * 0.10),
-                  SvgPicture.asset(
-                    "assets/images/rocket_app.svg",
-                    height: size.height * 0.25,
-                  ),
-                  SizedBox(height: size.height * 0.10),
+                  SizedBox(height: size.height * 0.02),
+                  Image.asset("assets/images/app_logo.png", height: size.height * 0.5),
                   RoundedTextFormFieldNormal(
                     onChanged: (value) {},
                     controller: controller.emailController, 
@@ -61,7 +57,7 @@ class LoginPage extends StatelessWidget {
                     valueData: controller.password,
                   ),
                   const SizedBox(height: dimenMedium),
-                  RoundedButton(
+                  controller.isLoading? CircularProgressIndicator() : RoundedButton(
                     text: loginPageButtonLogin,
                     color: accentColor, 
                     press: () => controller.checkLogin() 

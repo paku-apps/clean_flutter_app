@@ -1,6 +1,8 @@
 //Path Server
-//const String pathServer = "https://knurier6ja.execute-api.us-east-1.amazonaws.com/";
-const String pathServer = "http://10.0.2.2:9000/";
+//https://z1groinscc.execute-api.us-east-1.amazonaws.com
+const String pathServer = "https://z1groinscc.execute-api.us-east-1.amazonaws.com/";
+//const String pathServer = "http://10.0.2.2:9000/";
+
 
 //Path Enviroment
 const String stage = "dev";
