@@ -24,6 +24,9 @@ class HomeFatherController extends GetxController {
   Future<User?> getUserLogged() async {
     UserRepository repo = UserRepositoryImpl();
     var currentUser = await repo.getCurrentUser();
+    if(currentUser!=null){
+      usuarioLogged.value = currentUser;
+    }
     return currentUser;
   }
   

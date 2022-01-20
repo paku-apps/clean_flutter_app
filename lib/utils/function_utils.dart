@@ -8,5 +8,10 @@ void openBrowser(
 }
 
 String getInitialString(String text){
-  return text[0];
+  if(text.isNotEmpty){
+    return text[0];
+  } else {
+    return emptyString;
+  }
+  
 }
