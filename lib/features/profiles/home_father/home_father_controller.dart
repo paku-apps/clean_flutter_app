@@ -46,7 +46,8 @@ class HomeFatherController extends GetxController {
   Future<String?> getQRPrincipal() async {
     showQRLoading.value = true;
     QRRepository qrRespository = QRRepositoryImpl();
-    var qr = await qrRespository.getQRPrincipal();
+    var idApoderado = usuarioLogged.value.id;
+    var qr = await qrRespository.getQRPrincipal(idApoderado);
     showQR.value = true;
     showQRLoading.value = false;
     if(qr!=null){

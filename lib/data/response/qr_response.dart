@@ -12,10 +12,10 @@ class QrPermission {
     String qrCode;
 
     factory QrPermission.fromJson(Map<String, dynamic> json) => QrPermission(
-        qrCode: json["qrCode"],
+        qrCode: json["codigoqr"],
     );
 
     Map<String, dynamic> toJson() => {
-        "qrCode": qrCode,
+        "codigoqr": qrCode,
     };
 }

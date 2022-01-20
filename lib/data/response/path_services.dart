@@ -13,4 +13,4 @@ const String loginService = "/login";
 
 //Father
 const String childrenService = "/apoderados/:1/estudiantes";
-const String qrPrincipalService = "/getQrPrincipal";
+const String qrPrincipalService = "/qr/apoderado/:1";
