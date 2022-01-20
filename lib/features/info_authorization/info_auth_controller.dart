@@ -14,10 +14,10 @@ class InfoAuthorizationController extends GetxController {
   }
 
   void mockListChildren() {
-    listChildren.value.add(Child(id: "15", name: "Takeshi", lastname: "Farro", grade:  "2",level:  "Primaria"));
-    listChildren.value.add(Child(id: "16", name: "Cesar", lastname: "Chavez", grade:  "4",level:  "Primaria"));
-    listChildren.value.add(Child(id: "17", name: "Kenyi", lastname: "Mendoza", grade:  "1",level:  "Secundaria"));
-    listChildren.value.add(Child(id: "18", name: "Anderson", lastname: "Estela", grade:  "5",level:  "Secundaria"));
+    //listChildren.value.add(Child(id: "15", name: "Takeshi", lastname: "Farro", grade:  "2",level:  "Primaria"));
+    //listChildren.value.add(Child(id: "16", name: "Cesar", lastname: "Chavez", grade:  "4",level:  "Primaria"));
+    //listChildren.value.add(Child(id: "17", name: "Kenyi", lastname: "Mendoza", grade:  "1",level:  "Secundaria"));
+    //listChildren.value.add(Child(id: "18", name: "Anderson", lastname: "Estela", grade:  "5",level:  "Secundaria"));
   }
 
   void checkChild(int position){

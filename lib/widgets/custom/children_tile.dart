@@ -23,15 +23,15 @@ class ChildTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AvatarCircleInitials(firstName: child.name, lastName: child.lastname),
+          AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
           Container(
             padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextAppNormal(text: child.name + emptySpace + child.lastname, color: textPrimaryColor, noPaddingVertical: true),
-                TextAppNormal(text: child.grade + emptySpace + child.level, color: textPrimaryColor, noPaddingVertical: true)
+                TextAppNormal(text: child.nombres + emptySpace + child.apPaterno, color: textPrimaryColor, noPaddingVertical: true),
+                TextAppNormal(text: child.grado?.nombre ?? "" , color: textPrimaryColor, noPaddingVertical: true)
               ],
             )
           )

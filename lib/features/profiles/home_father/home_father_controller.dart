@@ -9,6 +9,7 @@ class HomeFatherController extends GetxController {
 
   var usuarioLogged = User().obs;
   var listChildren = List<Child>.empty().obs;
+  String tokenStored = "";
   var showQRLoading = false.obs;
   var showQR = false.obs;
   var qrPrincipal = "".obs;
@@ -22,16 +23,21 @@ class HomeFatherController extends GetxController {
 
   Future<User?> getUserLogged() async {
     UserRepository repo = UserRepositoryImpl();
-    return await repo.getCurrentUser();
+    var currentUser = await repo.getCurrentUser();
+    return currentUser;
   }
   
   Future<List<Child>?> getChildren() async {
+    UserRepository repoUsuario = UserRepositoryImpl();
+    tokenStored = await repoUsuario.getToken();
     ChildRepository repo = ChildRepositoryImpl();
-    var list = await repo.getListChild();
+    var idApoderado = usuarioLogged.value.id;
+    idApoderado = 5;
+    List<Child>? list = await repo.getListChild(tokenStored, idApoderado);
     if(list!=null){
       listChildren.value = list;
     }
-    return await repo.getListChild();
+    return list;
   }
 
   Future<String?> getQRPrincipal() async {

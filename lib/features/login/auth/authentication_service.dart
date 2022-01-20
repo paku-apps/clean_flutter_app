@@ -35,8 +35,8 @@ class AuthenticationServiceImpl extends AuthenticationService {
     );
     if(response.statusCode == 200){
       UserRepository repo = UserRepositoryImpl();
-      var jsonResponse = response.body;
-      var appResponse = apiResultResponseFromJson(jsonResponse);
+      var decodedResponse = utf8.decode(response.bodyBytes);
+      var appResponse = apiResultResponseFromJson(decodedResponse);
       var dataResponse = AuthenticationData.fromJson(appResponse.data);
       await repo.saveToken(dataResponse.authenticationResult.idToken);
       userLogged =  getUserFromUserBD(dataResponse.userBd);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/converters/user_model_from_user_response.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/response/auth/user_response.dart';
@@ -12,7 +13,7 @@ abstract class UserRepository {
   Future<User?> getCurrentUser();
   Future<void> saveUser(UserBd user);
   Future<void> saveToken(String idToken);
-  Future<String?> getToken();
+  Future<String> getToken();
 
 
 }
@@ -60,13 +61,13 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<String?> getToken() async {
+  Future<String> getToken() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var idTokenStored = prefs.getString(keyIdToken);
     if(idTokenStored!=null){
       return idTokenStored;
     }
-    return null;
+    return emptyString;
   }
 }

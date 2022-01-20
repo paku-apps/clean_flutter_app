@@ -37,7 +37,7 @@ class UserBd {
         fechaRegistro: json["fecha_registro"],
         fechaUpdate: json["fecha_update"],
         activo: json["activo"],
-        perfil: json["perfil"]
+        perfil: json["id_perfil"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -51,6 +51,6 @@ class UserBd {
         "fecha_registro": fechaRegistro,
         "fecha_update": fechaUpdate,
         "activo": activo,
-        "perfil": perfil
+        "id_perfil": perfil
     };
 }

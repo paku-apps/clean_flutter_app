@@ -7,10 +7,12 @@ List<Child> getListChildResponseToListChild(List<ChildResponse> list){
   list.forEach((childData) {
     var child =  Child();
     child.id = childData.id;
-    child.name = childData.names;
-    child.lastname = childData.lastname;
-    child.grade = childData.grade;
-    child.level = childData.level;
+    child.nombres = childData.nombres;
+    child.apPaterno = childData.apPaterno;
+    child.apMaterno = childData.apMaterno;
+    child.numDocumento = childData.numeroDocumento;
+    child.isChecked = false;
+    child.grado = childData.grado;
     listChild.add(child);
   });
 

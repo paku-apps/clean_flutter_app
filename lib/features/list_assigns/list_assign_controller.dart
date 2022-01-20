@@ -30,11 +30,11 @@ class ListAssignController extends GetxController {
    
   Future<List<Child>?> getChildren() async {
     ChildRepository repo = ChildRepositoryImpl();
-    var list = await repo.getListChild();
+    var list = await repo.getListChild("auth", 5);
     if(list!=null){
       listAssign.value = list;
     }
-    return await repo.getListChild();
+    return await repo.getListChild("auth", 5);
   }
 
 }

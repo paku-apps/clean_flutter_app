@@ -1,6 +1,7 @@
 
 //Commons Text
 const emptySpace = " ";
+const emptyString = "";
 
 //Message App
 const messageNotLaunchUrl = "No se puede abrir la página";

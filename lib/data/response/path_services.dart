@@ -12,5 +12,5 @@ const String stage = "dev";
 const String loginService = "/login";
 
 //Father
-const String childrenService = "/children";
+const String childrenService = "/apoderados/:1/estudiantes";
 const String qrPrincipalService = "/getQrPrincipal";

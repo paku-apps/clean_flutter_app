@@ -6,32 +6,56 @@ String childResponseToJson(List<ChildResponse> data) => json.encode(List<dynamic
 
 class ChildResponse {
     ChildResponse({
-        this.id = "0",
-        this.names = "",
-        this.lastname = "",
-        this.grade = "",
-        this.level = "",
+      this.id = 0,
+      this.nombres = "",
+      this.apPaterno = "",
+      this.apMaterno = "",
+      this.numeroDocumento = "",
+      this.grado
     });
 
-    String id;
-    String names;
-    String lastname;
-    String grade;
-    String level;
+    int id;
+    String nombres;
+    String apPaterno;
+    String apMaterno;
+    String numeroDocumento;
+    Grado? grado;
 
     factory ChildResponse.fromJson(Map<String, dynamic> json) => ChildResponse(
+        id: json["id"] == null ? null : json["id"],
+        nombres: json["nombres"] == null ? null : json["nombres"],
+        apPaterno: json["ap_paterno"] == null ? null : json["ap_paterno"],
+        apMaterno: json["ap_materno"] == null ? null : json["ap_materno"],
+        numeroDocumento: json["numero_documento"] == null ? null : json["numero_documento"],
+        grado: json["grado"] == null ? null : Grado.fromJson(json["grado"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id == null ? null : id,
+        "nombres": nombres == null ? null : nombres,
+        "ap_paterno": apPaterno == null ? null : apPaterno,
+        "ap_materno": apMaterno == null ? null : apMaterno,
+        "numero_documento": numeroDocumento == null ? null : numeroDocumento,
+        "grado": grado == null ? null : grado?.toJson(),
+    };
+}
+
+class Grado {
+    Grado({
+        this.id = 0,
+        this.nombre = "",
+    });
+
+    int id;
+    String nombre;
+
+    factory Grado.fromJson(Map<String, dynamic> json) => Grado(
         id: json["id"],
-        names: json["names"],
-        lastname: json["lastname"],
-        grade: json["grade"],
-        level: json["level"],
+        nombre: json["nombre"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "names": names,
-        "lastname": lastname,
-        "grade": grade,
-        "level": level,
+        "nombre": nombre,
     };
 }
