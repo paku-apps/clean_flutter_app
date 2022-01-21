@@ -1,6 +1,7 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
+import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/features/assign/data_demo.dart';
 import 'package:clean_app/features/assign/new_assign_controller.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
@@ -15,13 +16,13 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class AssignPage extends StatelessWidget {
   
-  const AssignPage({Key? key}) : super(key: key);
+  AssignPage({Key? key}) : super(key: key);
+  final TextEditingController _typeAheadController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
 
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController _typeAheadController = TextEditingController();
     String _selectedCity;
 
     final controllerAssign = Get.put(AssignController());
@@ -55,6 +56,7 @@ class AssignPage extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 36),
                             child: TypeAheadFormField(
                               keepSuggestionsOnLoading: false,
+                              minCharsForSuggestions: 3,
                               loadingBuilder: (context) =>
                                 Container(
                                   padding:const EdgeInsets.only(left: 36),
@@ -70,23 +72,28 @@ class AssignPage extends StatelessWidget {
                                 ),
                               // ignore: prefer_const_constructors
                               textFieldConfiguration: TextFieldConfiguration(
+                                controller: _typeAheadController,
                                 style: const TextStyle(color: textPrimaryColor, fontSize: 16),
                                 decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
                                     hintText: assignInputCharge),
                               ),
                               suggestionsCallback: (pattern) async {
-                                return await BackendService.getSuggestions(pattern);
+                                return controllerAssign.searchChargerByPattern(pattern);
                               },
-                              itemBuilder: (context, Map<String, String> suggestion) {
+                              itemBuilder: (context, Charger charger) {
                                 return ListTile(
-                                  leading: Icon(Icons.shopping_cart),
-                                  title: Text(suggestion['name']!),
-                                  subtitle: Text('\$${suggestion['price']}'),
+                                  leading: Image.network(charger.foto!, height: 48, width: 48,),
+                                  title: Text(charger.nombres!),
+                                  subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
                                 );
                               },
-                              onSuggestionSelected: (Map<String, String> suggestion) {
-                                
+                              noItemsFoundBuilder: (context) => Container(
+                                padding: EdgeInsets.all(8),
+                                child:Text("No se encontraron responsables")
+                                ),
+                              onSuggestionSelected: (Charger charger) {
+                                  _typeAheadController.text = charger.apPaterno! + separatorComma + emptySpace+ charger.nombres!;
                               },
                             ),
                           ),

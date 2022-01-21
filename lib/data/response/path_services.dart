@@ -14,3 +14,6 @@ const String loginService = "/login";
 //Father
 const String childrenService = "/apoderados/:1/estudiantes";
 const String qrPrincipalService = "/qr/apoderado/:1";
+
+//Charger
+const String searchChargerService = "/responsables";

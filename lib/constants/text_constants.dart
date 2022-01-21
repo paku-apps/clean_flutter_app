@@ -2,6 +2,7 @@
 //Commons Text
 const emptySpace = " ";
 const emptyString = "";
+const separatorComma = ",";
 
 //Message App
 const messageNotLaunchUrl = "No se puede abrir la página";
