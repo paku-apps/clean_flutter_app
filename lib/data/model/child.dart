@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:clean_app/data/response/child/child_response.dart';
+
+String childSelectedToJson(List<Child> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJsonIdEstudiante())));
 
 class Child {
 
@@ -21,5 +24,9 @@ class Child {
     this.grado,
     this.isChecked = false
   });
+  
+  Map<String, dynamic> toJsonIdEstudiante() => {
+    "id_estudiante": id == null ? null : id
+  };
 
 }

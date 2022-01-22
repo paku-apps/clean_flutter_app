@@ -45,7 +45,7 @@ class AssignPage extends StatelessWidget {
               child: Form(
                 autovalidateMode: assignController.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
                 //autovalidateMode:AutovalidateMode.onUserInteraction,
-                key: assignController.loginFormkey,
+                key: assignController.assignFormKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -97,6 +97,7 @@ class AssignPage extends StatelessWidget {
                                 ),
                               onSuggestionSelected: (Charger charger) {
                                   _typeAheadController.text = charger.apPaterno! + separatorComma + emptySpace+ charger.nombres!;
+                                  assignController.idCharger.value = charger.id!;
                               },
                             ),
                           ),
@@ -115,7 +116,11 @@ class AssignPage extends StatelessWidget {
                                 onTap: () async {
                                   var initialDateRate = DateTimeRange(start: DateTime.now(), end: DateTime.now());
                                   var selectedRange = await showDateRangePicker(context: context, initialDateRange: initialDateRate, firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year+2));
-                                  assignController.rangoFrecuenciaCadena.value = transformDateTimeToFormat(selectedRange!.start) + emptySpace + separatorLine + emptySpace + transformDateTimeToFormat(selectedRange.end);
+                                  if(selectedRange!=null){
+                                    assignController.rangeFrecuencyStart.value = transformDateTimeToFormatBackend(selectedRange.start);
+                                    assignController.rangeFrecuencyEnd.value = transformDateTimeToFormatBackend(selectedRange.end);
+                                    assignController.rangoFrecuenciaCadena.value = transformDateTimeToFormat(selectedRange.start) + emptySpace + separatorLine + emptySpace + transformDateTimeToFormat(selectedRange.end);
+                                  }
                                 },
                                 child: SizedBox(
                                 height: 48,
@@ -182,7 +187,9 @@ class AssignPage extends StatelessWidget {
                     ),
                     RoundedButton(
                       text: registerAssignButton, 
-                      press: () {}
+                      press: () {
+                        assignController.submitNewAssign();
+                      }
                     )
                   ]
                 )

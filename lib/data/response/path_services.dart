@@ -18,3 +18,6 @@ const String listAssignService = "/apoderados/:1/autorizaciones";
 
 //Charger
 const String searchChargerService = "/responsables";
+
+//Assigns
+const String createNewAssignService = "/autorizaciones";
