@@ -49,6 +49,7 @@ class HomeChargePage extends StatelessWidget {
           listIcons: [Icon(Icons.home)],
           listNames: const [draweroptionsHome],
           listFunctions: [() => {Navigator.pop(context)}],
+          closeFunction: homeChargeController.closeSession,
         ),
         body: TabBarView(
           controller: homeChargeController.tabBarcontroller,

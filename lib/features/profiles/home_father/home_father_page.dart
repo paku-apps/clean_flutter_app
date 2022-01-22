@@ -39,6 +39,7 @@ class HomeFatherPage extends StatelessWidget {
           listIcons: [Icon(Icons.home), Icon(Icons.list)],
           listNames: const [draweroptionsHome, drawerOptionAuthorizations],
           listFunctions: [() => {Navigator.pop(context)},() => {Get.offAndToNamed(AppLinks.LIST_ASSIGNS)}, ],
+          closeFunction: controllerPage.closeSession,
         );
       }),
       body: SafeArea(

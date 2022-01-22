@@ -61,7 +61,7 @@ class AuthenticationServiceImpl extends AuthenticationService {
   @override
   Future<void> signOut() async {
     // TODO: implement signOut
-    throw UnimplementedError();
+    //throw UnimplementedError();
   }
 }
 

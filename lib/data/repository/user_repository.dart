@@ -14,7 +14,7 @@ abstract class UserRepository {
   Future<void> saveUser(UserBd user);
   Future<void> saveToken(String idToken);
   Future<String> getToken();
-
+  Future<void> clearDataUser();
 
 }
 
@@ -58,6 +58,13 @@ class UserRepositoryImpl extends UserRepository {
 
     var userLogged = prefs.setString(keyIdToken, idToken);
 
+  }
+
+  @override
+  Future<void> clearDataUser() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 
   @override

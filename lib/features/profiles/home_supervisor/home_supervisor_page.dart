@@ -33,6 +33,7 @@ class HomeSupervisorPage extends StatelessWidget {
         listIcons: [Icon(Icons.home)],
         listNames: const [draweroptionsHome],
         listFunctions: [() => {Navigator.pop(context)}],
+        closeFunction: controllerPage.closeSession,
       ),
       body: SafeArea(
           child: BackgroundColorSafe(

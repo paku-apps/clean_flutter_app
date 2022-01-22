@@ -14,13 +14,15 @@ class HeaderFooterDrawerApp extends StatelessWidget {
   List<Icon> listIcons;
   List<String> listNames;
   List<Function> listFunctions;
+  Function closeFunction;
   
   HeaderFooterDrawerApp({
     Key? key,
     required this.user,
     required this.listIcons,
     required this.listNames,
-    required this.listFunctions
+    required this.listFunctions,
+    required this.closeFunction
   }): super(key: key);
 
   @override
@@ -68,8 +70,9 @@ class HeaderFooterDrawerApp extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text(closeSession),
-              onTap: () {
-                Get.offAllNamed(AppLinks.LOGIN);
+              onTap: () async {
+                closeFunction();
+                //Get.offAllNamed(AppLinks.LOGIN);
               },
             )
           ],

@@ -2,10 +2,13 @@ import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/assign_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:get/get.dart';
 
 class ListAssignController extends GetxController {
+  
+  final AuthenticationController _authenticationController = Get.find();
 
   var isLoading = false.obs;
   var listAssign = List<Assign>.empty().obs;
@@ -50,5 +53,9 @@ class ListAssignController extends GetxController {
     return list;
   }
    
-
+  Future closeSession() async {
+    _authenticationController.signOut();
+    UserRepository repoUsuario = UserRepositoryImpl();
+    await repoUsuario.clearDataUser();
+  }
 }

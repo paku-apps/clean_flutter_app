@@ -51,6 +51,7 @@ class ListAssignPage extends StatelessWidget {
           listIcons: [Icon(Icons.home), Icon(Icons.list)],
           listNames: const [draweroptionsHome, drawerOptionAuthorizations],
           listFunctions: [() => {Get.offAndToNamed(AppLinks.HOME_FATHER)},() => {Navigator.pop(context)}, ],
+          closeFunction: controllerListAssign.closeSession,
         );
       }),
       floatingActionButton: FloatingActionButton(
