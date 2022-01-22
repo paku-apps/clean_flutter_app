@@ -13,5 +13,9 @@ String getInitialString(String text){
   } else {
     return emptyString;
   }
-  
+}
+
+String transformDateTimeToFormat(DateTime dateTime){
+  return dateTime.day.toString() + separatorSlash + dateTime.month.toString() + separatorSlash + dateTime.year.toString(); 
+  //return dateTime.year.toString() + separatorSlash + dateTime.month.toString() + separatorSlash + dateTime.day.toString(); 
 }

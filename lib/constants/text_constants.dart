@@ -3,6 +3,8 @@
 const emptySpace = " ";
 const emptyString = "";
 const separatorComma = ",";
+const separatorLine = "-";
+const separatorSlash = "/";
 
 //Message App
 const messageNotLaunchUrl = "No se puede abrir la página";

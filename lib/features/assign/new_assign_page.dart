@@ -4,10 +4,12 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/features/assign/data_demo.dart';
 import 'package:clean_app/features/assign/new_assign_controller.dart';
+import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
+import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/inputs/input_icon_form_fielld_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -25,9 +27,10 @@ class AssignPage extends StatelessWidget {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     String _selectedCity;
 
-    final controllerAssign = Get.put(AssignController());
+    final assignController = Get.put(AssignController());
 
     Size size = MediaQuery.of(context).size;
+    
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56), 
@@ -40,9 +43,9 @@ class AssignPage extends StatelessWidget {
           colorBackground: colorBackgroundWhite,
           child: SingleChildScrollView(
               child: Form(
-                autovalidateMode: controllerAssign.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+                autovalidateMode: assignController.isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
                 //autovalidateMode:AutovalidateMode.onUserInteraction,
-                key: controllerAssign.loginFormkey,
+                key: assignController.loginFormkey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -79,7 +82,7 @@ class AssignPage extends StatelessWidget {
                                     hintText: assignInputCharge),
                               ),
                               suggestionsCallback: (pattern) async {
-                                return controllerAssign.searchChargerByPattern(pattern);
+                                return assignController.searchChargerByPattern(pattern);
                               },
                               itemBuilder: (context, Charger charger) {
                                 return ListTile(
@@ -106,13 +109,14 @@ class AssignPage extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
                       child: Row(
                         children: [
-                          Icon(Icons.calendar_today, size: 36),
+                          const Icon(Icons.calendar_today, size: 36),
                           Expanded(
                             child: InkWell(
-                                onTap: () {
+                                onTap: () async {
                                   var initialDateRate = DateTimeRange(start: DateTime.now(), end: DateTime.now());
-                                  showDateRangePicker(context: context, initialDateRange: initialDateRate, firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year+2));
-                                } ,
+                                  var selectedRange = await showDateRangePicker(context: context, initialDateRange: initialDateRate, firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year+2));
+                                  assignController.rangoFrecuenciaCadena.value = transformDateTimeToFormat(selectedRange!.start) + emptySpace + separatorLine + emptySpace + transformDateTimeToFormat(selectedRange.end);
+                                },
                                 child: SizedBox(
                                 height: 48,
                                 child: Container(
@@ -123,12 +127,21 @@ class AssignPage extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         const SizedBox(width: 8),
-                                        const Text(
-                                          assignInputFrecuency,
-                                          textAlign: TextAlign.start,
-                                      )
+                                        Obx(() {
+                                          if(assignController.rangoFrecuenciaCadena.isNotEmpty){
+                                            return Text(
+                                              assignController.rangoFrecuenciaCadena.toString(),
+                                              textAlign: TextAlign.start,
+                                            ); 
+                                          } else {      
+                                            return const Text(
+                                              assignInputFrecuency,
+                                              textAlign: TextAlign.start,
+                                            );
+                                          }
+                                        }),
                                       ]
                                     ),
                                   ),
@@ -138,20 +151,34 @@ class AssignPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Text("Seleccione a quién recogerá:", textAlign: TextAlign.start, style: TextStyle(fontSize: textSizeNormalLabel)),
                     Container(//Lista de niños
                       width: size.width,
                       margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-                      child: Row(
-                        children: [
-                          Icon(Icons.supervised_user_circle_rounded, size: 36),
-                          Expanded(
-                            child: Text("DEMO")
-                          ),
-                          Checkbox(value: true, onChanged: (value) {
-
-                          })
-                        ],
-                      ),
+                      child: GetBuilder<AssignController>(
+                        init: AssignController(),
+                        builder: (assignController) =>
+                          ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(8),
+                            itemCount: assignController.listChildren.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    child: ChildTile(
+                                        child: assignController.listChildren[index],
+                                    ),
+                                  ),
+                                  Checkbox(value: assignController.listChildren[index].isChecked, onChanged: (value) {
+                                    assignController.checkChild(index);
+                                  })
+                                ]
+                              );
+                            }
+                          )
+                      )
                     ),
                     RoundedButton(
                       text: registerAssignButton, 
@@ -166,3 +193,27 @@ class AssignPage extends StatelessWidget {
     );
   }
 }
+
+
+/*
+ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(8),
+                            itemCount: assignController.listChildren.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    child: ChildTile(
+                                        child: assignController.listChildren[index],
+                                      ),
+                                  ),
+                                  Checkbox(value: assignController.listChildren[index].isChecked, onChanged: (value) {
+                                    assignController.checkChild(index);
+                                  })
+                                ]
+                              );
+                            }
+                          ),
+*/

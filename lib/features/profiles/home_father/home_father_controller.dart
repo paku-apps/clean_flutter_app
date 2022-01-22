@@ -35,7 +35,6 @@ class HomeFatherController extends GetxController {
     tokenStored = await repoUsuario.getToken();
     ChildRepository repo = ChildRepositoryImpl();
     var idApoderado = usuarioLogged.value.id;
-    idApoderado = 5;
     List<Child>? list = await repo.getListChild(tokenStored, idApoderado);
     if(list!=null){
       listChildren.value = list;
