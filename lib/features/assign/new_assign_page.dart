@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/features/assign/data_demo.dart';
 import 'package:clean_app/features/assign/new_assign_controller.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
@@ -11,6 +14,7 @@ import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/inputs/input_icon_form_fielld_normal.dart';
+import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
@@ -185,12 +189,19 @@ class AssignPage extends StatelessWidget {
                           )
                       )
                     ),
-                    RoundedButton(
-                      text: registerAssignButton, 
-                      press: () {
-                        assignController.submitNewAssign();
+                    Obx((){
+                      if(!assignController.isLoading.value){
+                        return RoundedButton(
+                          text: registerAssignButton, 
+                          press: () {
+                            assignController.submitNewAssign();
+                          }
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
                       }
-                    )
+                    })
+                    
                   ]
                 )
               )

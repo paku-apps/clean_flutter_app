@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:get/get.dart';
 
 class HomeFatherController extends GetxController {
@@ -21,6 +24,12 @@ class HomeFatherController extends GetxController {
     getChildren();
   }
 
+  @override
+  void onReady(){
+    super.onReady();
+    showSnackbarMessage();
+  }
+
   Future<User?> getUserLogged() async {
     UserRepository repo = UserRepositoryImpl();
     var currentUser = await repo.getCurrentUser();
@@ -28,6 +37,15 @@ class HomeFatherController extends GetxController {
       usuarioLogged.value = currentUser;
     }
     return currentUser;
+  }
+
+  void showSnackbarMessage() {
+    if(Get.arguments!=null) {
+      var valuesSnackbar = json.decode(Get.arguments);
+      if(valuesSnackbar["isSuccess"] == true) {
+          showSuccessSnackbar(valuesSnackbar["title"], valuesSnackbar["message"]);
+      }
+    }
   }
   
   Future<List<Child>?> getChildren() async {

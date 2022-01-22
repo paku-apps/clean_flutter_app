@@ -53,30 +53,47 @@ class ListAssignPage extends StatelessWidget {
           listFunctions: [() => {Get.offAndToNamed(AppLinks.HOME_FATHER)},() => {Navigator.pop(context)}, ],
         );
       }),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: primaryColor,
+          child: const Icon(Icons.sync, size: 36),
+          onPressed: () {
+            controllerListAssign.getListAssignByUser();
+          }
+      ),
       body: SafeArea(
         child: BackgroundColorSafe(
           colorBackground: colorBackgroundWhite,
           child: SingleChildScrollView(
             child: Obx(() {
               if(controllerListAssign.isLoading == true){
-                return CircularProgressIndicator();
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height-60,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
               } else {
-                return Obx(() {
-                  return ListView.separated(
-                    separatorBuilder: (context, index) => const Divider(
-                      color: Colors.black,
-                    ),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(4),
-                    itemCount: controllerListAssign.listAssign.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return AssignTile(
-                        assign: controllerListAssign.listAssign[index],
+                return Column(
+                  children: [
+                    Obx(() {
+                      return ListView.separated(
+                        separatorBuilder: (context, index) => const Divider(
+                          color: Colors.black,
+                        ),
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.all(4),
+                        itemCount: controllerListAssign.listAssign.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AssignTile(
+                            assign: controllerListAssign.listAssign[index],
+                          );
+                        }
                       );
-                    }
-                  );
-                });
+                    })
+                  ],
+                );
               }
             })
           )

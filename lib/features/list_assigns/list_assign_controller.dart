@@ -1,8 +1,6 @@
 import 'package:clean_app/data/model/assign.dart';
-import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/assign_repository.dart';
-import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:get/get.dart';
@@ -39,6 +37,7 @@ class ListAssignController extends GetxController {
   }
 
   Future<List<Assign>> getListAssignByUser() async {
+    isLoading.value = true;
     UserRepository repoUsuario = UserRepositoryImpl();
     tokenStored = await repoUsuario.getToken();
     AssignRepository repo = AssignRepositoryImpl();
@@ -47,6 +46,7 @@ class ListAssignController extends GetxController {
     if(list!=null){
       listAssign.value = list;
     }
+    isLoading.value = false;
     return list;
   }
    

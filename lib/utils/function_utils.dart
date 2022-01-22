@@ -24,3 +24,9 @@ String transformDateTimeToFormat(DateTime dateTime){
 String transformDateTimeToFormatBackend(DateTime dateTime){
   return DateFormat('yyyy-MM-dd').format(dateTime);
 }
+
+ Map<String, dynamic> getJsonArgumentSnackbar(bool isSuccess, String title, String message) => {
+    "isSuccess": isSuccess,
+    "title": title,
+    "message": message
+  }; 

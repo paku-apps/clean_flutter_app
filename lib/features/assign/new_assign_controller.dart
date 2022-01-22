@@ -5,6 +5,8 @@ import 'package:clean_app/data/repository/assign_repository.dart';
 import 'package:clean_app/data/repository/charger_repository.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/navigation/app_routes.dart';
+import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +15,10 @@ class AssignController extends GetxController {
 
   var isSubmitted = false.obs();
   String tokenStored = "";
+  //UI
+  var isLoading = false.obs;
   
   final GlobalKey<FormState> assignFormKey = GlobalKey<FormState>().obs();
-  late TextEditingController emailController, passwordController;
   var responsable = "".obs();
   var rangoFrecuenciaCadena = "".obs;
   var listChildren = List<Child>.empty().obs;
@@ -46,8 +49,7 @@ class AssignController extends GetxController {
   
   @override 
   void onClose(){
-    emailController.dispose();
-    passwordController.dispose();
+
   }
 
   Future<List<Charger>> searchChargerByPattern(String pattern) async {
@@ -78,6 +80,7 @@ class AssignController extends GetxController {
   }
 
   void submitNewAssign() async {
+    isLoading.value = true;
     var listaChilds = listChildren.value;
     var start = this.rangeFrecuencyStart.value;
     var end = this.rangeFrecuencyEnd.value;
@@ -85,11 +88,17 @@ class AssignController extends GetxController {
     var responsable = this.idCharger.value;
     this.tokenStored;
 
-    var childrenSelected = listaChilds.where((child) => child.isChecked == true);
+    //var childrenSelected = listaChilds.where((child) => child.isChecked == true);
     var assignRepository = AssignRepositoryImpl();
-    var responseSubmit = await assignRepository.submitAssign(this.tokenStored, responsable, apoderado, start, end, childrenSelected);
-
-
+    try{
+      var responseSubmit = await assignRepository.submitAssign(this.tokenStored, responsable, apoderado, start, end, listaChilds);
+      isLoading.value = false;
+      Get.offAllNamed(AppLinks.HOME_FATHER);
+      showSuccessSnackbar("Se registró la autorización", "Se le notificará al responsable");
+    } on AssignRepositoryException catch(e){
+      showErrorSnackbar("Aviso", e.message);
+      isLoading.value = false;
+    }
   }
 
 }

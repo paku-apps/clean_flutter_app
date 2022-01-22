@@ -6,6 +6,7 @@ import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/assign_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart' as http;
 
@@ -71,7 +72,9 @@ class AssignRepositoryImpl extends AssignRepository {
         return "ERROR";
       }
     } else {
-      throw AssignRepositoryException(message: 'No se pudo parser Assign');
+      if(response.statusCode == 500){ throw AssignRepositoryException(message: 'Ocurrió algo inesperado en nuestros servicios', code: 500);}
+      if(response.statusCode == 401){ throw AssignRepositoryException(message: 'Por favor vuelva a iniciar sesión', code: 401);}
+      throw AssignRepositoryException(message: 'Ocurrió algo inesperado en la aplicación', code: 401);
     }
   }
 
@@ -79,6 +82,7 @@ class AssignRepositoryImpl extends AssignRepository {
 
 class AssignRepositoryException implements Exception {
   final String message;
+  final int code;
 
-  AssignRepositoryException({this.message = 'Error en el repository Assign'});
+  AssignRepositoryException({this.message = 'Error en el repository Assign', this.code = 404});
 }
