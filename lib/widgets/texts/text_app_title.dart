@@ -20,3 +20,23 @@ class TextAppTitle extends StatelessWidget {
     );
   }
 }
+
+class TextTileWidgetTitle extends StatelessWidget {
+
+  String text;
+  Color color;
+
+  TextTileWidgetTitle({
+    Key? key,
+    required this.text,
+    required this.color
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(dimenSmall, dimenTiny, dimenSmall, dimenTiny),
+      child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.bold, color: color),),
+    );
+  }
+}

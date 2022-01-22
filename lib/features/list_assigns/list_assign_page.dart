@@ -6,6 +6,7 @@ import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/appBars/app_bar_options.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
+import 'package:clean_app/widgets/custom/assign_tile.dart';
 import 'package:clean_app/widgets/drawers/drawer_app.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_title.dart';
@@ -44,12 +45,14 @@ class ListAssignPage extends StatelessWidget {
             }],
         )
       ),
-      drawer: HeaderFooterDrawerApp(
-        user: User(),
-        listIcons: [Icon(Icons.home), Icon(Icons.list)],
-        listNames: const [draweroptionsHome, drawerOptionAuthorizations],
-        listFunctions: [() => {Get.offAndToNamed(AppLinks.HOME_FATHER)},() => {Navigator.pop(context)}, ],
-      ),
+      drawer: Obx((){ 
+        return HeaderFooterDrawerApp(
+          user: controllerListAssign.usuarioLogged.value,
+          listIcons: [Icon(Icons.home), Icon(Icons.list)],
+          listNames: const [draweroptionsHome, drawerOptionAuthorizations],
+          listFunctions: [() => {Get.offAndToNamed(AppLinks.HOME_FATHER)},() => {Navigator.pop(context)}, ],
+        );
+      }),
       body: SafeArea(
         child: BackgroundColorSafe(
           colorBackground: colorBackgroundWhite,
@@ -58,7 +61,22 @@ class ListAssignPage extends StatelessWidget {
               if(controllerListAssign.isLoading == true){
                 return CircularProgressIndicator();
               } else {
-                return Center();
+                return Obx(() {
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Colors.black,
+                    ),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(4),
+                    itemCount: controllerListAssign.listAssign.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return AssignTile(
+                        assign: controllerListAssign.listAssign[index],
+                      );
+                    }
+                  );
+                });
               }
             })
           )

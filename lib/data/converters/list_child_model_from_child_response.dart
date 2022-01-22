@@ -10,7 +10,7 @@ List<Child> getListChildResponseToListChild(List<ChildResponse> list){
     child.nombres = childData.nombres;
     child.apPaterno = childData.apPaterno;
     child.apMaterno = childData.apMaterno;
-    child.numDocumento = childData.numeroDocumento;
+    child.numDocumento = childData.numeroDocumento ?? "";
     child.isChecked = false;
     child.grado = childData.grado;
     listChild.add(child);

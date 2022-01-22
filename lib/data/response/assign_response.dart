@@ -3,6 +3,10 @@ import 'package:clean_app/data/response/charger_response.dart';
 import 'package:clean_app/data/response/child/child_response.dart';
 import 'package:clean_app/data/response/etapa_response.dart';
 
+List<AssignResponse> assignResponseFromJson(String str) => List<AssignResponse>.from(json.decode(str).map((x) => AssignResponse.fromJson(x)));
+
+String assignResponseToJson(List<AssignResponse> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class AssignResponse {
     AssignResponse({
         this.id,

@@ -18,7 +18,7 @@ class ChildResponse {
     String nombres;
     String apPaterno;
     String apMaterno;
-    String numeroDocumento;
+    String? numeroDocumento;
     Grado? grado;
 
     factory ChildResponse.fromJson(Map<String, dynamic> json) => ChildResponse(
