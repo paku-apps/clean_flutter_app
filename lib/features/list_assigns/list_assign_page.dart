@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/user.dart';
@@ -24,25 +26,8 @@ class ListAssignPage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56), 
-        child: AppBarDrawerAppOption(
+        child: AppBarDrawerApp(
           title: listAssignsTitle,
-          listIcons: [Icon(Icons.edit), Icon(Icons.delete)],
-          listFunctions: [
-            () {controllerListAssign.goToUpdateAssign();}, 
-            () {
-              showDialog(
-                context: context, 
-                builder: (_) => AlertDialog(
-                  title: TextAppTitle(text: listAssignsEditTitle, color: textPrimaryColor),
-                  content: TextAppNormal(text: listAssignsEditMessage,color: textPrimaryColor, noPaddingVertical: true,),
-                  actions: [
-                    TextButton(onPressed: () async {await controllerListAssign.deleteAssign();Navigator.pop(context);}, child: Text(listAssignsEditOk),),
-                    TextButton(onPressed: () {Navigator.pop(context);}, child: Text(listAssignsEditCancel),)
-                  ],
-                ),
-                barrierDismissible: true,
-              );
-            }],
         )
       ),
       drawer: Obx((){ 
@@ -87,8 +72,13 @@ class ListAssignPage extends StatelessWidget {
                         padding: const EdgeInsets.all(4),
                         itemCount: controllerListAssign.listAssign.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return AssignTile(
-                            assign: controllerListAssign.listAssign[index],
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(AppLinks.DETAIL_ASSIGN, arguments: [json.encode(controllerListAssign.listAssign[index])]);
+                            },
+                            child: AssignTile(
+                              assign: controllerListAssign.listAssign[index],
+                            ),
                           );
                         }
                       );

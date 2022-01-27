@@ -21,4 +21,25 @@ class Assign{
     Charger? charger;
     List<Child>? estudiantes;
 
+  factory Assign.fromJson(Map<String, dynamic> json) => Assign(
+    id: json["id"] == null ? null : json["id"],
+    fechaInicio: json["fechaInicio"] == null ? null : json["fechaInicio"],
+    fechaFin: json["fechaFin"] == null ? null : json["fechaFin"],
+    etapa: json["etapa"] == null ? null : Etapa.fromJson(json["etapa"]),
+    charger: json["charger"] == null ? null : Charger.fromJson(json["charger"]),
+    estudiantes: json["estudiantes"] == null ? null : List<Child>.from(json["estudiantes"].map((x) => Child.fromJson(x))),
+  );
+
+ 
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "fechaInicio": fechaInicio,
+      "fechaFin": fechaFin,
+      "etapa": etapa == null ? null : etapa!.toJson(),
+      "charger": charger == null ? null : charger!.toJson(),
+      "estudiantes": estudiantes == null ? null : List<dynamic>.from(estudiantes!.map((x) => x.toJson()))
+    };
+  }
+
 }

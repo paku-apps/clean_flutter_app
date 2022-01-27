@@ -45,6 +45,8 @@ const assignPageTitle = "Asignar Responsable";
 const assignInputCharge = "Ingresar nombre del responsable";
 const assignInputFrecuency = "Ingresar Frecuencia";
 const registerAssignButton = "Registrar";
+const editAssignPageTitle = "Editar Autorización";
+const updateAssignButton = "Actualizar";
 
 //Home Father Page List Assign
 const listAssignsTitle = "Autorizaciones creadas";

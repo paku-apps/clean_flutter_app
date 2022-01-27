@@ -32,6 +32,23 @@ class AssignPage extends StatelessWidget {
     String _selectedCity;
 
     final assignController = Get.put(AssignController());
+    var assignToEdit = null;
+    var listChildCheked = <int>[];
+
+    var argumentitos = Get.arguments;
+    if(argumentitos!=null){
+      assignController.isToEditAssign.value = true;
+      assignToEdit = json.decode(argumentitos[0]);
+      _typeAheadController.text = assignToEdit["charger"]["ap_paterno"] + emptySpace + assignToEdit["charger"]["ap_materno"]+", "+assignToEdit["charger"]["nombres"];
+      assignController.rangeFrecuencyStart.value = assignToEdit["fechaInicio"];
+      assignController.rangeFrecuencyEnd.value = assignToEdit["fechaFin"];
+      assignController.rangoFrecuenciaCadena.value = assignToEdit["fechaInicio"] +emptySpace+ separatorLine + emptySpace + assignToEdit["fechaFin"];
+      
+      assignToEdit["estudiantes"].forEach((chechChild)  {
+        listChildCheked.add(chechChild["id"]);
+      });
+      assignController.listChildrenToEdit.value = listChildCheked;
+    }
 
     Size size = MediaQuery.of(context).size;
     
@@ -39,7 +56,7 @@ class AssignPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56), 
         child: AppBarBackNav(
-          title: assignPageTitle
+          title: assignToEdit==null ? assignPageTitle : editAssignPageTitle
         )
       ),
       body: SafeArea(
@@ -82,8 +99,8 @@ class AssignPage extends StatelessWidget {
                                 controller: _typeAheadController,
                                 style: const TextStyle(color: textPrimaryColor, fontSize: 16),
                                 decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: assignInputCharge),
+                                  border: OutlineInputBorder(),
+                                  hintText: assignInputCharge),
                               ),
                               suggestionsCallback: (pattern) async {
                                 return assignController.searchChargerByPattern(pattern);
@@ -181,7 +198,7 @@ class AssignPage extends StatelessWidget {
                                     ),
                                   ),
                                   Checkbox(value: assignController.listChildren[index].isChecked, onChanged: (value) {
-                                    assignController.checkChild(index);
+                                    assignController.checkChild(index, value!);
                                   })
                                 ]
                               );
@@ -192,9 +209,13 @@ class AssignPage extends StatelessWidget {
                     Obx((){
                       if(!assignController.isLoading.value){
                         return RoundedButton(
-                          text: registerAssignButton, 
+                          text: assignToEdit == null ? registerAssignButton : updateAssignButton, 
                           press: () {
-                            assignController.submitNewAssign();
+                            if(assignToEdit==null){
+                              assignController.submitNewAssign();
+                            }else {
+                              assignController.updateAssign();
+                            }
                           }
                         );
                       } else {

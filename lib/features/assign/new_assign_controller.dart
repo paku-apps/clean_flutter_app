@@ -29,6 +29,10 @@ class AssignController extends GetxController {
   var rangeFrecuencyEnd = "".obs;
   var idCharger = 0.obs;
   var idApoderado = 0.obs;
+
+  //Data for edit
+  var isToEditAssign = false.obs;
+  var listChildrenToEdit = List<int>.empty().obs;
   
   @override
   void onInit(){
@@ -60,8 +64,8 @@ class AssignController extends GetxController {
     return list;
   }
 
-  void checkChild(int position){
-    listChildren.value[position].isChecked = !listChildren.value[position].isChecked;
+  void checkChild(int position, bool isCheck){
+    listChildren.value[position].isChecked = isCheck;
     update();
   }
   
@@ -73,10 +77,21 @@ class AssignController extends GetxController {
     List<Child>? list = await repo.getListChild(tokenStored, idApoderado);
     if(list!=null){
       listChildren.value = list;
+      validateIsForEdit();
     }
     update();
     return list;
     
+  }
+
+  void validateIsForEdit(){
+    if(isToEditAssign.value) {
+      listChildren.value.forEach((child) { 
+        if(listChildrenToEdit.contains(child.id)){
+          child.isChecked = true;
+        }
+      });
+    }
   }
 
   void submitNewAssign() async {
@@ -99,6 +114,14 @@ class AssignController extends GetxController {
       showErrorSnackbar("Aviso", e.message);
       isLoading.value = false;
     }
+  }
+
+  void updateAssign() async {
+    isLoading.value = true;
+    var start = this.rangeFrecuencyStart.value;
+    var end = this.rangeFrecuencyEnd.value;
+    var listaChilds = listChildren.value;
+
   }
 
 }

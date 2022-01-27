@@ -1,5 +1,6 @@
 import 'package:clean_app/features/assign/new_assign_page.dart';
 import 'package:clean_app/features/demo/demo_page.dart';
+import 'package:clean_app/features/detail_assign/detail_assign_page.dart';
 import 'package:clean_app/features/list_assigns/list_assign_page.dart';
 import 'package:clean_app/features/info_authorization/info_auth_page.dart';
 import 'package:clean_app/features/login/login_page.dart';
@@ -20,7 +21,8 @@ class AppRoutes {
     GetPage(name: AppLinks.NEW_ASSIGN, page: () => AssignPage()),
     GetPage(name: AppLinks.LIST_ASSIGNS, page: () => ListAssignPage()),
     GetPage(name: AppLinks.INFO_AUTH, page: () => InfoAuthorizationPage()),
-    GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage())
+    GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
+    GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage())
   ];
 
 }
@@ -36,6 +38,7 @@ class AppLinks {
   static const String NEW_ASSIGN = "/newassign";
   static const String LIST_ASSIGNS = "/listassigns";
   static const String INFO_AUTH = "/infoauthorization";
+  static const String DETAIL_ASSIGN = "/detail";
 
 
   static const String REGISTER_CHARGER = "/register/charger";
