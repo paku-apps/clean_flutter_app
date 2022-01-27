@@ -14,7 +14,7 @@ abstract class AssignRepository {
 
   Future<List<Assign>> getListAssignByApoderado(String authToken, int idApoderado);
   Future<String> submitAssign(String authToken, int responsable, int apoderado, String start, String end, Iterable<Child> childrenSelected);
-
+  Future<String> updateAssign(String authToken, int idAssign, int responsable, int apoderado, String start, String end, Iterable<Child> childrenSelected);
 }
 
 class AssignRepositoryImpl extends AssignRepository {
@@ -49,6 +49,41 @@ class AssignRepositoryImpl extends AssignRepository {
     var pathService = pathServer+stage+createNewAssignService;
     var url = Uri.parse(pathService);
     var response = await client.post(
+      url, 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $authToken"
+      },
+      body: json.encode({
+        "id_autorizado" : responsable,
+        "id_apoderado": apoderado,
+        "fecha_inicio": start,
+        "fecha_fin": end,
+        "estudiantes": childSelectedToJson(childrenSelected.toList())
+      })
+    );
+    if(response.statusCode == 200){
+      var jsonResponse = response.body;
+      var decodedResponse = utf8.decode(response.bodyBytes);
+      var resultResponse = apiResultResponseFromJson(decodedResponse);
+      if(resultResponse.status == true){
+        return "SUCCESS";
+      } else {
+        return "ERROR";
+      }
+    } else {
+      if(response.statusCode == 500){ throw AssignRepositoryException(message: 'Ocurrió algo inesperado en nuestros servicios', code: 500);}
+      if(response.statusCode == 401){ throw AssignRepositoryException(message: 'Por favor vuelva a iniciar sesión', code: 401);}
+      throw AssignRepositoryException(message: 'Ocurrió algo inesperado en la aplicación', code: 401);
+    }
+  }
+
+  @override
+  Future<String> updateAssign(String authToken, int idAssign, int responsable, int apoderado, String start, String end, Iterable<Child> childrenSelected) async {
+    var pathService = pathServer+stage+updateAssignService;
+    pathService = pathService.replaceAll(":1", idAssign.toString());
+    var url = Uri.parse(pathService);
+    var response = await client.put(
       url, 
       headers: {
         "Content-Type": "application/json",

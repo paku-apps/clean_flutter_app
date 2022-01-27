@@ -33,6 +33,7 @@ class AssignController extends GetxController {
   //Data for edit
   var isToEditAssign = false.obs;
   var listChildrenToEdit = List<int>.empty().obs;
+  var idAssignToUpdate = 0.obs;
   
   @override
   void onInit(){
@@ -106,7 +107,7 @@ class AssignController extends GetxController {
     //var childrenSelected = listaChilds.where((child) => child.isChecked == true);
     var assignRepository = AssignRepositoryImpl();
     try{
-      var responseSubmit = await assignRepository.submitAssign(this.tokenStored, responsable, apoderado, start, end, listaChilds);
+      var responseSubmit = await assignRepository.submitAssign(tokenStored, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
       Get.offAllNamed(AppLinks.HOME_FATHER);
       showSuccessSnackbar("Se registró la autorización", "Se le notificará al responsable");
@@ -120,8 +121,20 @@ class AssignController extends GetxController {
     isLoading.value = true;
     var start = this.rangeFrecuencyStart.value;
     var end = this.rangeFrecuencyEnd.value;
+    var apoderado = this.idApoderado.value;
     var listaChilds = listChildren.value;
-
+    var responsable = this.idCharger.value;
+    
+    var assignRepository = AssignRepositoryImpl();
+    try{
+      var responseUpdated = await assignRepository.updateAssign(tokenStored, idAssignToUpdate.value, responsable, apoderado, start, end, listaChilds);
+      isLoading.value = false;
+      Get.offAllNamed(AppLinks.LIST_ASSIGNS);
+      showSuccessSnackbar("Se actualizó la autorización", "Se le notificará al responsable");
+    } on AssignRepositoryException catch(e){
+      showErrorSnackbar("Aviso", e.message);
+      isLoading.value = false;
+    }
   }
 
 }

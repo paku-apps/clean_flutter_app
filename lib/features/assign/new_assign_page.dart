@@ -43,11 +43,12 @@ class AssignPage extends StatelessWidget {
       assignController.rangeFrecuencyStart.value = assignToEdit["fechaInicio"];
       assignController.rangeFrecuencyEnd.value = assignToEdit["fechaFin"];
       assignController.rangoFrecuenciaCadena.value = assignToEdit["fechaInicio"] +emptySpace+ separatorLine + emptySpace + assignToEdit["fechaFin"];
-      
       assignToEdit["estudiantes"].forEach((chechChild)  {
         listChildCheked.add(chechChild["id"]);
       });
       assignController.listChildrenToEdit.value = listChildCheked;
+      assignController.idAssignToUpdate.value = assignToEdit["id"];
+      assignController.idCharger.value = assignToEdit["charger"]["id"];
     }
 
     Size size = MediaQuery.of(context).size;
