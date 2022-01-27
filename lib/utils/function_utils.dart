@@ -41,7 +41,7 @@ String transformStringDateTimeToAppFormat(String startDateTime, String endDateTi
   var dateTimeEnd = DateFormat("dd-MM-yyyy").parse(endDateTime);
   var start =  DateFormat('dd MMMM, yyyy', "es_US").format(dateTimeStart);
   var end =  DateFormat('dd MMMM, yyyy', "es_US").format(dateTimeEnd);
-  return "Desde " + start + " hasta el " + end;
+  return "Desde " + start + " hasta el " + end ;
   //return dateTime.day.toString() + separatorSlash + dateTime.month.toString() + separatorSlash + dateTime.year.toString(); 
   //return dateTime.year.toString() + separatorSlash + dateTime.month.toString() + separatorSlash + dateTime.day.toString(); 
 }

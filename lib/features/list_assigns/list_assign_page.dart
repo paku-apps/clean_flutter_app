@@ -59,9 +59,7 @@ class ListAssignPage extends StatelessWidget {
                   ),
                 );
               } else {
-                return Column(
-                  children: [
-                    Obx(() {
+                return Obx(() {
                       return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(
                           color: Colors.black,
@@ -82,8 +80,7 @@ class ListAssignPage extends StatelessWidget {
                           );
                         }
                       );
-                    })
-                  ],
+                    }
                 );
               }
             })

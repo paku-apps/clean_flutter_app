@@ -67,7 +67,9 @@ class DetailAssignPage extends StatelessWidget {
                         margin: EdgeInsets.all(dimenSmall),
                         child: const Icon(Icons.account_box, size: 36),
                       ),
-                      Text(assign["charger"]["ap_paterno"] +emptySpace + assign["charger"]["ap_materno"] + ", " + assign["charger"]["nombres"])
+                      Expanded(child: SizedBox(
+                        child: Text(assign["charger"]["ap_paterno"] +emptySpace + assign["charger"]["ap_materno"] + ", " + assign["charger"]["nombres"]),
+                      ))
                     ]
                   )
                 ),
@@ -79,7 +81,9 @@ class DetailAssignPage extends StatelessWidget {
                         margin: EdgeInsets.all(dimenSmall),
                         child: const Icon(Icons.calendar_today, size: 36),
                       ),
-                      Text(transformStringDateTimeToAppFormat(assign["fechaInicio"], assign["fechaFin"]) )
+                      Expanded(child: SizedBox(
+                        child: Text(transformStringDateTimeToAppFormat(assign["fechaInicio"], assign["fechaFin"])),
+                      ))
                     ]
                   )
                 ),
