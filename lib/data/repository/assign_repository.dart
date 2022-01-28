@@ -15,6 +15,7 @@ abstract class AssignRepository {
   Future<List<Assign>> getListAssignByApoderado(String authToken, int idApoderado);
   Future<String> submitAssign(String authToken, int responsable, int apoderado, String start, String end, Iterable<Child> childrenSelected);
   Future<String> updateAssign(String authToken, int idAssign, int responsable, int apoderado, String start, String end, Iterable<Child> childrenSelected);
+  Future<String> deleteAssign(String authToken, int idAssign);
 }
 
 class AssignRepositoryImpl extends AssignRepository {
@@ -104,6 +105,35 @@ class AssignRepositoryImpl extends AssignRepository {
       if(resultResponse.status == true){
         return "SUCCESS";
       } else {
+        return "ERROR";
+      }
+    } else {
+      if(response.statusCode == 500){ throw AssignRepositoryException(message: 'Ocurrió algo inesperado en nuestros servicios', code: 500);}
+      if(response.statusCode == 401){ throw AssignRepositoryException(message: 'Por favor vuelva a iniciar sesión', code: 401);}
+      throw AssignRepositoryException(message: 'Ocurrió algo inesperado en la aplicación', code: 401);
+    }
+  }
+
+  @override
+  Future<String> deleteAssign(String authToken, int idAssign) async {
+    var pathService = pathServer+stage+deleteAssignService+idAssign.toString();
+    var url = Uri.parse(pathService);
+    var response = await client.delete(
+      url, 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $authToken"
+      },
+    );
+    if(response.statusCode == 200){
+      var jsonResponse = response.body;
+      var decodedResponse = utf8.decode(response.bodyBytes);
+      var resultResponse = apiResultResponseFromJson(decodedResponse);
+      if(resultResponse.status == true){
+        print("Se eliminó la autorizacion");
+        return "SUCCESS";
+      } else {
+        print("No se pudo eliminar la autorizacion");
         return "ERROR";
       }
     } else {

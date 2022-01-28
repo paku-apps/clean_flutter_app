@@ -22,3 +22,4 @@ const String searchChargerService = "/responsables";
 //Assigns
 const String createNewAssignService = "/autorizaciones";
 const String updateAssignService = "/autorizaciones/:1";
+const String deleteAssignService = "/autorizaciones/";

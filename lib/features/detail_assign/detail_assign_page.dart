@@ -43,7 +43,7 @@ class DetailAssignPage extends StatelessWidget {
                   title: TextAppTitle(text: listAssignsEditTitle, color: textPrimaryColor),
                   content: TextAppNormal(text: listAssignsEditMessage,color: textPrimaryColor, noPaddingVertical: true,),
                   actions: [
-                    TextButton(onPressed: () async {await detailAssignController.deleteAssign(); Navigator.pop(context);}, child: Text(listAssignsEditOk),),
+                    TextButton(onPressed: () async {await detailAssignController.deleteAssign(assign); Navigator.pop(context);}, child: Text(listAssignsEditOk),),
                     TextButton(onPressed: () {Navigator.pop(context);}, child: const Text(listAssignsEditCancel),)
                   ],
                 ),
