@@ -6,6 +6,7 @@ import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/auth/authentication_data.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/services/dio_services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +24,36 @@ class AuthenticationServiceImpl extends AuthenticationService {
   @override
   Future<User> signInEmailAndPassword(String username, String password) async {
     
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
+
+    var userLogged = User();
+    var url = pathServer+stage+loginService;
+
+    
+    try {
+      var response = await httpService.request(
+        url: url,
+        method: Method.POST,
+        params: {
+          "username": username,
+          "password": password
+        }
+      );
+      if(response.statusCode == 200){
+        UserRepository repo = UserRepositoryImpl();
+        var apiResultResponse = ApiResultResponse.fromJson(response.data);
+        var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
+        await repo.saveToken(dataResponse.authenticationResult.idToken);
+        userLogged =  getUserFromUserBD(dataResponse.userBd);
+        await repo.saveUser(dataResponse.userBd);
+      } else {
+        throw AuthenticationException(message: 'Wrong username or password');
+      }
+    } catch (e){
+      throw AuthenticationException(message: 'Wrong username or password');
+    }
+    /*
     var userLogged = User();
     var url = Uri.parse(pathServer+stage+loginService);
     var response = await client.post(
@@ -43,7 +74,7 @@ class AuthenticationServiceImpl extends AuthenticationService {
       await repo.saveUser(dataResponse.userBd);
     } else {
       throw AuthenticationException(message: 'Wrong username or password');
-    }
+    }*/
 
     return userLogged;
   }
