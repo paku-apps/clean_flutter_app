@@ -24,18 +24,19 @@ class HttpDioService {
 
   void initInterceptors() {
 
-    var tokenApp = getCurrentTokenUser();
 
     _dio!.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (requestOptions, handler) {
+        onRequest: (requestOptions, handler) async {
           requestOptions.followRedirects = false;
+          var tokenApp = await getCurrentTokenUser();
+              if(tokenApp!=emptyString){
+                requestOptions.headers['Content-Type'] = "application/json";
+                requestOptions.headers['Authorization'] = "Bearer $tokenApp";
+              }
           print("REQUEST[${requestOptions.method}] => PATH: ${requestOptions.path}"
               "=> REQUEST VALUES: ${requestOptions.queryParameters} => HEADERS: ${requestOptions.headers}");
           print("REQUEST BODY => ${requestOptions.data}");
-              if(tokenApp!=emptyString){
-                requestOptions.headers['Authorization'] = "Bearer $tokenApp";
-              }
           return handler.next(requestOptions);
         },
         onResponse: (response, handler) {

@@ -6,7 +6,6 @@ import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
-import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:get/get.dart';
 
 class HomeFatherController extends GetxController {

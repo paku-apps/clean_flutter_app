@@ -6,6 +6,7 @@ import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/child/child_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/services/dio_services.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ChildRepository {
@@ -19,24 +20,30 @@ class ChildRepositoryImpl extends ChildRepository {
 
   @override
   Future<List<Child>?> getListChild(String authToken, int idApoderado) async {
+
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
     var pathService = pathServer+stage+childrenService;
     pathService = pathService.replaceAll(":1", idApoderado.toString());
-    var url = Uri.parse(pathService);
-    var response = await client.get(
-      url, 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $authToken"
+    
+    UserRepository repo = UserRepositoryImpl();
+    
+    try {
+      var response = await httpService.request(
+        method: Method.GET,
+        url: pathService
+      );
+      if(response.statusCode == 200){
+
+        var apiResultResponse =  ApiResultResponse.fromJson(response.data);
+        var dataResponse = childResponseFromJson(json.encode(apiResultResponse.data));
+        return getListChildResponseToListChild(dataResponse);
+
+      } else {
+        throw ChildrenRepositoryException(message: 'Wrong username or password');
       }
-    );
-    if(response.statusCode == 200){
-      var jsonResponse = response.body;
-      var decodedResponse = utf8.decode(response.bodyBytes);
-      var resultResponse = apiResultResponseFromJson(decodedResponse);
-      var dataResponse = childResponseFromJson(json.encode(resultResponse.data));
-      return getListChildResponseToListChild(dataResponse);
-    } else {
-      throw ChildrenRepositoryException(message: 'No se pudo parser Children');
+    } catch (e){
+      throw ChildrenRepositoryException(message: 'Error en el repository Children');
     }
 
   }

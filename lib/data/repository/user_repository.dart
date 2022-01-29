@@ -93,8 +93,7 @@ class UserRepositoryImpl extends UserRepository {
   Future<void> saveRefreshToken(String refreshToken) async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    var userLogged = prefs.setString(keyRefreshToken, refreshToken);
+    prefs.setString(keyRefreshToken, refreshToken);
   }
 
   @override

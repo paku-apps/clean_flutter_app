@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/data/response/qr_response.dart';
+import 'package:clean_app/services/dio_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -39,27 +41,31 @@ class QRRepositoryImpl extends QRRepository {
   }
 
   Future<String?> getRemoteQRPrincipal(int idApoderado) async {
-    WidgetsFlutterBinding.ensureInitialized();
-    var url = Uri.parse(pathServer+stage+qrPrincipalService.replaceAll(":1", idApoderado.toString()));
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var authToken = prefs.getString(keyIdToken);
-    var response = await client.post(
-      url, 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $authToken"
+
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
+    UserRepository repo = UserRepositoryImpl();
+
+    var pathService = pathServer+stage+qrPrincipalService.replaceAll(":1", idApoderado.toString());
+    pathService = pathService.replaceAll(":1", idApoderado.toString());
+    
+    
+    try {
+      var response = await httpService.request(
+        method: Method.POST,
+        url: pathService
+      );
+      if(response.statusCode == 200){
+
+        var apiResultResponse =  ApiResultResponse.fromJson(response.data);
+        var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
+        return dataResponse.qrCode;
+
+      } else {
+        throw QRRepositoryException(message: 'Wrong username or password');
       }
-    );
-    if(response.statusCode == 200){
-      var jsonResponse = response.body;
-      var decodedResponse = utf8.decode(response.bodyBytes);
-      var resultResponse = apiResultResponseFromJson(decodedResponse);
-      var dataResponse = qrPermissionFromJson(json.encode(resultResponse.data));
-      prefs.setString(keyQRPrincipal, dataResponse.qrCode);
-      prefs.setString(keyQRDate, DateTime.now().add(Duration(hours: 12)).toString());
-      return dataResponse.qrCode;
-    } else {
-      throw QRRepositoryException(message: 'No se pudo parsear QRPermission');
+    } catch (e){
+      throw QRRepositoryException(message: 'Error en el repository QR Principal');
     }
   }
 
