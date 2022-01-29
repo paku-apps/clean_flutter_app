@@ -5,6 +5,7 @@ import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/charger_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/services/dio_services.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ChargerRepository {
@@ -18,27 +19,30 @@ class ChargerRepositoryImpl extends ChargerRepository {
 
   @override
   Future<List<Charger>> getListChargerSearch(String authToken, String pattern) async {
+
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
     var pathService = pathServer+stage+searchChargerService;
-    //pathService = pathService.replaceAll(":1", idApoderado.toString());
-    var url = Uri.parse(pathService);
-    var response = await client.post(
-      url, 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $authToken"
-      },      
-      body: json.encode({
-        "busqueda": pattern
-      })
-    );
-    if(response.statusCode == 200){
-      var jsonResponse = response.body;
-      var decodedResponse = utf8.decode(response.bodyBytes);
-      var resultResponse = apiResultResponseFromJson(decodedResponse);
-      var dataResponse = chargerResponseFromJson(json.encode(resultResponse.data));
-      return getListChargerResponseToListCharger(dataResponse);
-    } else {
-      throw ChargerRepositoryException(message: 'No se pudo parser Chargers');
+    
+    try {
+      var response = await httpService.request(
+        method: Method.POST,
+        url: pathService,
+        params: {
+          "busqueda": pattern
+        }
+      );
+      if(response.statusCode == 200){
+
+        var apiResultResponse =  ApiResultResponse.fromJson(response.data);
+        var dataResponse = chargerResponseFromJson(json.encode(apiResultResponse.data));
+        return getListChargerResponseToListCharger(dataResponse);
+
+      } else {
+        throw ChargerRepositoryException(message: 'Error en el repository Charger');
+      }
+    } catch (e){
+      throw ChargerRepositoryException(message: 'Error en el repository Charger');
     }
   }
 
