@@ -28,7 +28,10 @@ class AssignTile extends StatelessWidget {
           Column(
             children: [
               Center(
-                child: Image.network(assign.charger!.foto!, height: 48, width: 48),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(assign.charger!.foto!),
+                  radius: 28,
+                ),
               )
             ],
           ),
