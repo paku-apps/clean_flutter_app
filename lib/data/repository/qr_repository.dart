@@ -42,9 +42,11 @@ class QRRepositoryImpl extends QRRepository {
 
   Future<String?> getRemoteQRPrincipal(int idApoderado) async {
 
+    WidgetsFlutterBinding.ensureInitialized();
     HttpDioService httpService = HttpDioService();
     httpService.init();
     UserRepository repo = UserRepositoryImpl();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var pathService = pathServer+stage+qrPrincipalService.replaceAll(":1", idApoderado.toString());
     pathService = pathService.replaceAll(":1", idApoderado.toString());
@@ -59,6 +61,8 @@ class QRRepositoryImpl extends QRRepository {
 
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
+        prefs.setString(keyQRPrincipal, dataResponse.qrCode);
+        prefs.setString(keyQRDate, DateTime.now().add(Duration(hours: 12)).toString());
         return dataResponse.qrCode;
 
       } else {
@@ -67,6 +71,29 @@ class QRRepositoryImpl extends QRRepository {
     } catch (e){
       throw QRRepositoryException(message: 'Error en el repository QR Principal');
     }
+
+    /*
+    var url = Uri.parse(pathServer+stage+qrPrincipalService.replaceAll(":1", idApoderado.toString()));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var authToken = prefs.getString(keyIdToken);
+    var response = await client.post(
+      url, 
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $authToken"
+      }
+    );
+    if(response.statusCode == 200){
+      var jsonResponse = response.body;
+      var decodedResponse = utf8.decode(response.bodyBytes);
+      var resultResponse = apiResultResponseFromJson(decodedResponse);
+      var dataResponse = qrPermissionFromJson(json.encode(resultResponse.data));
+      prefs.setString(keyQRPrincipal, dataResponse.qrCode);
+      prefs.setString(keyQRDate, DateTime.now().add(Duration(hours: 12)).toString());
+      return dataResponse.qrCode;
+    } else {
+      throw QRRepositoryException(message: 'No se pudo parsear QRPermission');
+    } */
   }
 
 }
