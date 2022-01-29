@@ -44,7 +44,9 @@ class AssignPage extends StatelessWidget {
       assignController.rangeFrecuencyEnd.value = assignToEdit["fechaFin"];
       assignController.rangoFrecuenciaCadena.value = assignToEdit["fechaInicio"] +emptySpace+ separatorLine + emptySpace + assignToEdit["fechaFin"];
       assignToEdit["estudiantes"].forEach((chechChild)  {
-        listChildCheked.add(chechChild["id"]);
+        if(chechChild["isChecked"]){
+          listChildCheked.add(chechChild["id"]);
+        }
       });
       assignController.listChildrenToEdit.value = listChildCheked;
       assignController.idAssignToUpdate.value = assignToEdit["id"];

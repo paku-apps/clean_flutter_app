@@ -11,7 +11,7 @@ List<Child> getListChildResponseToListChild(List<ChildResponse> list){
     child.apPaterno = childData.apPaterno;
     child.apMaterno = childData.apMaterno;
     child.numDocumento = childData.numeroDocumento ?? "";
-    child.isChecked = false;
+    child.isChecked = childData.estado == null ? false : childData.estado!.check;
     child.grado = childData.grado;
     listChild.add(child);
   });

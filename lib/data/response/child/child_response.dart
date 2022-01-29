@@ -11,7 +11,8 @@ class ChildResponse {
       this.apPaterno = "",
       this.apMaterno = "",
       this.numeroDocumento = "",
-      this.grado
+      this.grado,
+      this.estado
     });
 
     int id;
@@ -20,6 +21,7 @@ class ChildResponse {
     String apMaterno;
     String? numeroDocumento;
     Grado? grado;
+    EstadoEstudiante? estado;
 
     factory ChildResponse.fromJson(Map<String, dynamic> json) => ChildResponse(
         id: json["id"] == null ? null : json["id"],
@@ -28,6 +30,7 @@ class ChildResponse {
         apMaterno: json["ap_materno"] == null ? null : json["ap_materno"],
         numeroDocumento: json["numero_documento"] == null ? null : json["numero_documento"],
         grado: json["grado"] == null ? null : Grado.fromJson(json["grado"]),
+        estado: json["estado"] == null ? null : EstadoEstudiante.fromJson(json["estado"])
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,6 +40,7 @@ class ChildResponse {
         "ap_materno": apMaterno == null ? null : apMaterno,
         "numero_documento": numeroDocumento == null ? null : numeroDocumento,
         "grado": grado == null ? null : grado?.toJson(),
+        "estado": estado == null ? null : estado?.toJson()
     };
 }
 
@@ -58,4 +62,20 @@ class Grado {
         "id": id,
         "nombre": nombre,
     };
+}
+
+class EstadoEstudiante {
+  EstadoEstudiante({
+    this.check = false
+  });
+
+  bool check;
+
+  factory EstadoEstudiante.fromJson(Map<String, dynamic> json) => EstadoEstudiante(
+    check: json["check"]
+  );
+
+  Map<String, dynamic> toJson() => {
+    "check": check
+  };
 }

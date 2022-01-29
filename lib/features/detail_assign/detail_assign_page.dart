@@ -27,6 +27,7 @@ class DetailAssignPage extends StatelessWidget {
 
     var argumentitos = Get.arguments;
     var assign = json.decode(argumentitos[0]);
+    var listChildSelected = assign["estudiantes"].where((estudiante) => estudiante["isChecked"] == true).toList();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -92,13 +93,13 @@ class DetailAssignPage extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   padding: const EdgeInsets.all(8),
-                  itemCount: assign["estudiantes"].length,
+                  itemCount: listChildSelected.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Row(
                       children: [
                         Expanded(
                           child: ChildTile(
-                              child: Child.fromJson(assign["estudiantes"][index]),
+                              child: Child.fromJson(listChildSelected[index]),
                           ),
                         )
                       ]
