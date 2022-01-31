@@ -9,7 +9,7 @@ class LoginController extends GetxController {
 
   final AuthenticationController _authenticationController = Get.find();
 
-  final GlobalKey<FormState> loginFormkey = GlobalKey<FormState>();
+  late GlobalKey<FormState> loginFormkey;
   late TextEditingController emailController, passwordController;
   var isLoading = false.obs();
   var email = "";
@@ -28,6 +28,7 @@ class LoginController extends GetxController {
 
   @override 
   void onInit(){
+    loginFormkey = GlobalKey<FormState>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }

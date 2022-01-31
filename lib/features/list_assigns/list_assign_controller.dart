@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class ListAssignController extends GetxController {
   
-  final AuthenticationController _authenticationController = Get.find();
+  AuthenticationController authenticationController = Get.find();
 
   var isLoading = false.obs;
   var listAssign = List<Assign>.empty().obs;
@@ -53,8 +53,8 @@ class ListAssignController extends GetxController {
     return list;
   }
    
-  Future closeSession() async {
-    _authenticationController.signOut();
+  Future<void> closeSession() async {
+    authenticationController.signOut();
     UserRepository repoUsuario = UserRepositoryImpl();
     await repoUsuario.clearDataUser();
   }
