@@ -44,8 +44,8 @@ class HomeFatherPage extends StatelessWidget {
           listIcons: [Icon(Icons.home), Icon(Icons.list)],
           listNames: const [draweroptionsHome, drawerOptionAuthorizations],
           listFunctions: [
-            () => {controllerPage.currentPage.value = "HOMEPAGE"},
-            () => {controllerPage.currentPage.value = "LISTPAGE"}, 
+            () {controllerPage.currentPage.value = "HOMEPAGE"; Navigator.pop(context);},
+            () {controllerPage.currentPage.value = "LISTPAGE";Navigator.pop(context);}, 
           ],
           closeFunction: controllerPage.closeSession,
         );
@@ -147,13 +147,26 @@ class HomeFatherPage extends StatelessWidget {
           )
         )
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: primaryColor,
-          child: const Icon(Icons.add, size: 36),
-          onPressed: () {
-            Get.toNamed(AppLinks.NEW_ASSIGN);
-          }
-      ),
+      floatingActionButton: 
+      Obx(() {
+        if(controllerPage.currentPage == "HOMEPAGE"){
+          return FloatingActionButton(
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.add, size: 36),
+            onPressed: () {
+              Get.toNamed(AppLinks.NEW_ASSIGN);
+            }
+          );
+        } else {
+          return FloatingActionButton(
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.sync, size: 36),
+            onPressed: () {
+              controllerListAssign.getListAssignByUser();
+            }
+          );
+        }
+      }) 
     );
   }
 }
