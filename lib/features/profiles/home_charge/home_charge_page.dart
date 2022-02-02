@@ -3,6 +3,7 @@ import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/profiles/home_charge/home_charge_controller.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer_tab.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
@@ -71,14 +72,17 @@ class HomeChargePage extends StatelessWidget {
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
                 child: Obx(() {
-                  if(homeChargeController.listAssignChildrenToday.isEmpty){
+                  if(homeChargeController.loadingToday.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if(homeChargeController.listAssignChildrenToday.isEmpty){
                     return EmptyStateApp(
                             pathImage: "assets/images/box.png", 
                             messageEmpty: "No se encontraron autorizaciones para hoy", 
                             colorState: Colors.black
                     );
-                  } else {
-                    return Column(
+                  } else { return Column(
                       children: [
                           ListView.builder(
                           scrollDirection: Axis.vertical,
@@ -91,7 +95,9 @@ class HomeChargePage extends StatelessWidget {
                             );
                           }
                         ),
-                        RoundedButton(text: homeChargerPageButtonQR, press: () {})
+                        RoundedButton(text: homeChargerPageButtonQR, press: () {
+                          Get.toNamed(AppLinks.CHARGER_QR);
+                        })
                       ]
                     );
                   }
@@ -103,7 +109,11 @@ class HomeChargePage extends StatelessWidget {
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
                 child: Obx(() {
-                  if(homeChargeController.listAssignChildrenProgram.isEmpty){
+                  if(homeChargeController.loadingFuture.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if(homeChargeController.listAssignChildrenProgram.isEmpty){
                     return EmptyStateApp(
                             pathImage: "assets/images/box.png", 
                             messageEmpty: "No se encontraron autorizaciones programadas", 

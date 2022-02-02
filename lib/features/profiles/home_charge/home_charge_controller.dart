@@ -15,6 +15,9 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   var usuarioLogged = User().obs;
   var listAssignChildrenToday = List<AssignChildModel>.empty().obs;
   var listAssignChildrenProgram = List<AssignChildModel>.empty().obs;
+
+  var loadingToday = false.obs;
+  var loadingFuture = false.obs;
   
   late TabController tabBarcontroller;
 
@@ -42,6 +45,7 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   }
 
   Future<List<AssignChildModel>> getauthorizationsForToday() async {
+    loadingToday.value = true;
     UserRepository repoUsuario = UserRepositoryImpl();
     var currentUser = await repoUsuario.getCurrentUser();
     AssignChildRepository repo = AssignChildRepositoryImpl();
@@ -49,11 +53,13 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     if(list!=null){
       listAssignChildrenToday.value = list;
     }
+    loadingToday.value = false;
     update();
     return list;
   }
 
   Future<List<AssignChildModel>> getauthorizationsForFuture() async {
+    loadingFuture.value = true;
     UserRepository repoUsuario = UserRepositoryImpl();
     var currentUser = await repoUsuario.getCurrentUser();
     AssignChildRepository repo = AssignChildRepositoryImpl();
@@ -61,6 +67,7 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     if(list!=null){
       listAssignChildrenProgram.value = list;
     }
+    loadingFuture.value = false;
     update();
     return list;
   }

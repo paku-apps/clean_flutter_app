@@ -28,6 +28,7 @@ const homeFatherPageChildren = "Este QR te autoriza a recoger a los siguientes e
 //Home Charger Page Texts
 const homeChargerPageTitle = "Autorizaciones";
 const homeChargerPageButtonQR = "Generar Código QR";
+const homeChargerPageDetailQR = "Autorización de Recojo";
 
 
 //Home Supervisor Page Texts

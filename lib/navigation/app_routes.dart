@@ -1,6 +1,7 @@
 import 'package:clean_app/features/assign/new_assign_page.dart';
 import 'package:clean_app/features/demo/demo_page.dart';
 import 'package:clean_app/features/detail_assign/detail_assign_page.dart';
+import 'package:clean_app/features/detail_charger_qr/detail_charger_qr_page.dart';
 import 'package:clean_app/features/list_assigns/list_assign_page.dart';
 import 'package:clean_app/features/info_authorization/info_auth_page.dart';
 import 'package:clean_app/features/login/login_page.dart';
@@ -22,7 +23,8 @@ class AppRoutes {
     GetPage(name: AppLinks.LIST_ASSIGNS, page: () => ListAssignPage()),
     GetPage(name: AppLinks.INFO_AUTH, page: () => InfoAuthorizationPage()),
     GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
-    GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage())
+    GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage()),
+    GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage())
   ];
 
 }
@@ -42,4 +44,7 @@ class AppLinks {
 
 
   static const String REGISTER_CHARGER = "/register/charger";
+
+  
+  static const String CHARGER_QR = "/home/charge/generatedqr";
 }
