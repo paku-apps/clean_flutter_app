@@ -17,10 +17,11 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 class HomeSupervisorPage extends StatelessWidget {
   HomeSupervisorPage({Key? key}) : super(key: key);
 
-  final controllerPage = Get.put(HomeSupervisorController());
 
   @override
   Widget build(BuildContext context) {
+    final controllerPage = Get.put(HomeSupervisorController());
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56), 
@@ -28,13 +29,15 @@ class HomeSupervisorPage extends StatelessWidget {
           title: homeSupervisorPageTitle,
         )
       ),
-      drawer: HeaderFooterDrawerApp(
-        user: User(),
-        listIcons: [Icon(Icons.home)],
-        listNames: const [draweroptionsHome],
-        listFunctions: [() => {Navigator.pop(context)}],
-        closeFunction: controllerPage.closeSession,
-      ),
+      drawer: Obx((){
+        return HeaderFooterDrawerApp(
+          user: controllerPage.usuarioLogged.value,
+          listIcons: [Icon(Icons.home)],
+          listNames: const [draweroptionsHome],
+          listFunctions: [() => {Navigator.pop(context)}],
+          closeFunction: controllerPage.closeSession,
+        );
+      }),
       body: SafeArea(
           child: BackgroundColorSafe(
             colorBackground: colorBackgroundWhite,

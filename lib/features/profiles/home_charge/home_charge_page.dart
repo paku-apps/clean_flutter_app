@@ -7,6 +7,7 @@ import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer_tab.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
+import 'package:clean_app/widgets/custom/assign_children_tile.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/drawers/drawer_app.dart';
 import 'package:clean_app/widgets/states/empty_state.dart';
@@ -18,6 +19,9 @@ class HomeChargePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final controllerPage = Get.put(HomeChargeController());
+
     Size size = MediaQuery.of(context).size;
     return GetBuilder<HomeChargeController>(
       init: HomeChargeController(),
@@ -39,13 +43,21 @@ class HomeChargePage extends StatelessWidget {
                   Tab(text: 'Hoy'),
                   Tab(text: 'Programaciones')
                 ],
+                onTap: (value) {
+                  if(value == 0){
+                    homeChargeController.getauthorizationsForToday();
+                  }
+                  if(value == 1){
+                    homeChargeController.getauthorizationsForFuture();
+                  }
+                },
                 automaticIndicatorColorAdjustment: true,
               ),
             )
           )
         ),
         drawer: HeaderFooterDrawerApp(
-          user: User(),
+          user: homeChargeController.usuarioLogged.value,
           listIcons: [Icon(Icons.home)],
           listNames: const [draweroptionsHome],
           listFunctions: [() => {Navigator.pop(context)}],
@@ -59,7 +71,7 @@ class HomeChargePage extends StatelessWidget {
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
                 child: Obx(() {
-                  if(homeChargeController.listChildrenToday.isEmpty){
+                  if(homeChargeController.listAssignChildrenToday.isEmpty){
                     return EmptyStateApp(
                             pathImage: "assets/images/box.png", 
                             messageEmpty: "No se encontraron autorizaciones para hoy", 
@@ -72,10 +84,10 @@ class HomeChargePage extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           padding: const EdgeInsets.all(8),
-                          itemCount: homeChargeController.listChildrenToday.length,
+                          itemCount: homeChargeController.listAssignChildrenToday.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return ChildTile(
-                              child: homeChargeController.listChildrenToday[index],
+                            return AssignChildTile(
+                              assignChild: homeChargeController.listAssignChildrenToday[index],
                             );
                           }
                         ),
@@ -91,7 +103,7 @@ class HomeChargePage extends StatelessWidget {
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
                 child: Obx(() {
-                  if(homeChargeController.listChildrenProgram.isEmpty){
+                  if(homeChargeController.listAssignChildrenProgram.isEmpty){
                     return EmptyStateApp(
                             pathImage: "assets/images/box.png", 
                             messageEmpty: "No se encontraron autorizaciones programadas", 
@@ -102,10 +114,10 @@ class HomeChargePage extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(8),
-                      itemCount: homeChargeController.listChildrenProgram.length,
+                      itemCount: homeChargeController.listAssignChildrenProgram.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return ChildTile(
-                          child: homeChargeController.listChildrenProgram[index],
+                        return AssignChildTile(
+                          assignChild: homeChargeController.listAssignChildrenProgram[index],
                         );
                       }
                     );

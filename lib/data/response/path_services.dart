@@ -23,3 +23,7 @@ const String searchChargerService = "/responsables";
 const String createNewAssignService = "/autorizaciones";
 const String updateAssignService = "/autorizaciones/:1";
 const String deleteAssignService = "/autorizaciones/";
+
+//Charger
+const String listAssignChildToday = "/responsables/:1/estudiantes/hoy";
+const String listAssignChildFuture = "/responsables/:1/estudiantes/futuro";
