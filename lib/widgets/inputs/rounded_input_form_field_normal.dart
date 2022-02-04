@@ -24,7 +24,12 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var deviceData = MediaQuery.of(context);
+      //width: deviceData.size.width > 600 ? 300 : 400 ,
+
     return Container(
+      width: getResponsiveLenght(deviceData),
       padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
       child: TextFormField(
         controller: controller,
@@ -55,5 +60,18 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
         ),
       )
     );
+  }
+
+  double getResponsiveLenght(MediaQueryData mediaQueryData){
+    if(mediaQueryData.size.width>950){
+      //Desktop
+      return 700;
+    } else if(mediaQueryData.size.width>600){
+      //Tablet
+      return 400;
+    } else {
+      //Size Mobile
+      return 200;
+    }
   }
 }
