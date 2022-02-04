@@ -5,6 +5,7 @@ const emptyString = "";
 const separatorComma = ",";
 const separatorLine = "-";
 const separatorSlash = "/";
+const separatorQR = "-*-";
 
 //Message App
 const messageNotLaunchUrl = "No se puede abrir la página";
@@ -34,6 +35,7 @@ const homeChargerPageDetailQR = "Autorización de Recojo";
 //Home Supervisor Page Texts
 const homeSupervisorPageTitle = "Escanear Código QR";
 const homeSupervisorScanQR = "Escanear QR";
+const detailSupervisorQRTitle = "Información de la Autorización";
 
 
 //Drawer Profiles Texts

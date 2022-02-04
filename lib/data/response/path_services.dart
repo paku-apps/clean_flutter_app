@@ -17,7 +17,7 @@ const String qrPrincipalService = "/qr/apoderado/:1";
 const String listAssignService = "/apoderados/:1/autorizaciones";
 
 //Charger
-const String searchChargerService = "/responsables";
+const String searchChargerService = "/responsables/busqueda";
 
 //Assigns
 const String createNewAssignService = "/autorizaciones";
@@ -28,3 +28,4 @@ const String deleteAssignService = "/autorizaciones/";
 const String listAssignChildToday = "/responsables/:1/estudiantes/hoy";
 const String listAssignChildFuture = "/responsables/:1/estudiantes/futuro";
 const String generateQRDetail = "/qr/responsable/:1";
+const String pathDecodeQR = "/qr/descifrar";

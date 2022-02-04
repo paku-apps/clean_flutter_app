@@ -55,10 +55,11 @@ class HomeSupervisorPage extends StatelessWidget {
                                                         "Cancelar", 
                                                         false, 
                                                         ScanMode.QR);
+                          if(barcodeScanRes!= "-1"){controllerPage.goToInfoAuth(barcodeScanRes);}
                         }
                       ),
-                      Text(controllerPage.valueQR.value),
-                      TextLabelTap(press: () => {Get.toNamed(AppLinks.INFO_AUTH)}, textLabel: "Detail Authorization")
+                      Text(controllerPage.valueQR.value, style: TextStyle(color: whiteColor),),
+                      //TextLabelTap(press: () => {Get.toNamed(AppLinks.INFO_AUTH)}, textLabel: "Detail Authorization")
                      ]
                   )
                 );

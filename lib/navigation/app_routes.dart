@@ -24,7 +24,8 @@ class AppRoutes {
     GetPage(name: AppLinks.INFO_AUTH, page: () => InfoAuthorizationPage()),
     GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
     GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage()),
-    GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage())
+    GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage()),
+    GetPage(name: AppLinks.CHARGER_QR, page: () => InfoAuthorizationPage())
   ];
 
 }
@@ -47,4 +48,6 @@ class AppLinks {
 
   
   static const String CHARGER_QR = "/home/charge/generatedqr";
+
+  static const String DETAIL_SUPERVISOR_QR = "home/supervisor/qr/detail";
 }

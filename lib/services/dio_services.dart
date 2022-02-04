@@ -56,6 +56,7 @@ class HttpDioService {
             var newToken = await getCurrentTokenUser();
             
             if(newToken!=emptyString){
+                cloneReq?.headers.add("Content-Type", "application/json");
                 cloneReq?.headers.add("Authorization", "Bearer $newToken");
             }
 
