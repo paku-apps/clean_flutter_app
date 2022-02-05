@@ -21,30 +21,56 @@ class ChildTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var deviceData = MediaQuery.of(context);
-
-    return Container(
-      width: deviceData.size.width,
-      margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
-      alignment: Alignment.center,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextAppNormalAvatar(text: child.nombres + emptySpace + child.apPaterno, color: textPrimaryColor, noPaddingVertical: true),
-                TextAppNormalAvatar(text: child.grado?.nombre ?? "" , color: textPrimaryColor, noPaddingVertical: true)
-              ],
+    var isForDevice = isMobile();
+    if(isForDevice){
+      return Container(
+        margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextAppNormalAvatar(text: child.nombres + emptySpace + child.apPaterno, color: textPrimaryColor, noPaddingVertical: true),
+                    TextAppNormalAvatar(text: child.grado?.nombre ?? "" , color: textPrimaryColor, noPaddingVertical: true)
+                  ],
+                )
+              )
             )
-          )
-        ],
-      )
-    );
+          ],
+        )
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextAppNormalAvatar(text: child.nombres + emptySpace + child.apPaterno, color: textPrimaryColor, noPaddingVertical: true),
+                  TextAppNormalAvatar(text: child.grado?.nombre ?? "" , color: textPrimaryColor, noPaddingVertical: true)
+                ],
+              )
+            )
+          ],
+        )
+      );
+    }    
   }
 }

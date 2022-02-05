@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 extension extensionBooleans on bool {
 
@@ -20,4 +21,8 @@ double getResponsiveWidthContainer(MediaQueryData mediaQueryData){
     //Size Mobile
     return 350;
   }
+}
+
+bool isMobile(){
+  return GetPlatform.isMobile;
 }

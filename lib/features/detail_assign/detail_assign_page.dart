@@ -6,6 +6,7 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/features/detail_assign/detail_assign_controller.dart';
+import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav_options.dart';
@@ -25,6 +26,7 @@ class DetailAssignPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    var deviceData = MediaQuery.of(context);
     var argumentitos = Get.arguments;
     var assign = json.decode(argumentitos[0]);
     var listChildSelected = assign["estudiantes"].where((estudiante) => estudiante["isChecked"] == true).toList();
@@ -61,6 +63,7 @@ class DetailAssignPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container( //FormAutocompletado
+                  width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
                   margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
                   child: Row(
                     children: [
@@ -75,6 +78,7 @@ class DetailAssignPage extends StatelessWidget {
                   )
                 ),
                 Container( //FormAutocompletado
+                  width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
                   margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
                   child: Row(
                     children: [

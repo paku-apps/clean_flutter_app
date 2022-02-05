@@ -1,5 +1,6 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
+import 'package:clean_app/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,11 +20,19 @@ class TextAppNormalAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var deviceData = MediaQuery.of(context);
-    return Container(
-      width: getResponsiveWidthText(deviceData),
-      padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-      child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
-    );
+    if(isMobile()){
+      return Container(
+        width: getResponsiveWidthText(deviceData),
+        padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+        child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
+      );
+    } else {
+      return Container(
+        width: getResponsiveWidthText(deviceData),
+        padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+        child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
+      );
+    }
   }
 
   double getResponsiveWidthText(MediaQueryData mediaQueryData){
@@ -35,7 +44,7 @@ class TextAppNormalAvatar extends StatelessWidget {
       return 500;
     } else {
       //Size Mobile
-      return 280;
+      return 320;
     }
   }
 }
