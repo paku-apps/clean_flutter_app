@@ -23,6 +23,19 @@ double getResponsiveWidthContainer(MediaQueryData mediaQueryData){
   }
 }
 
+double getResponsiveWidthContainerCheckbox(MediaQueryData mediaQueryData){
+  if(mediaQueryData.size.width>950){
+    //Desktop
+    return 570;
+  } else if(mediaQueryData.size.width>600){
+    //Tablet
+    return 370;
+  } else {
+    //Size Mobile
+    return 220;
+  }
+}
+
 bool isMobile(){
   return GetPlatform.isMobile;
 }

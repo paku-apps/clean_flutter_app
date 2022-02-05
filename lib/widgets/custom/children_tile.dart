@@ -11,10 +11,12 @@ import 'package:flutter/material.dart';
 class ChildTile extends StatelessWidget {
 
   Child child;
+  bool hasCheckBox;
 
   ChildTile({
     Key? key,
-    required this.child
+    required this.child,
+    this.hasCheckBox = false
   }) : super(key: key);
 
   @override
@@ -22,10 +24,10 @@ class ChildTile extends StatelessWidget {
 
     var deviceData = MediaQuery.of(context);
     var isForDevice = isMobile();
+    
     if(isForDevice){
       return Container(
         margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
-        alignment: Alignment.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,6 +59,7 @@ class ChildTile extends StatelessWidget {
           children: [
             AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
             Container(
+              width: hasCheckBox ? getResponsiveWidthContainerCheckbox(deviceData) : getResponsiveWidthContainer(deviceData),
               alignment: Alignment.center,
               padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
               child: Column(
