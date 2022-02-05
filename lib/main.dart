@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Clean App',
+      title: 'Recojo Villa Maria',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

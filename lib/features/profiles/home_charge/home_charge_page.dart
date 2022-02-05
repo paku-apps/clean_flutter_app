@@ -50,7 +50,7 @@ class HomeChargePage extends StatelessWidget {
                   ),
                   Container(
                     width: isMobile() ? size.width * 0.5 : size.width*0.4,
-                    child: Tab(text: 'Programaciones')
+                    child: Tab(text: 'Futuras')
                   )
                   ],
                 onTap: (value) {

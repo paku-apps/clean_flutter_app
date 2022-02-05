@@ -160,12 +160,25 @@ class HomeFatherPage extends StatelessWidget {
             }
           );
         } else {
-          return FloatingActionButton(
-            backgroundColor: primaryColor,
-            child: const Icon(Icons.sync, size: 36),
-            onPressed: () {
-              controllerListAssign.getListAssignByUser();
-            }
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                backgroundColor: primaryColor,
+                child: const Icon(Icons.sync, size: 36),
+                onPressed: () {
+                  controllerListAssign.getListAssignByUser();
+                }
+              ),
+              SizedBox(height: 10,),
+              FloatingActionButton(
+                backgroundColor: primaryColor,
+                child: const Icon(Icons.add, size: 36),
+                onPressed: () {
+                  Get.toNamed(AppLinks.NEW_ASSIGN);
+                }
+              )
+            ]
           );
         }
       }) 
