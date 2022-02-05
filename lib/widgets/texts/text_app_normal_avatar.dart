@@ -3,13 +3,13 @@ import 'package:clean_app/constants/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TextAppNormal extends StatelessWidget {
+class TextAppNormalAvatar extends StatelessWidget {
 
   String text;
   Color color;
   bool noPaddingVertical;
 
-  TextAppNormal({
+  TextAppNormalAvatar({
     Key? key,
     this.noPaddingVertical = false,
     required this.text,
@@ -35,7 +35,7 @@ class TextAppNormal extends StatelessWidget {
       return 500;
     } else {
       //Size Mobile
-      return 450;
+      return 280;
     }
   }
 }

@@ -7,6 +7,7 @@ import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
+import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/background_color.dart';
@@ -30,6 +31,7 @@ class HomeFatherPage extends StatelessWidget {
     final controllerPage = Get.put(HomeFatherController());
     final controllerListAssign = Get.put(ListAssignController());
 
+    var deviceData = MediaQuery.of(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -57,8 +59,8 @@ class HomeFatherPage extends StatelessWidget {
               child: Obx(() {
                 if(controllerPage.currentPage == "HOMEPAGE"){
                   return Column (
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: size.height * 0.01),
                       TextAppNormal(text: homeFatherPageTextQr, color: textPrimaryColor),
@@ -98,8 +100,8 @@ class HomeFatherPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           itemCount: controllerPage.listChildren.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return ChildTile(
-                              child: controllerPage.listChildren[index],
+                            return  ChildTile(
+                                child: controllerPage.listChildren[index],
                             );
                           }
                         );

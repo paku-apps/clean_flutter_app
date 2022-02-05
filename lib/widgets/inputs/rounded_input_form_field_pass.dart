@@ -29,7 +29,9 @@ class RoundedTextFormFieldPass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deviceData = MediaQuery.of(context);
     return Container(
+      width: getResponsiveLenghtButton(deviceData),
       padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
       child: TextFormField(
         obscureText: !showPassword,
@@ -44,7 +46,6 @@ class RoundedTextFormFieldPass extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: "Contraseña",
-          hoverColor: primaryColor,
           hintStyle: const TextStyle(color: primaryColor),
           filled: true,
           fillColor: primaryColorLight,
@@ -68,5 +69,18 @@ class RoundedTextFormFieldPass extends StatelessWidget {
         ),
       )
     );
+  }
+  
+  double getResponsiveLenghtButton(MediaQueryData mediaQueryData){
+    if(mediaQueryData.size.width>950){
+      //Desktop
+      return 700;
+    } else if(mediaQueryData.size.width>600){
+      //Tablet
+      return 500;
+    } else {
+      //Size Mobile
+      return 400;
+    }
   }
 }

@@ -19,10 +19,11 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var deviceData = MediaQuery.of(context);
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: size.width * 0.8,
+      padding: const EdgeInsets.fromLTRB(dimenExtraBig, 10, dimenExtraBig, 0),
+      width: getResponsiveLenghtButton(deviceData),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: newElevatedButton(),
@@ -46,5 +47,18 @@ class RoundedButton extends StatelessWidget {
           textStyle: TextStyle(
               color: textColor, fontSize: 14, fontWeight: FontWeight.w500)),
     );
+  }
+
+  double getResponsiveLenghtButton(MediaQueryData mediaQueryData){
+    if(mediaQueryData.size.width>950){
+      //Desktop
+      return 700;
+    } else if(mediaQueryData.size.width>600){
+      //Tablet
+      return 500;
+    } else {
+      //Size Mobile
+      return 400;
+    }
   }
 }

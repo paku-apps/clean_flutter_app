@@ -26,10 +26,9 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var deviceData = MediaQuery.of(context);
-      //width: deviceData.size.width > 600 ? 300 : 400 ,
 
     return Container(
-      width: getResponsiveLenght(deviceData),
+      width: getResponsiveLenghtButton(deviceData),
       padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
       child: TextFormField(
         controller: controller,
@@ -43,7 +42,6 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
         },
         decoration: InputDecoration(
           hintText: "Correo electrónico",
-          hoverColor: primaryColor,
           hintStyle: const TextStyle(color: primaryColor),
           filled: true,
           fillColor: primaryColorLight,
@@ -62,16 +60,16 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
     );
   }
 
-  double getResponsiveLenght(MediaQueryData mediaQueryData){
+  double getResponsiveLenghtButton(MediaQueryData mediaQueryData){
     if(mediaQueryData.size.width>950){
       //Desktop
       return 700;
     } else if(mediaQueryData.size.width>600){
       //Tablet
-      return 400;
+      return 500;
     } else {
       //Size Mobile
-      return 200;
+      return 400;
     }
   }
 }
