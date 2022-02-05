@@ -4,6 +4,7 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/profiles/home_charge/home_charge_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
+import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer_tab.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
@@ -24,6 +25,7 @@ class HomeChargePage extends StatelessWidget {
     final controllerPage = Get.put(HomeChargeController());
 
     Size size = MediaQuery.of(context).size;
+
     return GetBuilder<HomeChargeController>(
       init: HomeChargeController(),
       builder: (homeChargeController) => Scaffold(
@@ -38,12 +40,19 @@ class HomeChargePage extends StatelessWidget {
                 unselectedLabelColor: Colors.grey,
                 labelColor: primaryColor,
                 indicatorWeight: 5,
+                isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.indigo,
-                tabs: const [
-                  Tab(text: 'Hoy'),
-                  Tab(text: 'Programaciones')
-                ],
+                tabs: [
+                  Container(
+                    width: isMobile() ? size.width * 0.5 : size.width*0.4,
+                    child: Tab(text: 'Hoy'),
+                  ),
+                  Container(
+                    width: isMobile() ? size.width * 0.5 : size.width*0.4,
+                    child: Tab(text: 'Programaciones')
+                  )
+                  ],
                 onTap: (value) {
                   if(value == 0){
                     homeChargeController.getauthorizationsForToday();
@@ -83,6 +92,7 @@ class HomeChargePage extends StatelessWidget {
                             colorState: Colors.black
                     );
                   } else { return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                           ListView.builder(
                           scrollDirection: Axis.vertical,
