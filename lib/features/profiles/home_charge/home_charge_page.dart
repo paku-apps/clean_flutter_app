@@ -114,7 +114,7 @@ class HomeChargePage extends StatelessWidget {
                 })
               )
             ),
-            //Programaciones
+            //Programaciones / Futuras
             SafeArea(
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,

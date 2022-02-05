@@ -88,7 +88,9 @@ class InfoAuthorizationPage extends StatelessWidget {
                         );
                       }
                   ),
-                  Center(child: RoundedButton(text: infoAuthorizationConfirm, press: () {}))
+                  Center(child: RoundedButton(text: infoAuthorizationConfirm, press: () {
+                    infoController.registerAuthorization();
+                  }))
                 ],
                 );
               }

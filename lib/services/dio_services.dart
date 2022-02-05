@@ -131,9 +131,9 @@ class HttpDioService {
       data: {
         'grant_type': 'refresh_token', 
         'client_id': '2v9kfta1dhqv01dtm6blf3m48g',
-        'token': refreshToken},
+        'refresh_token': refreshToken},
       options: Options(
-        contentType: Headers.formUrlEncodedContentType 
+        contentType: Headers.formUrlEncodedContentType
       )
     );
 
