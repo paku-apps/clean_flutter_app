@@ -40,7 +40,7 @@ class HomeChargePage extends StatelessWidget {
                 unselectedLabelColor: Colors.grey,
                 labelColor: primaryColor,
                 indicatorWeight: 5,
-                isScrollable: true,
+                isScrollable: isMobile() ? false : true,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.indigo,
                 tabs: [

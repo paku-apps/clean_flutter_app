@@ -6,6 +6,7 @@ import 'package:clean_app/data/repository/charger_repository.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/navigation/app_routes.dart';
+import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class AssignController extends GetxController {
   var rangoFrecuenciaCadena = "".obs;
   var listChildren = List<Child>.empty().obs;
   var usuarioLogged = User().obs;
+  var checkForever = false.obs;
 
   //Data for Backend
   var rangeFrecuencyStart = "".obs;
@@ -95,15 +97,20 @@ class AssignController extends GetxController {
     }
   }
 
+  void checkForeverRange(){
+    checkForever.value = !checkForever.value;
+    update();
+  }
+
   void submitNewAssign() async {
     isLoading.value = true;
     var listaChilds = listChildren.value;
-    var start = this.rangeFrecuencyStart.value;
-    var end = this.rangeFrecuencyEnd.value;
+    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : this.rangeFrecuencyStart.value;
+    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : this.rangeFrecuencyEnd.value;
     var apoderado = this.idApoderado.value;
     var responsable = this.idCharger.value;
     this.tokenStored;
-
+    
     //var childrenSelected = listaChilds.where((child) => child.isChecked == true);
     var assignRepository = AssignRepositoryImpl();
     try{
@@ -119,8 +126,8 @@ class AssignController extends GetxController {
 
   void updateAssign() async {
     isLoading.value = true;
-    var start = this.rangeFrecuencyStart.value;
-    var end = this.rangeFrecuencyEnd.value;
+    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : this.rangeFrecuencyStart.value;
+    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : this.rangeFrecuencyEnd.value;
     var apoderado = this.idApoderado.value;
     var listaChilds = listChildren.value;
     var responsable = this.idCharger.value;

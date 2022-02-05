@@ -50,6 +50,7 @@ const assignInputFrecuency = "Ingresar Frecuencia";
 const registerAssignButton = "Registrar";
 const editAssignPageTitle = "Editar Autorización";
 const updateAssignButton = "Actualizar";
+const assignForever= "Para siempre";
 
 //Home Father Page List Assign
 const listAssignsTitle = "Autorizaciones creadas";

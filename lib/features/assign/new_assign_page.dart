@@ -134,58 +134,74 @@ class AssignPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    //SfDateRangePicker(),
                     Container(//Frecuencia
                       width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                      margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.calendar_today, size: 36),
-                          Expanded(
-                            child: InkWell(
-                                onTap: () async {
-                                  var initialDateRate = DateTimeRange(start: DateTime.now(), end: DateTime.now());
-                                  var selectedRange = await showDateRangePicker(context: context, initialDateRange: initialDateRate, firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year+2));
-                                  if(selectedRange!=null){
-                                    assignController.rangeFrecuencyStart.value = transformDateTimeToFormatBackend(selectedRange.start);
-                                    assignController.rangeFrecuencyEnd.value = transformDateTimeToFormatBackend(selectedRange.end);
-                                    assignController.rangoFrecuenciaCadena.value = transformDateTimeToFormat(selectedRange.start) + emptySpace + separatorLine + emptySpace + transformDateTimeToFormat(selectedRange.end);
-                                  }
-                                },
-                                child: SizedBox(
-                                height: 48,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black38),
-                                    borderRadius: BorderRadius.all(Radius.circular(4))
-                                  ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        const SizedBox(width: 8),
-                                        Obx(() {
-                                          if(assignController.rangoFrecuenciaCadena.isNotEmpty){
-                                            return Text(
-                                              assignController.rangoFrecuenciaCadena.toString(),
-                                              textAlign: TextAlign.start,
-                                            ); 
-                                          } else {      
-                                            return const Text(
-                                              assignInputFrecuency,
-                                              textAlign: TextAlign.start,
-                                            );
-                                          }
-                                        }),
-                                      ]
+                      child: Obx((){
+                        return Row(
+                          children: [
+                            SizedBox(width: 4),
+                            Checkbox(value: assignController.checkForever.value, onChanged: (value) {
+                              assignController.checkForeverRange();
+                            },),
+                            Text(assignForever),
+                          ],
+                        );
+                      })
+                    ),
+                    //SfDateRangePicker(),
+                    Obx((){
+                      return Container(//Frecuencia
+                        width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
+                        margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+                        child: assignController.checkForever.value ? SizedBox(height: 8) : Row(
+                          children: [
+                            const Icon(Icons.calendar_today, size: 36),
+                            Expanded(
+                              child: InkWell(
+                                  onTap: () async {
+                                    var initialDateRate = DateTimeRange(start: DateTime.now(), end: DateTime.now());
+                                    var selectedRange = await showDateRangePicker(context: context, initialDateRange: initialDateRate, firstDate: DateTime.now(), lastDate: DateTime(DateTime.now().year+2));
+                                    if(selectedRange!=null){
+                                      assignController.rangeFrecuencyStart.value = transformDateTimeToFormatBackend(selectedRange.start);
+                                      assignController.rangeFrecuencyEnd.value = transformDateTimeToFormatBackend(selectedRange.end);
+                                      assignController.rangoFrecuenciaCadena.value = transformDateTimeToFormat(selectedRange.start) + emptySpace + separatorLine + emptySpace + transformDateTimeToFormat(selectedRange.end);
+                                    }
+                                  },
+                                  child: SizedBox(
+                                  height: 48,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black38),
+                                      borderRadius: BorderRadius.all(Radius.circular(4))
+                                    ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(width: 8),
+                                          Obx(() {
+                                            if(assignController.rangoFrecuenciaCadena.isNotEmpty){
+                                              return Text(
+                                                assignController.rangoFrecuenciaCadena.toString(),
+                                                textAlign: TextAlign.start,
+                                              ); 
+                                            } else {      
+                                              return const Text(
+                                                assignInputFrecuency,
+                                                textAlign: TextAlign.start,
+                                              );
+                                            }
+                                          }),
+                                        ]
+                                      ),
                                     ),
                                   ),
-                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      );
+                    }),
                     Text("Seleccione a quién recogerá:", textAlign: TextAlign.start, style: TextStyle(fontSize: textSizeNormalLabel)),
                     Container(//Lista de niño
                       margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),

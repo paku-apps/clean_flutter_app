@@ -9,12 +9,14 @@ class TextAppNormal extends StatelessWidget {
   String text;
   Color color;
   bool noPaddingVertical;
+  double textSize;
 
   TextAppNormal({
     Key? key,
     this.noPaddingVertical = false,
     required this.text,
-    required this.color
+    required this.color,
+    this.textSize = textSizeNormalLabel
     }) : super(key: key);
 
   @override
@@ -23,14 +25,14 @@ class TextAppNormal extends StatelessWidget {
     if(isForDevice){
       return Container(
         padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-        child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
+        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color),),
       );
     } else {
       var deviceData = MediaQuery.of(context);
       return Container(
         width: getResponsiveWidthText(deviceData),
         padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-        child: Text(text, style: TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.normal, color: color),),
+        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color),),
       );
     }
   }
