@@ -24,7 +24,6 @@ class AppRoutes {
     GetPage(name: AppLinks.INFO_AUTH, page: () => InfoAuthorizationPage()),
     GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
     GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage()),
-    GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage()),
     GetPage(name: AppLinks.CHARGER_QR, page: () => InfoAuthorizationPage())
   ];
 

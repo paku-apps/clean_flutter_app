@@ -29,3 +29,4 @@ const String listAssignChildToday = "/responsables/:1/estudiantes/hoy";
 const String listAssignChildFuture = "/responsables/:1/estudiantes/futuro";
 const String generateQRDetail = "/qr/responsable/:1";
 const String pathDecodeQR = "/qr/descifrar";
+const String registerAuthCharger = "/recojos";

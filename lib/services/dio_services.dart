@@ -13,11 +13,13 @@ const BASE_URL = pathServer;
 class HttpDioService {
 
   Dio? _dio;
+  Dio? defaultDio;
 
   static header() => {"Content-Type": "application/json"};
 
   Future<HttpDioService> init() async {
     _dio = Dio(BaseOptions(baseUrl: BASE_URL, headers: header()));
+    defaultDio = Dio();
     initInterceptors();
     return this;
   }
@@ -47,7 +49,8 @@ class HttpDioService {
           print("Error[${error.response?.statusCode}]");
 
           //Validate the unauthorized
-          if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
+          //if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
+          if (error.response?.statusCode == 401) {
             await refreshToken();
             final cloneReq = await _dio?.request(error.requestOptions.path,
                           data: error.requestOptions.data,
@@ -125,21 +128,28 @@ class HttpDioService {
 
   Future<void> refreshToken() async {
 
-    final refreshToken = await getCurrentRefreshToken();
+    var refreshToken = await getCurrentRefreshToken();
     var userRepository = UserRepositoryImpl();
-    final response = await _dio?.post('https://auth-cvm.auth.us-east-1.amazoncognito.com/oauth2/token', 
-      data: {
-        'grant_type': 'refresh_token', 
-        'client_id': '2v9kfta1dhqv01dtm6blf3m48g',
-        'refresh_token': refreshToken},
-      options: Options(
-        contentType: Headers.formUrlEncodedContentType
-      )
-    );
-
-    if (response?.statusCode == 200) {
-      userRepository.saveToken(response?.data['id_token']);
+    try {
+      final response = await defaultDio?.post('https://auth-cvm.auth.us-east-1.amazoncognito.com/oauth2/token', 
+        data: {
+          'grant_type': 'refresh_token', 
+          'client_id': '2v9kfta1dhqv01dtm6blf3m48g',
+          'refresh_token': refreshToken
+        },
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType
+        )
+      );
+      
+      if (response?.statusCode == 200) {
+        userRepository.saveToken(response?.data['id_token']);
+      }
+    } catch (e) {
+      print(e);
+      throw Exception("Something wen't wrong to get token in refresh Token");
     }
+
   }
 
 

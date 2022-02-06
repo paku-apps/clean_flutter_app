@@ -4,7 +4,9 @@ import 'package:clean_app/data/model/assign_confirm.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/qr_repository.dart';
+import 'package:clean_app/data/repository/supervisor_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +23,11 @@ class InfoAuthorizationController extends GetxController {
   void onInit(){
     super.onInit();
     getUserLogged();
+  }
+
+  @override 
+  void onClose(){
+    listAuthConfirm.clear();
   }
 
   Future<User?> getUserLogged() async {
@@ -68,9 +75,18 @@ class InfoAuthorizationController extends GetxController {
     update();
   }
 
-  String registerAuthorization(){
+  Future<String> registerAuthorization() async {
     if(isNotSelectedChildren()){
       showErrorSnackbar("Tiene que recoger un niñ@", "Por favor seleccione como minimo a un niñ@");
+    } else {
+      var supervisorRepo = SupervisorRepositoryImpl();
+      var state = await supervisorRepo.registerAuthorization(usuarioLogged.value.id, listAuthConfirm);
+      if(state=="SUCCESS"){
+        Get.offAndToNamed(AppLinks.HOME_SUPERVISOR);
+        showSuccessSnackbar("Se registró la autorización", "Se recogieron los niños seleccionados");
+      } else {
+        showErrorSnackbar("No se pudo registrar la autorización", "Por favor vuelva a intentarlo");
+      }
     }
     return "";
   }
