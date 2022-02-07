@@ -47,8 +47,7 @@ class TextFormFieldIconNormal extends StatelessWidget {
             },
             decoration: InputDecoration(
               hintText: hint,
-              hoverColor: primaryColor,
-              hintStyle: const TextStyle(color: primaryColor),
+              hintStyle: const TextStyle(color: textPrimaryColorUnselected),
               filled: true,
               fillColor: whiteColor,
               prefixIcon: leftIcon != null ?Icon(

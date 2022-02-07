@@ -70,29 +70,31 @@ class RegisterChargerPage extends StatelessWidget {
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
-                      controller: registerChargerController.nameController, 
+                      controller: registerChargerController.docController, 
                       validatorFunction: (value) {registerChargerController.validateDoc(value);},
                       label: registerChargerFieldNumDoc,
                       hint: registerChargerFieldHintNumDoc
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
-                      controller: registerChargerController.nameController, 
+                      controller: registerChargerController.passConytoller, 
                       validatorFunction: (value) {registerChargerController.validateNombres(value);},
                       label: registerChargerFieldPass,
                       hint: registerChargerFieldHintPass
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
-                      controller: registerChargerController.nameController, 
-                      validatorFunction: (value) {registerChargerController.validateNombres(value);},
+                      controller: registerChargerController.repassController, 
+                      validatorFunction: (value) {registerChargerController.validatePass(value);},
                       label: registerChargerFieldRePass,
                       hint: registerChargerFieldHintRePass
                     ),
                     SizedBox(height: size.height * 0.05),
-                    RoundedButton(
-                      text: registerChargerButton, 
-                      press: () {}
+                    registerChargerController.isLoading? CircularProgressIndicator() : RoundedButton(
+                      text: registerChargerButton,
+                      color: accentColor, 
+                      press: () => registerChargerController.checkToRegister() 
+                      //controller.checkLogin
                     ),
                     SizedBox(height: size.height * 0.05)
                   ]
