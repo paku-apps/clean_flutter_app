@@ -48,6 +48,7 @@ String transformDateTimeToAppFormat(DateTime startDateTime, DateTime endDateTime
 }
 
 String getRangeOfChildAuthorizations(List<AutorizacionModel> listAssigns){
+  initializeDateFormatting();
   var maxRangeChild = "";
   var maxDate = DateTime.now();
   listAssigns.forEach((assignChild) { 

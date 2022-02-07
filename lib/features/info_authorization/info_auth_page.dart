@@ -20,7 +20,6 @@ class InfoAuthorizationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final infoController = Get.put(InfoAuthorizationController());
 
     Size size = MediaQuery.of(context).size;
     var argumentitos = Get.arguments;

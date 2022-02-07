@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Recojo Villa Maria',
+      onGenerateTitle: (BuildContext context) {
+        return "Recojo Villa Maria";
+      },
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
