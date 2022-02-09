@@ -19,6 +19,9 @@ const loginPageButtonLogin = "Ingresar";
 const loginPageTextTapForgotPass = "Olvidé la contraseña";
 const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
 
+//Forgor Page Texts
+const homeChangePassword = "Guardar";
+
 //Home Father Page Texts
 const homeFatherPageTitle = "Autorización";
 const homeFatherPageTextQr = "Muestra este código QR al supervisor";

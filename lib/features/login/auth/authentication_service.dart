@@ -6,6 +6,7 @@ import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/auth/authentication_data.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/services/dio_services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -44,10 +45,17 @@ class AuthenticationServiceImpl extends AuthenticationService {
         UserRepository repo = UserRepositoryImpl();
         var apiResultResponse = ApiResultResponse.fromJson(response.data);
         var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
-        await repo.saveToken(dataResponse.authenticationResult.idToken);
-        await repo.saveRefreshToken(dataResponse.authenticationResult.refreshToken);
-        userLogged =  getUserFromUserBD(dataResponse.userBd);
-        await repo.saveUser(dataResponse.userBd);
+        if(dataResponse.reseteo == false){
+        //if(dataResponse.reseteo){
+          Get.offAndToNamed(AppLinks.FORGOT_PAGE);
+        } else {
+          await repo.saveToken(dataResponse.authenticationResult.idToken);
+          await repo.saveRefreshToken(dataResponse.authenticationResult.refreshToken);
+          userLogged =  getUserFromUserBD(dataResponse.userBd);
+          await repo.saveUser(dataResponse.userBd);
+        }
+
+        /**/
       } else {
         throw AuthenticationException(message: 'Wrong username or password');
       }

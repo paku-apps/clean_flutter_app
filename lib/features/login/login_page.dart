@@ -78,6 +78,7 @@ class LoginPage extends StatelessWidget {
                     textLabel: loginPageTextTapNewAccountPickup
                   ), 
                   SizedBox(height: size.height * 0.10),
+                  /*
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,7 +102,7 @@ class LoginPage extends StatelessWidget {
                         icon: Icon(Icons.check_box)
                       )
                     ],
-                  )
+                  )*/
                 ],
               ),
               )

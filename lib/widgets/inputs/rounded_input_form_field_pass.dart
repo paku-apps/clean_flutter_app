@@ -13,6 +13,8 @@ class RoundedTextFormFieldPass extends StatelessWidget {
   TextEditingController controller;
   Function validatorFunction;
   String valueData;
+  String labelContrasenia;
+  bool passIsVisible;
   IconData? leftIcon;
 
   RoundedTextFormFieldPass({
@@ -21,6 +23,8 @@ class RoundedTextFormFieldPass extends StatelessWidget {
     this.icon = Icons.lock,
     this.showPassword = false,
     this.leftIcon,
+    this.labelContrasenia = "Contraseña",
+    this.passIsVisible = true,
     required this.functionTapIcon,
     required this.controller,
     required this.validatorFunction,
@@ -45,7 +49,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
           return validatorFunction(value!);
         },
         decoration: InputDecoration(
-          hintText: "Contraseña",
+          hintText: labelContrasenia,
           hintStyle: const TextStyle(color: primaryColor),
           filled: true,
           fillColor: primaryColorLight,
@@ -53,13 +57,13 @@ class RoundedTextFormFieldPass extends StatelessWidget {
             leftIcon,
             color: primaryColor
           ) : null,
-          suffixIcon: IconButton(
+          suffixIcon: passIsVisible ? IconButton(
             icon: Icon( 
               !showPassword ? Icons.visibility : Icons.visibility_off,
               color: primaryColor
             ),
             onPressed: () => functionTapIcon(),
-          ),
+          ) : SizedBox(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
             borderSide: const BorderSide(

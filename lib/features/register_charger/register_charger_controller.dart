@@ -117,7 +117,7 @@ class RegisterChargerController extends GetxController{
       showSuccessSnackbar("Bienvenido", "Colegio Villa Maria te saluda");
     } catch(e) {
       isLoading = false;
-      showErrorSnackbar("Ingreso fallido", "Por favor, intentelo en breves momentos");
+      showErrorSnackbar("Error al registrar", "Por favor, intentelo en breves momentos");
       update();
     }
   }

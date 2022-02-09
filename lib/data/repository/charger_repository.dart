@@ -73,7 +73,6 @@ class ChargerRepositoryImpl extends ChargerRepository {
       );
       if(response.statusCode == 200){
         var apiResultResponse = ApiResultResponse.fromJson(response.data);
-        var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
         return "Success";
       } else {
         throw ChargerRepositoryException(message: 'No se pudo registrar al usuario');

@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/converters/user_model_from_user_response.dart';
 import 'package:clean_app/data/model/user.dart';
+import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/auth/user_response.dart';
+import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/services/dio_services.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,6 +20,7 @@ abstract class UserRepository {
   Future<void> saveRefreshToken(String refreshToken);
   Future<String> getRefreshToken();
   Future<void> clearDataUser();
+  Future<String> submitNewPassword(int idUsuario, String newPassword);
 
 }
 
@@ -106,4 +110,42 @@ class UserRepositoryImpl extends UserRepository {
     }
     return emptyString;
   }
+
+  @override
+  Future<String> submitNewPassword(int? idUsuario, String newPass) async {
+
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
+
+    var userLogged = User();
+    var url = pathServer+stage+submitPathNewPassword;
+    url = url.replaceAll(":1", idUsuario.toString());
+
+    try {
+      var response = await httpService.request(
+        url: url,
+        method: Method.PUT,
+        params: {
+          "password": newPass
+        }
+      );
+      if(response.statusCode == 200){
+        var apiResultResponse = ApiResultResponse.fromJson(response.data);
+        return "Success";
+      } else {
+        throw UserRepositoryException(message: 'No se pudo registrar al usuario');
+      }
+    } catch (e){
+      throw UserRepositoryException(message: 'No se pudo registrar al autorizado');
+    }
+
+  }
+
+  
+}
+
+class UserRepositoryException implements Exception {
+  final String message;
+
+  UserRepositoryException({this.message = 'Error en el repository de Usuario'});
 }
