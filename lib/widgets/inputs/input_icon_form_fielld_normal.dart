@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class TextFormFieldIconNormal extends StatelessWidget {
 
   final ValueChanged<String> onChanged;
-  bool showPassword;
+  bool isPassword;
   TextEditingController controller;
   Function validatorFunction;
   String valueData;
@@ -18,7 +18,7 @@ class TextFormFieldIconNormal extends StatelessWidget {
   TextFormFieldIconNormal({
     Key? key,
     required this.onChanged,
-    this.showPassword = false,
+    this.isPassword = false,
     this.leftIcon,
     required this.label,
     required this.hint,
@@ -29,13 +29,18 @@ class TextFormFieldIconNormal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var deviceData = MediaQuery.of(context);
+
     return Container(
+      width: getResponsiveLenghtInput(deviceData),
       padding: const EdgeInsets.fromLTRB(dimenExtraLarge, dimenMedium, dimenExtraLarge, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: const TextStyle(fontSize: textSizeNormalLabel, fontWeight: FontWeight.bold),),
           TextFormField(
+            obscureText: isPassword,
             controller: controller,
             style: const TextStyle(color: primaryColor),
             cursorColor: primaryColor,
@@ -43,7 +48,7 @@ class TextFormFieldIconNormal extends StatelessWidget {
               valueData = value!;
             },
             validator: (value) {
-              return validatorFunction(value!);
+              return validatorFunction(value);
             },
             decoration: InputDecoration(
               hintText: hint,
@@ -59,5 +64,18 @@ class TextFormFieldIconNormal extends StatelessWidget {
         ]
       )
     );
+  }
+
+  double getResponsiveLenghtInput(MediaQueryData mediaQueryData){
+    if(mediaQueryData.size.width>950){
+      //Desktop
+      return 700;
+    } else if(mediaQueryData.size.width>600){
+      //Tablet
+      return 500;
+    } else {
+      //Size Mobile
+      return mediaQueryData.size.width*0.95;
+    }
   }
 }

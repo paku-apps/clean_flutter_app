@@ -25,6 +25,7 @@ const String updateAssignService = "/autorizaciones/:1";
 const String deleteAssignService = "/autorizaciones/";
 
 //Charger
+const String registerCharger = "/responsables";
 const String listAssignChildToday = "/responsables/:1/estudiantes/hoy";
 const String listAssignChildFuture = "/responsables/:1/estudiantes/futuro";
 const String generateQRDetail = "/qr/responsable/:1";

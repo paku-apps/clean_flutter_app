@@ -43,49 +43,66 @@ class RegisterChargerPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [ 
                     SizedBox(height: size.height * 0.05),
+                    /*
                     AvatarProfilePicker(
                       pictureTaked: registerChargerController.imageFileTaked,
                       functionProfile: () { registerChargerController.takePicture(); },
-                    ),
+                    ),*/
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
                       controller: registerChargerController.nameController, 
-                      validatorFunction: (value) {registerChargerController.validateNombres(value);},
+                      validatorFunction: (value) => registerChargerController.validateNombres(value),
+                      valueData: registerChargerController.nombres,
                       label: registerChargerFieldName,
                       hint: registerChargerFieldHintName
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
-                      controller: registerChargerController.lastnameController, 
-                      validatorFunction: (value) {registerChargerController.validateNombres(value);},
-                      label: registerChargerFieldLastName,
+                      controller: registerChargerController.lastnamePaternoController, 
+                      validatorFunction: (value) => registerChargerController.validateNombres(value),
+                      valueData: registerChargerController.appaterno,
+                      label: registerChargerFieldLastNamePaterno,
+                      hint: registerChargerFieldHintLastName
+                    ),
+                    TextFormFieldIconNormal(
+                      onChanged: (value) {},
+                      controller: registerChargerController.lastnameMaternoController, 
+                      validatorFunction: (value) => registerChargerController.validateNombres(value),
+                      valueData: registerChargerController.apmaterno,
+                      label: registerChargerFieldLastNameMaterno,
                       hint: registerChargerFieldHintLastName
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
                       controller: registerChargerController.emailController, 
-                      validatorFunction: (value) {registerChargerController.validateEmail(value);},
+                      validatorFunction: (value) => registerChargerController.validateEmail(value),
+                      valueData: registerChargerController.correo,
                       label: registerChargerFieldEmail,
                       hint: registerChargerFieldHintEmail
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
                       controller: registerChargerController.docController, 
-                      validatorFunction: (value) {registerChargerController.validateDoc(value);},
+                      validatorFunction: (value) => registerChargerController.validateDoc(value),
+                      valueData: registerChargerController.documento,
                       label: registerChargerFieldNumDoc,
                       hint: registerChargerFieldHintNumDoc
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
+                      isPassword: true,
                       controller: registerChargerController.passConytoller, 
-                      validatorFunction: (value) {registerChargerController.validateNombres(value);},
+                      validatorFunction: (value) => registerChargerController.validatePass(value),
+                      valueData: registerChargerController.pass,
                       label: registerChargerFieldPass,
                       hint: registerChargerFieldHintPass
                     ),
                     TextFormFieldIconNormal(
                       onChanged: (value) {},
+                      isPassword: true,
                       controller: registerChargerController.repassController, 
-                      validatorFunction: (value) {registerChargerController.validatePass(value);},
+                      validatorFunction: (value)  => registerChargerController.validateRePass(value),
+                      valueData: registerChargerController.repass,
                       label: registerChargerFieldRePass,
                       hint: registerChargerFieldHintRePass
                     ),

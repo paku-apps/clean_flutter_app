@@ -14,15 +14,23 @@ class RegisterChargerController extends GetxController{
   File? imageFileTaked = null.obs();
   var isLoading = false.obs();
 
-  final GlobalKey<FormState> regiterChargerFormkey = GlobalKey<FormState>().obs();
-  late TextEditingController nameController, lastnameController, emailController, docController, passConytoller, repassController;
-
+  late GlobalKey<FormState> regiterChargerFormkey;
+  late TextEditingController nameController, lastnamePaternoController, lastnameMaternoController, emailController, docController, passConytoller, repassController;
+  var nombres = "";
+  var appaterno = "";
+  var apmaterno = "";
+  var correo = "";
+  var documento = "";
+  var pass = "";
+  var repass = "";
 
 
   @override 
   void onInit(){
+    regiterChargerFormkey = GlobalKey<FormState>();
     nameController = TextEditingController();
-    lastnameController = TextEditingController();
+    lastnamePaternoController = TextEditingController();
+    lastnameMaternoController = TextEditingController();
     emailController = TextEditingController();
     docController = TextEditingController();
     passConytoller = TextEditingController();
@@ -37,7 +45,8 @@ class RegisterChargerController extends GetxController{
   @override 
   void onClose(){
     nameController.dispose();
-    lastnameController.dispose();
+    lastnamePaternoController.dispose();
+    lastnameMaternoController.dispose();
     emailController.dispose();
     docController.dispose();
     passConytoller.dispose();
@@ -74,8 +83,15 @@ class RegisterChargerController extends GetxController{
   }
 
   String? validatePass(String value){
-    if(!GetUtils.isLengthGreaterOrEqual(value, 8)){
+    if(!GetUtils.isLengthGreaterOrEqual(value, 6)){
       return "Ingresar un mínimo de 6 carácteres";
+    }
+    return null;
+  }
+
+  String? validateRePass(String value){
+    if(value != passConytoller.text){
+      return "Las contraseñas deben de coincidir";
     }
     return null;
   }
@@ -88,15 +104,15 @@ class RegisterChargerController extends GetxController{
       return;
     }
     regiterChargerFormkey.currentState!.save();
-    registerCharger(nameController.text, lastnameController.text, emailController.text, docController.text, passConytoller.text, repassController.text);
+    registerCharger(nameController.text, lastnamePaternoController.text,  lastnameMaternoController.text, emailController.text, docController.text, passConytoller.text, repassController.text);
   }
 
-  void registerCharger(String username, String lastName, String email, String numDoc, String pass, String repass) async {
+  void registerCharger(String username, String paterno, String materno, String email, String numDoc, String pass, String repass) async {
     isLoading = true;
 
     try{
       var chargerRepository = ChargerRepositoryImpl();
-      await chargerRepository.submitCharger(username, lastName, email, numDoc, pass, repass);
+      await chargerRepository.submitCharger(username, paterno, materno, email, numDoc, pass);
       isLoading = false;
       showSuccessSnackbar("Bienvenido", "Colegio Villa Maria te saluda");
     } catch(e) {

@@ -68,7 +68,8 @@ const infoAuthorizationConfirm = "Confirmar";
 //Register Charger Authorization
 const registerAuthorization = "Crear cuenta para recojo";
 const registerChargerFieldName = "Nombres";
-const registerChargerFieldLastName = "Apellidos";
+const registerChargerFieldLastNamePaterno = "Apellido paterno";
+const registerChargerFieldLastNameMaterno = "Apellido materno";
 const registerChargerFieldEmail = "Correo Electrónico";
 const registerChargerFieldNumDoc = "DNI/CEX";
 const registerChargerFieldPass = "Contraseña";

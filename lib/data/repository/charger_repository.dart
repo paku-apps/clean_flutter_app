@@ -4,6 +4,7 @@ import 'package:clean_app/data/converters/charger_model_from_carguer_response.da
 import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
+import 'package:clean_app/data/response/auth/authentication_data.dart';
 import 'package:clean_app/data/response/charger_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/services/dio_services.dart';
@@ -12,7 +13,7 @@ import 'package:http/http.dart' as http;
 abstract class ChargerRepository {
 
   Future<List<Charger>> getListChargerSearch(String authToken, String pattern);
-  Future<User?> submitCharger(String name, String lastName, String email, String numdoc, String pass, String repass);
+  Future<String> submitCharger(String name, String paterno, String materno, String email, String numdoc, String pass);
 
  }
 
@@ -49,38 +50,37 @@ class ChargerRepositoryImpl extends ChargerRepository {
   }
 
   @override
-  Future<User?> submitCharger(String name, String lastName, String email, String numdoc, String pass, String repass) async {
+  Future<String> submitCharger(String name, String paterno, String materno, String email, String numdoc, String pass) async {
 
     HttpDioService httpService = HttpDioService();
     httpService.init();
 
     var userLogged = User();
-    var url = pathServer+stage+loginService;
+    var url = pathServer+stage+registerCharger;
 
-    /*
     try {
       var response = await httpService.request(
         url: url,
         method: Method.POST,
         params: {
-          "username": username,
-          "password": password
+          "nombres": name,
+          "ap_paterno": paterno,
+          "ap_materno": materno,
+          "correo": email,
+          "numero_documento": numdoc,
+          "password": pass
         }
       );
       if(response.statusCode == 200){
-        UserRepository repo = UserRepositoryImpl();
         var apiResultResponse = ApiResultResponse.fromJson(response.data);
         var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
-        await repo.saveToken(dataResponse.authenticationResult.idToken);
-        await repo.saveRefreshToken(dataResponse.authenticationResult.refreshToken);
-        userLogged =  getUserFromUserBD(dataResponse.userBd);
-        await repo.saveUser(dataResponse.userBd);
+        return "Success";
       } else {
-        throw AuthenticationException(message: 'Wrong username or password');
+        throw ChargerRepositoryException(message: 'No se pudo registrar al usuario');
       }
     } catch (e){
-      throw AuthenticationException(message: 'Wrong username or password');
-    }*/
+      throw ChargerRepositoryException(message: 'No se pudo registrar al autorizado');
+    }
   }
 
 }
