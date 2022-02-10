@@ -66,7 +66,8 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: size.height * 0.05),
                   TextLabelTap(
                     press: () => {
-                      openBrowser("https://villamaria.edu.pe/")
+                      //openBrowser("https://villamaria.edu.pe/")
+                      Get.toNamed(AppLinks.RESET_PASSWORD)
                     },
                     textLabel: loginPageTextTapForgotPass
                   ), 

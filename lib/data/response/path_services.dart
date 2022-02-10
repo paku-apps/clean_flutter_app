@@ -34,3 +34,4 @@ const String registerAuthCharger = "/recojos";
 
 //Forgot Pasword
 const String submitPathNewPassword = "/usuarios/:1/password";
+const String submitPasswordToEmail = "/password/reseteo";

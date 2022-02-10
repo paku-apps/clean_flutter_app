@@ -21,6 +21,7 @@ const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
 
 //Forgor Page Texts
 const homeChangePassword = "Guardar";
+const homeResetPassword = "Recuperar contraseña";
 
 //Home Father Page Texts
 const homeFatherPageTitle = "Autorización";

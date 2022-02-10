@@ -165,6 +165,35 @@ class UserRepositoryImpl extends UserRepository {
 
   }
 
+  @override
+  Future<String> submitNewPasswordEmail(String email) async {
+
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
+
+    var userLogged = User();
+    var url = pathServer+stage+submitPasswordToEmail;
+
+    try {
+      var response = await httpService.request(
+        url: url,
+        method: Method.POST,
+        params: {
+          "correo": email
+        }
+      );
+      if(response.statusCode == 200){
+        var apiResultResponse = ApiResultResponse.fromJson(response.data);
+        return "Success";
+      } else {
+        throw UserRepositoryException(message: 'No se pudo recuperar la contraseña');
+      }
+    } catch (e){
+      throw UserRepositoryException(message: 'No se pudo recuperar la contraseña');
+    }
+
+  }
+
   
 }
 

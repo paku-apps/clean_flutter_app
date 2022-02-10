@@ -10,6 +10,7 @@ import 'package:clean_app/features/profiles/home_charge/home_charge_page.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_page.dart';
 import 'package:clean_app/features/profiles/home_supervisor/home_supervisor_page.dart';
 import 'package:clean_app/features/register_charger/register_charger_page.dart';
+import 'package:clean_app/features/sent_email_forgot/email_forgot_page.dart';
 import 'package:clean_app/main.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +29,8 @@ class AppRoutes {
     GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
     GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage()),
     GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage()),
-    GetPage(name: AppLinks.FORGOT_PAGE, page: () => ForgotPasswordPage())
+    GetPage(name: AppLinks.FORGOT_PAGE, page: () => ForgotPasswordPage()),
+    GetPage(name: AppLinks.RESET_PASSWORD, page: () => EmailForgotPage())
   ];
 
 }
@@ -55,4 +57,5 @@ class AppLinks {
 
   static const String DETAIL_SUPERVISOR_QR = "/home/supervisor/qr/detail";
   static const String FORGOT_PAGE = "/forgotpassword";
+  static const String RESET_PASSWORD = "/reset";
 }
