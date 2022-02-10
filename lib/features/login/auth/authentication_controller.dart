@@ -18,14 +18,19 @@ class AuthenticationController extends GetxController {
     super.onInit();
   }
 
-  Future<void> signIn(String username, String password) async {
+  Future<String> signIn(String username, String password) async {
     var user = await _authenticationService.signInEmailAndPassword(username, password);
-    if(user.id != 0){
+    if(user.reseteo==false){
       _authenticationStateStream.value = Authenticated(user: user);
-    } 
+      return "SUCCESS";
+    } else {
+      _authenticationStateStream.value = UnAuthenticated();
+
+    }
+    return "PASSWORD";
   }
 
-  void updateToPasswordSignIn(user){
+  void updateToPasswordSignIn(user) async {
     _authenticationStateStream.value = Authenticated(user: user);
   }
 

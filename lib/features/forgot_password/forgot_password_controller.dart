@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:clean_app/data/converters/user_model_from_user_response.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/features/login/auth/authentication_service.dart';
 import 'package:clean_app/features/login/auth/authentication_state.dart';
+import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -12,7 +16,7 @@ class ForgotPasswordController extends GetxController {
   final AuthenticationController _authenticationController = Get.find();
   
   bool isSubmitted = false;
-  var isLoading = false.obs();  
+  var isLoading = false.obs;  
   
   late GlobalKey<FormState> changePasswordFormKey;
   late TextEditingController firstPasswordController, secondPasswordController;
@@ -51,6 +55,7 @@ class ForgotPasswordController extends GetxController {
 
   void checkNewPassword(){
     isSubmitted = true;
+    isLoading.value = true;
     update();
     final isValid = changePasswordFormKey.currentState!.validate();
     if(!isValid){
@@ -62,15 +67,22 @@ class ForgotPasswordController extends GetxController {
 
   void submitNewPassowrd(String text, String text2) async {
     var repo = UserRepositoryImpl();
-    var user = await repo.getCurrentUser();
+    var user = await repo.getAuxiliarUser();
+    var argumentitos = Get.arguments;
+    var tokens = json.decode(argumentitos[0]);
     if(user!=null){
       try{
-        //await repo.submitNewPassword(user.id, text);
-        isLoading = false;
-        _authenticationController.updateToPasswordSignIn(user);
-        showSuccessSnackbar("Bienvenido", "Colegio Villa Maria te saluda");
+        var validPassword = await repo.submitNewPassword(user.id, text);
+        if(validPassword == "Success"){    
+          _authenticationController.updateToPasswordSignIn(getUserFromUserBD(user));
+          await repo.saveUser(user);
+          Get.offAndToNamed(AppLinks.MAIN_PAGE);
+          showSuccessSnackbar("Bienvenido", "Colegio Villa Maria te saluda");
+        } 
+        isLoading.value = false;
+        update();
       } catch(e) {
-        isLoading = false;
+        isLoading.value = false;
         showErrorSnackbar("Error al actualizar", "Por favor, intentelo en breves momentos");
         update();
       }

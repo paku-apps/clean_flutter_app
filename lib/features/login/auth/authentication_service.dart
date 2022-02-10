@@ -47,11 +47,17 @@ class AuthenticationServiceImpl extends AuthenticationService {
         var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
         if(dataResponse.reseteo == false){
         //if(dataResponse.reseteo){
-          Get.offAndToNamed(AppLinks.FORGOT_PAGE);
+          //await repo.saveUser(dataResponse.userBd);
+          await repo.saveAuxiliarUser(dataResponse.userBd);
+          await repo.saveToken(dataResponse.authenticationResult.idToken);
+          await repo.saveRefreshToken(dataResponse.authenticationResult.refreshToken);
+          userLogged = getUserFromUserBD(dataResponse.userBd);
+          userLogged.reseteo = true;
+          Get.offAndToNamed(AppLinks.FORGOT_PAGE, arguments: [json.encode({"userDb": dataResponse.userBd, "token": dataResponse.authenticationResult.idToken, "refresh": dataResponse.authenticationResult.refreshToken})]);
         } else {
           await repo.saveToken(dataResponse.authenticationResult.idToken);
           await repo.saveRefreshToken(dataResponse.authenticationResult.refreshToken);
-          userLogged =  getUserFromUserBD(dataResponse.userBd);
+          userLogged = getUserFromUserBD(dataResponse.userBd);
           await repo.saveUser(dataResponse.userBd);
         }
 
@@ -62,28 +68,6 @@ class AuthenticationServiceImpl extends AuthenticationService {
     } catch (e){
       throw AuthenticationException(message: 'Wrong username or password');
     }
-    /*
-    var userLogged = User();
-    var url = Uri.parse(pathServer+stage+loginService);
-    var response = await client.post(
-      url, 
-      headers: {"Content-Type": "application/json"},
-      body: json.encode({
-        "username": username,
-        "password": password
-      })
-    );
-    if(response.statusCode == 200){
-      UserRepository repo = UserRepositoryImpl();
-      var decodedResponse = utf8.decode(response.bodyBytes);
-      var appResponse = apiResultResponseFromJson(decodedResponse);
-      var dataResponse = AuthenticationData.fromJson(appResponse.data);
-      await repo.saveToken(dataResponse.authenticationResult.idToken);
-      userLogged =  getUserFromUserBD(dataResponse.userBd);
-      await repo.saveUser(dataResponse.userBd);
-    } else {
-      throw AuthenticationException(message: 'Wrong username or password');
-    }*/
 
     return userLogged;
   }

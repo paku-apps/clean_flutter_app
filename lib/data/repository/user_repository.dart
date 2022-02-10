@@ -21,6 +21,8 @@ abstract class UserRepository {
   Future<String> getRefreshToken();
   Future<void> clearDataUser();
   Future<String> submitNewPassword(int idUsuario, String newPassword);
+  Future<void> saveAuxiliarUser(UserBd user);
+  Future<UserBd?> getAuxiliarUser();
 
 }
 
@@ -29,6 +31,7 @@ class UserRepositoryImpl extends UserRepository {
   final keyUserApp = "SP_KEY_APP";
   final keyIdToken = "SP_KEY_APP_TOKEN";
   final keyRefreshToken = "SP_KEY_APP_REFRESH_TOKEN";
+  final keyAuxiliarUser = "SP_KEY_AUXILIAR_USER";
 
   static final UserRepositoryImpl _singleton = UserRepositoryImpl._internal();
 
@@ -109,6 +112,27 @@ class UserRepositoryImpl extends UserRepository {
       return refreshToken;
     }
     return emptyString;
+  }
+
+  
+ @override
+  Future<void> saveAuxiliarUser(UserBd user) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //jsonEncode(user);
+    var userLogged = prefs.setString(keyAuxiliarUser, jsonEncode(user));
+  }
+
+  @override
+  Future<UserBd?> getAuxiliarUser() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userLogged = prefs.getString(keyAuxiliarUser);
+    if(userLogged!=null){
+      Map<String, dynamic> jsonBody = jsonDecode(userLogged);
+      return UserBd.fromJson(jsonBody);
+    }
+    return null;
   }
 
   @override

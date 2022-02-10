@@ -11,6 +11,7 @@ class UserBd {
     String fechaUpdate;
     bool activo;
     int perfil;
+    bool reseteo;
 
     UserBd({
         this.id = 0,
@@ -23,7 +24,8 @@ class UserBd {
         this.fechaRegistro = "",
         this.fechaUpdate = "",
         this.activo = false,
-        this.perfil = 999
+        this.perfil = 999,
+        this.reseteo = false
     });
 
     factory UserBd.fromJson(Map<String, dynamic> json) => UserBd(

@@ -33,4 +33,4 @@ const String pathDecodeQR = "/qr/descifrar";
 const String registerAuthCharger = "/recojos";
 
 //Forgot Pasword
-const String submitPathNewPassword = "/usuario/:1/password";
+const String submitPathNewPassword = "/usuarios/:1/password";

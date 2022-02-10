@@ -10,11 +10,13 @@ import 'package:clean_app/features/profiles/home_charge/home_charge_page.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_page.dart';
 import 'package:clean_app/features/profiles/home_supervisor/home_supervisor_page.dart';
 import 'package:clean_app/features/register_charger/register_charger_page.dart';
+import 'package:clean_app/main.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
 
   static final pages = [
+    GetPage(name: AppLinks.MAIN_PAGE, page: () => MyApp()),
     GetPage(name: AppLinks.DEMO, page: () => DemoPage()),
     GetPage(name: AppLinks.LOGIN, page: () => LoginPage()),
     GetPage(name: AppLinks.HOME_FATHER, page: () => HomeFatherPage()),
@@ -32,6 +34,7 @@ class AppRoutes {
 }
 
 class AppLinks {
+  static const String MAIN_PAGE = "/";
   static const String DEMO = "/demo";
   static const String LOGIN = "/login";
   static const String HOME_FATHER = "/home/father";

@@ -40,6 +40,7 @@ class LoginController extends GetxController {
 
   @override 
   void onClose(){
+    loginFormkey = GlobalKey();
     emailController.dispose();
     passwordController.dispose();
   }
@@ -80,10 +81,10 @@ class LoginController extends GetxController {
     isLoading = true;
 
     try{
-      await _authenticationController.signIn(username, password);
+      var typeLogin = await _authenticationController.signIn(username, password);
       _loginStateStream.value = LoginState();
       isLoading = false;
-      showSuccessSnackbar("Bienvenido", "Colegio Villa Maria los saluda");
+      //showSuccessSnackbar("Bienvenido", "Colegio Villa Maria los saluda");
     } on AuthenticationException catch(e) {
       _loginStateStream.value = LoginFailure(error: e.message);
       isLoading = false;

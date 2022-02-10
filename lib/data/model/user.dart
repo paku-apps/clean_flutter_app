@@ -9,6 +9,7 @@ class User {
   String foto;
   bool activo;
   int perfil;
+  bool reseteo;
 
   User({
     this.id = 0,
@@ -20,6 +21,7 @@ class User {
     this.foto = "",
     this.activo = false,
     this.perfil = 999,
+    this.reseteo = false
   });
 
 }
