@@ -46,7 +46,16 @@ class DetailAssignPage extends StatelessWidget {
                   title: TextAppTitle(text: listAssignsEditTitle, color: textPrimaryColor),
                   content: TextAppNormal(text: listAssignsEditMessage,color: textPrimaryColor, noPaddingVertical: true,),
                   actions: [
-                    TextButton(onPressed: () async {await detailAssignController.deleteAssign(assign); Navigator.pop(context);}, child: Text(listAssignsEditOk),),
+                    Obx((){
+                      if(detailAssignController.isLoading.value){
+                        return CircularProgressIndicator();
+                      } else {
+                        return TextButton(onPressed: () {
+                          detailAssignController.deleteAssign(assign);  
+                        }, 
+                        child: Text(listAssignsEditOk),);
+                      }
+                    }),
                     TextButton(onPressed: () {Navigator.pop(context);}, child: const Text(listAssignsEditCancel),)
                   ],
                 ),
@@ -60,61 +69,62 @@ class DetailAssignPage extends StatelessWidget {
           colorBackground: colorBackgroundWhite,
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container( //FormAutocompletado
-                  width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                  margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(dimenSmall),
-                        child: const Icon(Icons.account_box, size: 36),
-                      ),
-                      Expanded(child: SizedBox(
-                        child: Text(assign["charger"]["ap_paterno"] +emptySpace + assign["charger"]["ap_materno"] + ", " + assign["charger"]["nombres"]),
-                      ))
-                    ]
-                  )
-                ),
-                Container( //FormAutocompletado
-                  width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                  margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(dimenSmall),
-                        child: const Icon(Icons.calendar_today, size: 36),
-                      ),
-                      Expanded(child: SizedBox(
-                        child: Text(transformStringDateTimeToAppFormat(assign["fechaInicio"], assign["fechaFin"])),
-                      ))
-                    ]
-                  )
-                ),
-                TextAppNormalBold(text: "Alumnos a recoger con la autorización", color: textPrimaryColor),
-                ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(8),
-                  itemCount: listChildSelected.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      children: [
-                        Expanded(
-                          child: ChildTile(
-                              child: Child.fromJson(listChildSelected[index]),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container( //FormAutocompletado
+                      width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
+                      margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(dimenSmall),
+                            child: const Icon(Icons.account_box, size: 36),
                           ),
-                        )
-                      ]
-                    );
-                  }
+                          Expanded(child: SizedBox(
+                            child: Text(assign["charger"]["ap_paterno"] +emptySpace + assign["charger"]["ap_materno"] + ", " + assign["charger"]["nombres"]),
+                          ))
+                        ]
+                      )
+                    ),
+                    Container( //FormAutocompletado
+                      width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
+                      margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(dimenSmall),
+                            child: const Icon(Icons.calendar_today, size: 36),
+                          ),
+                          Expanded(child: SizedBox(
+                            child: Text(transformStringDateTimeToAppFormat(assign["fechaInicio"], assign["fechaFin"])),
+                          ))
+                        ]
+                      )
+                    ),
+                    TextAppNormalBold(text: "Alumnos a recoger con la autorización", color: textPrimaryColor),
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(8),
+                      itemCount: listChildSelected.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: ChildTile(
+                                  child: Child.fromJson(listChildSelected[index]),
+                              ),
+                            )
+                          ]
+                        );
+                      }
+                    )
+                  ]
                 )
-              ]
+              )
             )
           )
-        )
-      )
-    );
+        );
+    }
   }
-}

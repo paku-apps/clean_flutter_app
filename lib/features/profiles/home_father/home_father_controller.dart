@@ -28,6 +28,10 @@ class HomeFatherController extends GetxController {
     getChildren();
   }
 
+  void reloadData(){
+    getChildren();
+  }
+
   Future<User?> getUserLogged() async {
     UserRepository repo = UserRepositoryImpl();
     var currentUser = await repo.getCurrentUser();
@@ -63,8 +67,8 @@ class HomeFatherController extends GetxController {
   }
 
   Future<void> closeSession() async {
-    _authenticationController.signOut();
     UserRepository repoUsuario = UserRepositoryImpl();
     await repoUsuario.clearDataUser();
+    _authenticationController.signOut();
   }
 }

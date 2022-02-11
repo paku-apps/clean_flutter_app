@@ -52,10 +52,14 @@ class ListAssignController extends GetxController {
     isLoading.value = false;
     return list;
   }
+
+  void reloadData(){
+    getListAssignByUser();
+  }
    
   Future<void> closeSession() async {
-    authenticationController.signOut();
     UserRepository repoUsuario = UserRepositoryImpl();
     await repoUsuario.clearDataUser();
+    authenticationController.signOut();
   }
 }

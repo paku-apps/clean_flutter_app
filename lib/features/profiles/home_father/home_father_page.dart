@@ -3,19 +3,15 @@ import 'dart:convert';
 
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
-import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
-import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
-import 'package:clean_app/widgets/background_color.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/assign_tile.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/drawers/drawer_app.dart';
-import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,8 +42,8 @@ class HomeFatherPage extends StatelessWidget {
           listIcons: [Icon(Icons.home), Icon(Icons.list)],
           listNames: const [draweroptionsHome, drawerOptionAuthorizations],
           listFunctions: [
-            () {controllerPage.currentPage.value = "HOMEPAGE"; Navigator.pop(context);},
-            () {controllerPage.currentPage.value = "LISTPAGE";Navigator.pop(context);}, 
+            () {controllerPage.currentPage.value = "HOMEPAGE"; controllerPage.reloadData();Navigator.pop(context);},
+            () {controllerPage.currentPage.value = "LISTPAGE"; controllerListAssign.reloadData();Navigator.pop(context);}, 
           ],
           closeFunction: controllerPage.closeSession,
         );
@@ -153,6 +149,7 @@ class HomeFatherPage extends StatelessWidget {
       Obx(() {
         if(controllerPage.currentPage == "HOMEPAGE"){
           return FloatingActionButton(
+            heroTag: "btnHomeNew",
             backgroundColor: primaryColor,
             child: const Icon(Icons.add, size: 36),
             onPressed: () {
@@ -164,6 +161,7 @@ class HomeFatherPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
+                heroTag: "btnDetailSync",
                 backgroundColor: primaryColor,
                 child: const Icon(Icons.sync, size: 36),
                 onPressed: () {
@@ -172,6 +170,7 @@ class HomeFatherPage extends StatelessWidget {
               ),
               SizedBox(height: 10,),
               FloatingActionButton(
+                heroTag: "btnDetailNew",
                 backgroundColor: primaryColor,
                 child: const Icon(Icons.add, size: 36),
                 onPressed: () {

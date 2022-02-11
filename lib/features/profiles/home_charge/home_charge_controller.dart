@@ -79,8 +79,8 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   }
   
   Future closeSession() async {
-    _authenticationController.signOut();
     UserRepository repoUsuario = UserRepositoryImpl();
     await repoUsuario.clearDataUser();
+    _authenticationController.signOut();
   }
 }
