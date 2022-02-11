@@ -26,7 +26,7 @@ class SupervisorRepositoryImpl extends SupervisorRepository {
         url: pathService,
         params: {
           "id_supervisor": idSupervisor,
-          "autorizaciones": authConfirmationToJson(listInasistencias)
+          "estudiantes": authConfirmationToJson(listInasistencias)
         }
       );
       if(response.statusCode == 200){

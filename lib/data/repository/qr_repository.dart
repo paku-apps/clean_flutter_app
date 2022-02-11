@@ -67,7 +67,7 @@ class QRRepositoryImpl extends QRRepository {
 
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
-        prefs.setString(keyQRPrincipal, dataResponse.qrCode);
+        prefs.setString(keyQRPrincipal, dataResponse.iv+ separatorQR + dataResponse.qrCode); 
         prefs.setString(keyQRDate, DateTime.now().add(Duration(hours: 12)).toString());
         return dataResponse.iv+ separatorQR + dataResponse.qrCode;
 

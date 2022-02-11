@@ -6,16 +6,19 @@ List<dynamic> authConfirmationToJson(List<AuthorizationConfirmation> data) => Li
 class AuthorizationConfirmation{
 
   int? id_authorizacion;
-  List<int>? inasistencias;
+  int? id_estudiante;
+  bool? check;
 
   AuthorizationConfirmation(
     this.id_authorizacion,
-    this.inasistencias
+    this.id_estudiante,
+    this.check
   );
 
   Map<String, dynamic> toJsonAuthConfirm() => {
     "id_autorizacion": id_authorizacion == null ? null : id_authorizacion,
-    "inasistencias": inasistencias
+    "id_estudiante": id_estudiante,
+    "check": check
   };
 
 }

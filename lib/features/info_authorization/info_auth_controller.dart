@@ -48,6 +48,9 @@ class InfoAuthorizationController extends GetxController {
     var assignCharger = await qrRepository.getInfoFromQR(iv, codigoqr);
     if(assignCharger != null){
       mainCharger.value =assignCharger;
+      mainCharger.value.estudiantes?.forEach((student) { 
+        listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+      });
     }
     isLoading.value = false;
     return assignCharger;
@@ -57,6 +60,15 @@ class InfoAuthorizationController extends GetxController {
     mainCharger.value.estudiantes![position].checked = !mainCharger.value.estudiantes![position].checked;
     var idAuth = mainCharger.value.estudiantes![position].idAutorizacion;
     var idEstudiante =  mainCharger.value.estudiantes![position].idEstudiante;
+    if(mainCharger.value.estudiantes![position].checked == true){
+      listAuthConfirm.add(AuthorizationConfirmation(idAuth, idEstudiante, true));
+    } else {
+      var indexFounded = listAuthConfirm.indexWhere((authValidate) => authValidate.id_estudiante == mainCharger.value.estudiantes![position].idEstudiante);
+      if(indexFounded != -1){
+        listAuthConfirm.removeAt(indexFounded);
+      }
+    }
+    /*
     if(mainCharger.value.estudiantes![position].checked == false){
       var indexFinded = listAuthConfirm.indexWhere((authValidate) => authValidate.id_authorizacion == idAuth);
       if(indexFinded==-1){
@@ -71,7 +83,7 @@ class InfoAuthorizationController extends GetxController {
       } else {
         listAuthConfirm.removeAt(indexFinded);
       }
-    }
+    }*/
     update();
   }
 

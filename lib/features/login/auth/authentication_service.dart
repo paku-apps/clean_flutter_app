@@ -45,8 +45,8 @@ class AuthenticationServiceImpl extends AuthenticationService {
         UserRepository repo = UserRepositoryImpl();
         var apiResultResponse = ApiResultResponse.fromJson(response.data);
         var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
-        if(dataResponse.reseteo == false){
-        //if(dataResponse.reseteo){
+        //if(dataResponse.reseteo == false){
+        if(dataResponse.reseteo){
           //await repo.saveUser(dataResponse.userBd);
           await repo.saveAuxiliarUser(dataResponse.userBd);
           await repo.saveToken(dataResponse.authenticationResult.idToken);

@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/path_services.dart';
+import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as gx;
 
 enum Method { POST, GET, PUT, DELETE, PATCH}
 
@@ -25,7 +27,6 @@ class HttpDioService {
   }
 
   void initInterceptors() {
-
 
     _dio!.interceptors.add(
       InterceptorsWrapper(
@@ -148,6 +149,8 @@ class HttpDioService {
         userRepository.saveToken(response?.data['id_token']);
       }
     } catch (e) {
+      final AuthenticationController _authenticationController = gx.Get.find();
+      _authenticationController.signOut();
       print(e);
       throw Exception("Something wen't wrong to get token in refresh Token");
     }
