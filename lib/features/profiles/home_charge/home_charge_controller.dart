@@ -34,6 +34,10 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     getauthorizationsForToday();
   }
 
+  void reloadInitData(){
+    getauthorizationsForToday();
+  }
+
   Future<User?> getUserLogged() async {
     UserRepository repo = UserRepositoryImpl();
     var currentUser = await repo.getCurrentUser();

@@ -23,7 +23,7 @@ class Child {
   });
   
   Map<String, dynamic> toJsonIdEstudiante() => {
-    "id_estudiante": id == null ? null : id,
+    "id": id == null ? null : id,
     "check": isChecked
   };
 

@@ -20,6 +20,7 @@ class EmptyStateApp extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(pathImage, fit: BoxFit.cover, height: 150, width: 150),
           const SizedBox(height: dimenMedium),

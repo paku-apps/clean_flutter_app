@@ -17,6 +17,7 @@ class InfoAuthorizationController extends GetxController {
   var qrToDecoded = "".obs;
   var mainCharger = AssignChargerModel().obs;
   var isLoading = true.obs;
+  var isLoadingRegister = false.obs;
   var listAuthConfirm = List<AuthorizationConfirmation>.empty().obs;
 
   @override
@@ -68,35 +69,23 @@ class InfoAuthorizationController extends GetxController {
         listAuthConfirm.removeAt(indexFounded);
       }
     }
-    /*
-    if(mainCharger.value.estudiantes![position].checked == false){
-      var indexFinded = listAuthConfirm.indexWhere((authValidate) => authValidate.id_authorizacion == idAuth);
-      if(indexFinded==-1){
-        listAuthConfirm.add(AuthorizationConfirmation(idAuth, [idEstudiante]));
-      } else {
-        listAuthConfirm[indexFinded].inasistencias!.add(idEstudiante);
-      }
-    } else {
-      var indexFinded = listAuthConfirm.indexWhere((authValidate) => authValidate.id_authorizacion == idAuth);
-      if(listAuthConfirm[indexFinded].inasistencias!.length>1){
-        listAuthConfirm[indexFinded].inasistencias!.remove(idEstudiante);
-      } else {
-        listAuthConfirm.removeAt(indexFinded);
-      }
-    }*/
     update();
   }
 
   Future<String> registerAuthorization() async {
+    isLoadingRegister.value = true;
     if(isNotSelectedChildren()){
       showErrorSnackbar("Tiene que recoger un niñ@", "Por favor seleccione como minimo a un niñ@");
     } else {
       var supervisorRepo = SupervisorRepositoryImpl();
       var state = await supervisorRepo.registerAuthorization(usuarioLogged.value.id, listAuthConfirm);
       if(state=="SUCCESS"){
-        Get.offAndToNamed(AppLinks.HOME_SUPERVISOR);
+        isLoadingRegister.value = false;
+        Get.back();
+        Get.back();
         showSuccessSnackbar("Se registró la autorización", "Se recogieron los niños seleccionados");
       } else {
+        isLoadingRegister.value = false;
         showErrorSnackbar("No se pudo registrar la autorización", "Por favor vuelva a intentarlo");
       }
     }

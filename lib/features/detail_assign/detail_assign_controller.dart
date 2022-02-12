@@ -4,12 +4,15 @@ import 'dart:io';
 import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/repository/assign_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class DetailAssignController extends GetxController {
+  
+  final ListAssignController listAssignController = Get.find();
 
   var isLoading = false.obs;
 
@@ -27,6 +30,7 @@ class DetailAssignController extends GetxController {
       //var responseUpdated = await assignRepository.deleteAssign(tokenStored, assignEntity.id!);
       await Future.delayed(Duration(seconds: 2));
       //Get.offAndToNamed(AppLinks.LIST_ASSIGNS);
+      listAssignController.reloadData();
       Get.back();
       Get.back();
       isLoading.value = false;

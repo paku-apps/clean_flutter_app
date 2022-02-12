@@ -5,6 +5,7 @@ import 'package:clean_app/data/repository/assign_repository.dart';
 import 'package:clean_app/data/repository/charger_repository.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
@@ -13,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AssignController extends GetxController {
+
+  final ListAssignController listAssignController = Get.find();
 
   var isSubmitted = false.obs();
   String tokenStored = "";
@@ -116,7 +119,9 @@ class AssignController extends GetxController {
     try{
       var responseSubmit = await assignRepository.submitAssign(tokenStored, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
-      Get.offAllNamed(AppLinks.HOME_FATHER);
+      Get.back();
+      Get.back();
+      listAssignController.reloadData();
       showSuccessSnackbar("Se registró la autorización", "Se le notificará al responsable");
     } on AssignRepositoryException catch(e){
       showErrorSnackbar("Aviso", e.message);
@@ -136,8 +141,12 @@ class AssignController extends GetxController {
     try{
       var responseUpdated = await assignRepository.updateAssign(tokenStored, idAssignToUpdate.value, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
-      Get.offAllNamed(AppLinks.LIST_ASSIGNS);
+      //Get.offAllNamed(AppLinks.LIST_ASSIGNS);
+      listAssignController.reloadData();
+      Get.back();
+      Get.back();
       showSuccessSnackbar("Se actualizó la autorización", "Se le notificará al responsable");
+      
     } on AssignRepositoryException catch(e){
       showErrorSnackbar("Aviso", e.message);
       isLoading.value = false;
