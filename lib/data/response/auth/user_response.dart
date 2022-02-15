@@ -6,7 +6,7 @@ class UserBd {
     String apellidoMaterno;
     String numDocumento;
     String correo;
-    String foto;
+    String? foto;
     String fechaRegistro;
     String fechaUpdate;
     bool activo;
@@ -35,7 +35,7 @@ class UserBd {
         apellidoMaterno: json["ap_materno"],
         numDocumento: json["numero_documento"],
         correo: json["correo"],
-        foto: json["foto"],
+        foto: json["foto"] ?? null,
         fechaRegistro: json["fecha_registro"],
         fechaUpdate: json["fecha_update"],
         activo: json["activo"],

@@ -7,8 +7,6 @@ import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/assign_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/services/dio_services.dart';
-import 'package:get/get_connect/http/src/status/http_status.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:http/http.dart' as http;
 
 abstract class AssignRepository {

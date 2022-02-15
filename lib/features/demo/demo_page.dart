@@ -12,11 +12,11 @@ class DemoPage extends StatelessWidget {
       init: DemoController(),
       builder: (controller) => Scaffold(
         body: Center(
-          child: Text(controller.counter.toString())
+          child: Text("Por favor ingrese con otro perfil")
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            controller.increment();
+            
           },
           child: const Icon(Icons.add),
         ),

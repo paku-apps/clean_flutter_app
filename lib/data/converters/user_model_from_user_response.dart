@@ -9,7 +9,7 @@ User getUserFromUserBD(UserBd user){
   usuario.apellidoMaterno = user.apellidoMaterno;
   usuario.numerodDocumento = user.numDocumento;
   usuario.correo = user.correo;
-  usuario.foto = user.foto;
+  usuario.foto = user.foto?? "";
   usuario.activo = user.activo;
   usuario.perfil = user.perfil;
 
