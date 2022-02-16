@@ -1,6 +1,6 @@
 //Path Server
 //https://z1groinscc.execute-api.us-east-1.amazonaws.com
-//const String pathServerOld = "https://z1groinscc.execute-api.us-east-1.amazonaws.com/";
+//const String pathServer = "https://z1groinscc.execute-api.us-east-1.amazonaws.com/";
 //const String pathServer = "https://5ceizgcy8c.execute-api.us-east-1.amazonaws.com/";
 const String pathServer = "https://hxnr814yad.execute-api.us-east-1.amazonaws.com/";
  

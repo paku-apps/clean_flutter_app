@@ -21,6 +21,9 @@ class LoginPage extends StatelessWidget {
     
   @override
   Widget build(BuildContext context) {
+    
+    Future.delayed(Duration.zero, () => showAlert(context));
+
     Size size = MediaQuery.of(context).size;
     
     return GetBuilder<LoginController>(
@@ -112,5 +115,22 @@ class LoginPage extends StatelessWidget {
         )
       ),
     );
+  }
+
+  void showAlert(BuildContext context) {
+    if(GetPlatform.isDesktop){
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("Aviso"),
+            content: Text("Esta aplicación está preparada para dispostivos móviles, por favor dirigase en el siguiente Link"),
+            actions: [
+              TextButton(onPressed: () {
+                openBrowser("https://villamaria.edu.pe/");
+              }, child: const Text("Android"),)
+            ],
+          )
+      );
+    }
   }
 }
