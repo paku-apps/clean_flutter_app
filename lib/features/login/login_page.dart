@@ -123,7 +123,7 @@ class LoginPage extends StatelessWidget {
             content: Text(dialogDesktopApp),
             actions: [
               TextButton(onPressed: () {
-                //html.window.open('https://www.google.com',"_self");
+                html.window.open('https://www.google.com',"_self");
                 //openBrowser("https://villamaria.edu.pe/");
               }, child: const Text("Aceptar"),)
             ],
