@@ -27,8 +27,8 @@ class DetailAssignController extends GetxController {
     var tokenStored = await repoUsuario.getToken();
     var assignRepository = AssignRepositoryImpl();
     try{
-      //var responseUpdated = await assignRepository.deleteAssign(tokenStored, assignEntity.id!);
-      await Future.delayed(Duration(seconds: 2));
+      var responseUpdated = await assignRepository.deleteAssign(tokenStored, assignEntity.id!);
+      //await Future.delayed(Duration(seconds: 2));
       //Get.offAndToNamed(AppLinks.LIST_ASSIGNS);
       listAssignController.reloadData();
       Get.back();

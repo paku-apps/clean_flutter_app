@@ -147,6 +147,9 @@ class HttpDioService {
       
       if (response?.statusCode == 200) {
         userRepository.saveToken(response?.data['id_token']);
+      } else {
+        final AuthenticationController _authenticationController = gx.Get.find();
+        _authenticationController.signOut();
       }
     } catch (e) {
       final AuthenticationController _authenticationController = gx.Get.find();
