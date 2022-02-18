@@ -24,7 +24,7 @@ class EmptyStateApp extends StatelessWidget {
         children: [
           Image.asset(pathImage, fit: BoxFit.cover, height: 150, width: 150),
           const SizedBox(height: dimenMedium),
-          TextAppNormal(text: messageEmpty, color: colorState)
+          TextAppNormal(text: messageEmpty, color: colorState, textAlign: TextAlign.center,)
         ]
       )
     );

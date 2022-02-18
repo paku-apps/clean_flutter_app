@@ -10,10 +10,12 @@ class TextAppNormal extends StatelessWidget {
   Color color;
   bool noPaddingVertical;
   double textSize;
+  TextAlign textAlign;
 
   TextAppNormal({
     Key? key,
     this.noPaddingVertical = false,
+    this.textAlign = TextAlign.left,
     required this.text,
     required this.color,
     this.textSize = textSizeNormalLabel
@@ -25,14 +27,14 @@ class TextAppNormal extends StatelessWidget {
     if(isForDevice){
       return Container(
         padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color),),
+        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color), textAlign: textAlign,),
       );
     } else {
       var deviceData = MediaQuery.of(context);
       return Container(
         width: getResponsiveWidthText(deviceData),
         padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color),),
+        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color), textAlign: textAlign,),
       );
     }
   }
