@@ -82,7 +82,7 @@ class UserRepositoryImpl extends UserRepository {
   Future<void> clearDataUser() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    await prefs.clear();
   }
 
   @override

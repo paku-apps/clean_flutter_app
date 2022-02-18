@@ -1,6 +1,6 @@
 {
-    "name": "App Recojo - Villa Maria",
-    "short_name": "App Recojo - Villa Maria",
+    "name": "PickUpMe",
+    "short_name": "PickUpMe",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

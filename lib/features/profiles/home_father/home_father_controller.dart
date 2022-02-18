@@ -29,6 +29,7 @@ class HomeFatherController extends GetxController {
   }
 
   void reloadData(){
+    getUserLogged();
     getChildren();
   }
 

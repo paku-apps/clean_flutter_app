@@ -30,10 +30,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var homePage;
     return GetMaterialApp(
-      title: 'Recojo Villa Maria',
+      title: 'PickUpMe',
       onGenerateTitle: (BuildContext context) {
-        return "Recojo Villa Maria";
+        return "PickUpMe";
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
