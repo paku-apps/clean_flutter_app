@@ -1,8 +1,6 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
-import 'package:clean_app/features/login/auth/authentication_controller.dart';
-import 'package:clean_app/features/login/auth/authentication_service.dart';
 import 'package:clean_app/features/login/login_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/function_utils.dart';
@@ -11,10 +9,9 @@ import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_normal.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
 import 'package:clean_app/widgets/labels/label_tap.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'dart:html' as html;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -123,11 +120,12 @@ class LoginPage extends StatelessWidget {
           context: context,
           builder: (context) => AlertDialog(
             title: Text("Aviso"),
-            content: Text("Esta aplicación está preparada para dispostivos móviles, por favor dirigase en el siguiente Link"),
+            content: Text(dialogDesktopApp),
             actions: [
               TextButton(onPressed: () {
-                openBrowser("https://villamaria.edu.pe/");
-              }, child: const Text("Android"),)
+                html.window.open('https://www.google.com',"_self");
+                //openBrowser("https://villamaria.edu.pe/");
+              }, child: const Text("Aceptar"),)
             ],
           )
       );

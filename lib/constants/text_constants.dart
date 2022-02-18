@@ -19,6 +19,9 @@ const loginPageButtonLogin = "Ingresar";
 const loginPageTextTapForgotPass = "Olvidé la contraseña";
 const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
 
+//Dialog for App/Desktop
+const dialogDesktopApp = "Esta aplicación esta desarrollada para funcionar en equipos móviles. Por favor acceda a ella desde su celular";
+
 //Forgor Page Texts
 const homeChangePassword = "Guardar";
 const homeResetPassword = "Recuperar contraseña";
