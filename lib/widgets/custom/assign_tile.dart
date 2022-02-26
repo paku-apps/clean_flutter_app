@@ -4,6 +4,7 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
+import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_normal_avatar.dart';
 import 'package:clean_app/widgets/texts/text_app_title.dart';
@@ -33,10 +34,7 @@ class AssignTile extends StatelessWidget {
             Column(
               children: [
                 Center(
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(assign.charger!.foto!),
-                    radius: 28,
-                  ),
+                  child: AvatarCircleInitials(firstName: assign.charger!.nombres!, lastName: assign.charger!.apMaterno!),
                 )
               ],
             ),
@@ -95,5 +93,20 @@ class AssignTile extends StatelessWidget {
     }
 
     
+  }
+
+  validateFoto(Assign assign) {
+    if(assign.charger != null){
+       if(assign.charger?.foto != null){
+          return CircleAvatar(
+            backgroundImage: NetworkImage(assign.charger!.foto!),
+            radius: 28,
+          );
+       }
+    }
+    return const CircleAvatar(
+      backgroundImage: AssetImage("assets/images/avatar.png"),
+      radius: 28,
+    );
   }
 }

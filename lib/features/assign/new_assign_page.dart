@@ -11,6 +11,7 @@ import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
+import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
@@ -114,11 +115,19 @@ class AssignPage extends StatelessWidget {
                                   return assignController.searchChargerByPattern(pattern);
                                 },
                                 itemBuilder: (context, Charger charger) {
-                                  return ListTile(
-                                    leading: Image.network(charger.foto!, height: 48, width: 48,),
-                                    title: Text(charger.nombres!),
-                                    subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
-                                  );
+                                   if(charger.foto!=null){
+                                      return ListTile(
+                                        leading: Image.network(charger.foto!, height: 48, width: 48,) ,
+                                        title: Text(charger.nombres!),
+                                        subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
+                                      );
+                                   } else {
+                                     return ListTile(
+                                        leading: AvatarCircleInitials(firstName: charger.nombres!, lastName: charger.apPaterno!,),
+                                        title: Text(charger.nombres!),
+                                        subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
+                                      ); 
+                                   }
                                 },
                                 noItemsFoundBuilder: (context) => Container(
                                   padding: EdgeInsets.all(8),

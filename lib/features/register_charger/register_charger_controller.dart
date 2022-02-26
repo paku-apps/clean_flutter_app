@@ -114,9 +114,13 @@ class RegisterChargerController extends GetxController{
       var chargerRepository = ChargerRepositoryImpl();
       await chargerRepository.submitCharger(username, paterno, materno, email, numDoc, pass);
       isLoading = false;
+      Get.back();
+      Get.back();
       showSuccessSnackbar("Bienvenido", "Colegio Villa Maria te saluda");
     } catch(e) {
       isLoading = false;
+      Get.back();
+      Get.back();
       showErrorSnackbar("Error al registrar", "Por favor, intentelo en breves momentos");
       update();
     }

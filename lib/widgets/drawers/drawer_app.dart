@@ -1,6 +1,7 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/user.dart';
+import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/features/profiles/home_charge/home_charge_controller.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_controller.dart';
 import 'package:clean_app/features/profiles/home_supervisor/home_supervisor_controller.dart';
@@ -77,6 +78,7 @@ class HeaderFooterDrawerApp extends StatelessWidget {
                 closeFunction();
                 Get.delete<HomeFatherController>();
                 Get.delete<HomeChargeController>();
+                Get.delete<ListAssignController>();
                 Get.delete<HomeSupervisorController>();
                 //Get.offAllNamed(AppLinks.LOGIN);
               },

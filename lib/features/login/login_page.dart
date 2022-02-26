@@ -11,7 +11,6 @@ import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
 import 'package:clean_app/widgets/labels/label_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -79,31 +78,6 @@ class LoginPage extends StatelessWidget {
                     textLabel: loginPageTextTapNewAccountPickup
                   ), 
                   SizedBox(height: size.height * 0.10),
-                  /*
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () => {
-                          Get.offAndToNamed(AppLinks.HOME_FATHER)
-                        }, 
-                        icon: Icon(Icons.supervised_user_circle_sharp)
-                      ),
-                      IconButton(
-                        onPressed: () => {
-                          Get.offAndToNamed(AppLinks.HOME_CHARGE)
-                        }, 
-                        icon: Icon(Icons.access_alarm_sharp)
-                      ),
-                      IconButton(
-                        onPressed: () => {
-                          Get.offAndToNamed(AppLinks.HOME_SUPERVISOR)
-                        }, 
-                        icon: Icon(Icons.check_box)
-                      )
-                    ],
-                  )*/
                 ],
               ),
               )
@@ -123,7 +97,7 @@ class LoginPage extends StatelessWidget {
             content: Text(dialogDesktopApp),
             actions: [
               TextButton(onPressed: () {
-                html.window.open('https://www.google.com',"_self");
+                //html.window.open('https://www.google.com',"_self");
                 //openBrowser("https://villamaria.edu.pe/");
               }, child: const Text("Aceptar"),)
             ],
