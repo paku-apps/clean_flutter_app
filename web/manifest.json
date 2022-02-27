@@ -1,6 +1,6 @@
 {
-    "name": "PickUpMe",
-    "short_name": "PickUpMe",
+    "name": "PickMeApp",
+    "short_name": "PickMeApp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

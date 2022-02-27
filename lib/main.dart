@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var homePage;
     return GetMaterialApp(
-      title: 'PickUpMe',
+      title: 'PickMeApp',
       onGenerateTitle: (BuildContext context) {
-        return "PickUpMe";
+        return "PickMeApp";
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,

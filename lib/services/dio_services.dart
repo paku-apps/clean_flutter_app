@@ -134,7 +134,7 @@ class HttpDioService {
     var refreshToken = await getCurrentRefreshToken();
     var userRepository = UserRepositoryImpl();
     try {
-      final response = await defaultDio?.post('https://auth-cvm.auth.us-east-1.amazoncognito.com/oauth2/token', 
+      final response = await defaultDio?.post('https://auth-cvm-prd.auth.us-east-1.amazoncognito.com/oauth2/token', 
         data: {
           'grant_type': 'refresh_token', 
           'client_id': '2v9kfta1dhqv01dtm6blf3m48g',
