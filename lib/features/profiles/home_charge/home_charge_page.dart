@@ -61,6 +61,7 @@ class HomeChargePage extends StatelessWidget {
                     homeChargeController.getauthorizationsForFuture();
                   }
                 },
+                
                 automaticIndicatorColorAdjustment: true,
               ),
             )
@@ -75,76 +76,83 @@ class HomeChargePage extends StatelessWidget {
         ),
         body: TabBarView(
           controller: homeChargeController.tabBarcontroller,
+          physics: NeverScrollableScrollPhysics(),
           children: [
             //Hoy programacion
             SafeArea(
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
-                child: Obx(() {
-                  if(homeChargeController.loadingToday.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if(homeChargeController.listAssignChildrenToday.isEmpty){
-                    return EmptyStateApp(
-                            pathImage: "assets/images/box.png", 
-                            messageEmpty: "No se encontraron autorizaciones para hoy", 
-                            colorState: Colors.black
-                    );
-                  } else { return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(8),
-                          itemCount: homeChargeController.listAssignChildrenToday.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return AssignChildTile(
-                              assignChild: homeChargeController.listAssignChildrenToday[index],
-                            );
-                          }
-                        ),
-                        RoundedButton(text: homeChargerPageButtonQR, press: () {
-                          Get.toNamed(AppLinks.CHARGER_QR);
-                        })
-                      ]
-                    );
-                  }
-                })
+                  child: Obx(() {
+                    if(homeChargeController.loadingToday.value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if(homeChargeController.listAssignChildrenToday.isEmpty){
+                      return EmptyStateApp(
+                              pathImage: "assets/images/box.png", 
+                              messageEmpty: "No se encontraron autorizaciones para hoy", 
+                              colorState: Colors.black
+                      );
+                    } else { return SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                              RoundedButton(text: homeChargerPageButtonQR, press: () {
+                                Get.toNamed(AppLinks.CHARGER_QR);
+                              }),
+                              ListView.builder(
+                                primary: false,
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(8),
+                                itemCount: homeChargeController.listAssignChildrenToday.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return AssignChildTile(
+                                    assignChild: homeChargeController.listAssignChildrenToday[index],
+                                  );
+                                }
+                            ),
+                          ]
+                        )
+                      );
+                    }
+                  })
               )
             ),
             //Programaciones / Futuras
             SafeArea(
               child: BackgroundColorSafe(
                 colorBackground: colorBackgroundWhite,
-                child: Obx(() {
-                  if(homeChargeController.loadingFuture.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if(homeChargeController.listAssignChildrenProgram.isEmpty){
-                    return EmptyStateApp(
-                            pathImage: "assets/images/box.png", 
-                            messageEmpty: "No se encontraron autorizaciones programadas", 
-                            colorState: Colors.black
-                    );
-                  } else {
-                    return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
-                      itemCount: homeChargeController.listAssignChildrenProgram.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AssignChildTile(
-                          assignChild: homeChargeController.listAssignChildrenProgram[index],
-                        );
-                      }
-                    );
-                  }
-                })
+                  child: Obx(() {
+                    if(homeChargeController.loadingFuture.value) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if(homeChargeController.listAssignChildrenProgram.isEmpty){
+                      return EmptyStateApp(
+                              pathImage: "assets/images/box.png", 
+                              messageEmpty: "No se encontraron autorizaciones programadas", 
+                              colorState: Colors.black
+                      );
+                    } else {
+                      return SingleChildScrollView(
+                        child: ListView.builder(
+                          primary: false,
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(8),
+                          itemCount: homeChargeController.listAssignChildrenProgram.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return AssignChildTile(
+                              assignChild: homeChargeController.listAssignChildrenProgram[index],
+                            );
+                          }
+                        )
+                      );
+                    }
+                  })
+                )
               )
-            ),
           ]
         )
       )

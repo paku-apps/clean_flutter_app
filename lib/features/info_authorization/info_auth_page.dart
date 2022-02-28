@@ -68,6 +68,7 @@ class InfoAuthorizationPage extends StatelessWidget {
                     noPaddingVertical: false
                   ),
                   ListView.builder(
+                      primary: false,
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(8),

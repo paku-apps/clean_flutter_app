@@ -130,6 +130,8 @@ class QRRepositoryImpl extends QRRepository {
         var assignCharger = getAssignChargerModelFromAssignCharger(dataResponse);
         return assignCharger;
 
+      } else if(response.statusCode == 500){
+        return AssignChargerModel();
       } else {
         throw QRRepositoryException(message: 'Error en el repository QR Detail');
       }
