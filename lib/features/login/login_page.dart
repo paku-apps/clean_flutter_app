@@ -11,7 +11,7 @@ import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
 import 'package:clean_app/widgets/labels/label_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'dart:html' as html;
+//import 'dart:html' as html;
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -98,7 +98,7 @@ class LoginPage extends StatelessWidget {
             content: Text(dialogDesktopApp),
             actions: [
               TextButton(onPressed: () {
-                html.window.open('https://www.google.com',"_self");
+                //html.window.open('https://www.google.com',"_self");
                 //openBrowser("https://villamaria.edu.pe/");
               }, child: const Text("Aceptar"),)
             ],

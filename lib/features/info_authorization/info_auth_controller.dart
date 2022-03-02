@@ -46,15 +46,20 @@ class InfoAuthorizationController extends GetxController {
     var iv = partsQr[0];
     var codigoqr = partsQr[1];
     QRRepository qrRepository = QRRepositoryImpl();
-    var assignCharger = await qrRepository.getInfoFromQR(iv, codigoqr);
-    if(assignCharger != null){
-      mainCharger.value =assignCharger;
-      mainCharger.value.estudiantes?.forEach((student) { 
-        listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
-      });
+    try {
+      var assignCharger = await qrRepository.getInfoFromQR(iv, codigoqr);
+      if(assignCharger.idAutorizado != null){
+        mainCharger.value =assignCharger;
+        mainCharger.value.estudiantes?.forEach((student) { 
+          listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+        });
+      }
+      isLoading.value = false;
+      return assignCharger;
+    } catch(e) {
+      isLoading.value = false;
+      return null;
     }
-    isLoading.value = false;
-    return assignCharger;
   }
 
   void checkChild(int position){

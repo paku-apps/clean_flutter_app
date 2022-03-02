@@ -10,7 +10,9 @@ import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/assign_charger_tile.dart';
 import 'package:clean_app/widgets/custom/charger_tile.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
+import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_normal_bold.dart';
+import 'package:clean_app/widgets/texts/text_app_title.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -47,6 +49,22 @@ class InfoAuthorizationPage extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.fromLTRB(dimenMedium, dimenMedium, dimenMedium, dimenMedium),
                   child: Center(child: CircularProgressIndicator(),)
+                );
+              } else if (infoController.isLoading.value == false && infoController.mainCharger.value.idAutorizado == 0) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [ 
+                    TextAppNormal(text: "No se pudo encontrar la información solicitada, intente nuevamente", color: textPrimaryColor)
+                  ]
+                );
+              } else if (infoController.isLoading.value == false && infoController.mainCharger.value.idAutorizado == 999999) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [ 
+                    TextAppNormal(text: "No se encontraron alumnos para recoger", color: textPrimaryColor)
+                  ]
                 );
               } else {
                 return Column(

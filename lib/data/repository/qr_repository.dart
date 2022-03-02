@@ -126,9 +126,13 @@ class QRRepositoryImpl extends QRRepository {
       if(response.statusCode == 200){
 
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
-        var dataResponse = assignChargerFromJson(json.encode(apiResultResponse.data));
-        var assignCharger = getAssignChargerModelFromAssignCharger(dataResponse);
-        return assignCharger;
+        if(apiResultResponse.data != ""){    
+          var dataResponse = assignChargerFromJson(json.encode(apiResultResponse.data));
+          var assignCharger = getAssignChargerModelFromAssignCharger(dataResponse);
+          return assignCharger;
+        } else {
+          return AssignChargerModel(idAutorizado: 999999);
+        }
 
       } else if(response.statusCode == 500){
         return AssignChargerModel();
