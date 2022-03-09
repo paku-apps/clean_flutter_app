@@ -40,7 +40,7 @@ class HeaderFooterDrawerApp extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             Container(
-              height: 200,
+              height: 220,
               child: DrawerHeader(
                 decoration: BoxDecoration(
                   color: primaryColor,

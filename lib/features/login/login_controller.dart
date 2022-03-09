@@ -1,3 +1,4 @@
+import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/features/login/auth/authentication_service.dart';
 import 'package:clean_app/features/login/login_state.dart';
@@ -16,6 +17,7 @@ class LoginController extends GetxController {
   var password = "";
   var isSubmitted = false;
   var loginSuccessfull = false.obs();
+  var checkRemember = false.obs();
 
   //To Validate show or hide the password
   bool _showPassword = false;
@@ -31,6 +33,7 @@ class LoginController extends GetxController {
     loginFormkey = GlobalKey<FormState>();
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    loadRememberAccount();
   }
 
   @override 
@@ -70,7 +73,23 @@ class LoginController extends GetxController {
     login(emailController.text, passwordController.text);
   }
 
+  void tapRememberAccount(){
+      checkRemember = !checkRemember;
+      update();
+  }
   
+  void loadRememberAccount() async {
+    UserRepository repo = UserRepositoryImpl();
+    var isRememberUser = await repo.isRmemberUser();
+    if(isRememberUser){
+      var userRemember = await repo.getRememberUser();
+      var passRemember = await repo.getRememberPass();
+      emailController.text = userRemember;
+      passwordController.text = passRemember;
+      checkRemember = true;
+      update();
+    }
+  }
 
   final _loginStateStream = LoginState().obs;
 
@@ -81,7 +100,7 @@ class LoginController extends GetxController {
     isLoading = true;
 
     try{
-      var typeLogin = await _authenticationController.signIn(username, password);
+      var typeLogin = await _authenticationController.signIn(username, password, checkRemember);
       _loginStateStream.value = LoginState();
       isLoading = false;
       //showSuccessSnackbar("Bienvenido", "Colegio Villa Maria los saluda");

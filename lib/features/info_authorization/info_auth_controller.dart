@@ -53,9 +53,13 @@ class InfoAuthorizationController extends GetxController {
         mainCharger.value.estudiantes?.forEach((student) { 
           listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
         });
+        isLoading.value = false;
+        return assignCharger;
       }
-      isLoading.value = false;
-      return assignCharger;
+      if(assignCharger.idAutorizado == 999999) {
+        isLoading.value = false;
+        return assignCharger;
+      }
     } catch(e) {
       isLoading.value = false;
       return null;

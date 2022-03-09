@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 abstract class AuthenticationService extends GetxService {
 
   Future<User?> getCurrentUser();
-  Future<User> signInEmailAndPassword(String username, String password);
+  Future<User> signInEmailAndPassword(String username, String password, bool rememberAccount);
   Future<void> signOut();
 
 }
@@ -23,7 +23,7 @@ class AuthenticationServiceImpl extends AuthenticationService {
   static var client = http.Client();
 
   @override
-  Future<User> signInEmailAndPassword(String username, String password) async {
+  Future<User> signInEmailAndPassword(String username, String password, bool rememberAccount) async {
     
     HttpDioService httpService = HttpDioService();
     httpService.init();
@@ -45,6 +45,13 @@ class AuthenticationServiceImpl extends AuthenticationService {
         UserRepository repo = UserRepositoryImpl();
         var apiResultResponse = ApiResultResponse.fromJson(response.data);
         var dataResponse = AuthenticationData.fromJson(apiResultResponse.data);
+        if(rememberAccount){
+          repo.rememberAccount(true);
+          repo.rememberUser(username);
+          repo.rememberPassword(password);
+        } else {
+          repo.clearDataRemember();
+        }
         //if(dataResponse.reseteo == false){
         if(dataResponse.reseteo){
           //await repo.saveUser(dataResponse.userBd);

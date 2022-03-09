@@ -1,6 +1,5 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RoundedTextFormFieldNormal extends StatelessWidget {
@@ -11,12 +10,14 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
   Function validatorFunction;
   String valueData;
   IconData? leftIcon;
+  List<String> autofillHints;
 
   RoundedTextFormFieldNormal({
     Key? key,
     required this.onChanged,
     this.showPassword = false,
     this.leftIcon,
+    this.autofillHints = const [''],
     required this.controller,
     required this.validatorFunction,
     this.valueData = "",
@@ -32,6 +33,7 @@ class RoundedTextFormFieldNormal extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(dimenExtraBig, 0, dimenExtraBig, 0),
       child: TextFormField(
         controller: controller,
+        autofillHints: autofillHints,
         style: const TextStyle(color: primaryColor),
         cursorColor: primaryColor,
         onSaved: (value) {

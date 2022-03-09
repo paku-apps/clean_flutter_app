@@ -9,6 +9,7 @@ import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_normal.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
 import 'package:clean_app/widgets/labels/label_tap.dart';
+import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import 'dart:html' as html;
@@ -57,6 +58,19 @@ class LoginPage extends StatelessWidget {
                     valueData: controller.password,
                   ),
                   const SizedBox(height: dimenMedium),
+                  Container(
+                    width: 400,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Checkbox(value: controller.checkRemember, onChanged: (value) {
+                           controller.tapRememberAccount();
+                        },),
+                        Text("Recordar Usuario/Contraseña")
+                      ],
+                    ),
+                  ),
                   controller.isLoading? CircularProgressIndicator() : RoundedButton(
                     text: loginPageButtonLogin,
                     color: accentColor, 

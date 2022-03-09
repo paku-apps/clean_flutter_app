@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 abstract class ChildRepository {
 
   Future<List<Child>?> getListChild(String authToken, int idApoderado);
+  Future<List<Child>?> getListChildForAssign(String authToken, int idApoderado);
 
 }
 
@@ -46,6 +47,34 @@ class ChildRepositoryImpl extends ChildRepository {
       throw ChildrenRepositoryException(message: 'Error en el repository Children');
     }
 
+  }
+
+  @override
+  Future<List<Child>?> getListChildForAssign(String authToken, int idApoderado) async {
+    HttpDioService httpService = HttpDioService();
+    httpService.init();
+    var pathService = pathServer+stage+childrenAssignService;
+    pathService = pathService.replaceAll(":1", idApoderado.toString());
+    
+    UserRepository repo = UserRepositoryImpl();
+    
+    try {
+      var response = await httpService.request(
+        method: Method.GET,
+        url: pathService
+      );
+      if(response.statusCode == 200){
+
+        var apiResultResponse =  ApiResultResponse.fromJson(response.data);
+        var dataResponse = childResponseFromJson(json.encode(apiResultResponse.data));
+        return getListChildResponseToListChild(dataResponse);
+
+      } else {
+        throw ChildrenRepositoryException(message: 'Wrong username or password');
+      }
+    } catch (e){
+      throw ChildrenRepositoryException(message: 'Error en el repository Children');
+    }
   }
 
 }

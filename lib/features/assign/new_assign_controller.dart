@@ -80,7 +80,7 @@ class AssignController extends GetxController {
     tokenStored = await repoUsuario.getToken();
     ChildRepository repo = ChildRepositoryImpl();
     var idApoderado = usuarioLogged.value.id;
-    List<Child>? list = await repo.getListChild(tokenStored, idApoderado);
+    List<Child>? list = await repo.getListChildForAssign(tokenStored, idApoderado);
     if(list!=null){
       listChildren.value = list;
       validateIsForEdit();

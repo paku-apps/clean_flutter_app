@@ -19,8 +19,8 @@ class AuthenticationController extends GetxController {
     super.onInit();
   }
 
-  Future<String> signIn(String username, String password) async {
-    var user = await _authenticationService.signInEmailAndPassword(username, password);
+  Future<String> signIn(String username, String password, bool rememberAccount) async {
+    var user = await _authenticationService.signInEmailAndPassword(username, password, rememberAccount);
     if(user.reseteo==false){
       _authenticationStateStream.value = Authenticated(user: user);
       return "SUCCESS";

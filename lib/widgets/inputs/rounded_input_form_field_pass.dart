@@ -16,6 +16,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
   String labelContrasenia;
   bool passIsVisible;
   IconData? leftIcon;
+  List<String> autofillHints;
 
   RoundedTextFormFieldPass({
     Key? key,
@@ -25,6 +26,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
     this.leftIcon,
     this.labelContrasenia = "Contraseña",
     this.passIsVisible = true,
+    this.autofillHints = const [''],
     required this.functionTapIcon,
     required this.controller,
     required this.validatorFunction,
@@ -40,6 +42,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
       child: TextFormField(
         obscureText: !showPassword,
         controller: controller,
+        autofillHints: autofillHints,
         style: const TextStyle(color: primaryColor),
         cursorColor: primaryColor,
         onSaved: (value) {

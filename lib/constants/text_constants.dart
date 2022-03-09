@@ -18,6 +18,7 @@ const loginPageEditTextPassPlaceholder = "Contraseña";
 const loginPageButtonLogin = "Ingresar";
 const loginPageTextTapForgotPass = "Olvidé la contraseña";
 const loginPageTextTapNewAccountPickup = "Crear cuenta para recojo";
+const loginPageTextRememberAccount= "Recordar usuario";
 
 //Dialog for App/Desktop
 const dialogDesktopApp = "Esta aplicación esta desarrollada para funcionar en equipos móviles. Por favor acceda a ella desde su celular";

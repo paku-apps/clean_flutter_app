@@ -23,6 +23,13 @@ abstract class UserRepository {
   Future<String> submitNewPassword(int idUsuario, String newPassword);
   Future<void> saveAuxiliarUser(UserBd user);
   Future<UserBd?> getAuxiliarUser();
+  Future<void> rememberAccount(bool rememberAccount);
+  Future<void> rememberUser(String user);
+  Future<void> rememberPassword(String password);
+  Future<void> clearDataRemember();
+  Future<String> getRememberUser();
+  Future<String> getRememberPass();
+  Future<bool> isRmemberUser();
 
 }
 
@@ -32,6 +39,9 @@ class UserRepositoryImpl extends UserRepository {
   final keyIdToken = "SP_KEY_APP_TOKEN";
   final keyRefreshToken = "SP_KEY_APP_REFRESH_TOKEN";
   final keyAuxiliarUser = "SP_KEY_AUXILIAR_USER";
+  final keyRememberAccount = "SP_KEY_REMEMBER_ACCOUNT";
+  final keyRememberUser = "SP_KEY_REMEMBER_USER";
+  final keyRememberPassword = "SP_KEY_REMEMBER_PASS";
 
   static final UserRepositoryImpl _singleton = UserRepositoryImpl._internal();
 
@@ -82,7 +92,11 @@ class UserRepositoryImpl extends UserRepository {
   Future<void> clearDataUser() async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await prefs.remove(keyUserApp);
+    await prefs.remove(keyIdToken);
+    await prefs.remove(keyRefreshToken);
+    await prefs.remove(keyAuxiliarUser);
+    //await prefs.clear();
   }
 
   @override
@@ -194,6 +208,68 @@ class UserRepositoryImpl extends UserRepository {
 
   }
 
+  @override
+  Future<String> getRememberPass() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var idTokenStored = prefs.getString(keyRememberPassword);
+    if(idTokenStored!=null){
+      return idTokenStored;
+    }
+    return emptyString;
+  }
+
+  @override
+  Future<String> getRememberUser() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var idTokenStored = prefs.getString(keyRememberUser);
+    if(idTokenStored!=null){
+      return idTokenStored;
+    }
+    return emptyString;
+  }
+
+  @override
+  Future<bool> isRmemberUser() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var idTokenStored = prefs.getBool(keyRememberAccount);
+    if(idTokenStored!=null){
+      return idTokenStored;
+    }
+    return false;
+  }
+
+  @override
+  Future<void> rememberAccount(bool rememberAccount) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(keyRememberAccount, rememberAccount);
+  }
+
+  @override
+  Future<void> rememberPassword(String password) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(keyRememberPassword, password);
+  }
+
+  @override
+  Future<void> rememberUser(String user) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(keyRememberUser, user);
+  }
+
+  @override
+  Future<void> clearDataRemember() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(keyRememberAccount);
+    await prefs.remove(keyRememberUser);
+    await prefs.remove(keyRememberPassword);
+  }
   
 }
 

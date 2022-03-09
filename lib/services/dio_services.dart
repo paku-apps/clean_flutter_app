@@ -51,7 +51,7 @@ class HttpDioService {
 
           //Validate the unauthorized
           //if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
-          if (error.response?.statusCode == 401) {
+          if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
             await refreshToken();
             final cloneReq = await _dio?.request(error.requestOptions.path,
                           data: error.requestOptions.data,
