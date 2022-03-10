@@ -26,7 +26,7 @@ class AssignCharger {
     String apMaterno;
     String numeroDocumento;
     String correo;
-    String foto;
+    String? foto;
     List<EstudianteAutorizacion>? estudiantes;
 
     factory AssignCharger.fromJson(Map<String, dynamic> json) => AssignCharger(
@@ -36,7 +36,7 @@ class AssignCharger {
         apMaterno: json["ap_materno"] == null ? null : json["ap_materno"],
         numeroDocumento: json["numero_documento"] == null ? null : json["numero_documento"],
         correo: json["correo"] == null ? null : json["correo"],
-        foto: json["foto"] == null ? null : json["foto"],
+        foto: json["foto"] == "" ? null : json["foto"],
         estudiantes: json["estudiantes"] == null ? null : List<EstudianteAutorizacion>.from(json["estudiantes"].map((x) => EstudianteAutorizacion.fromJson(x))),
     );
 

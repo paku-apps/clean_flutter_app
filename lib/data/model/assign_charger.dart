@@ -17,7 +17,7 @@ class AssignChargerModel{
     String apMaterno;
     String numeroDocumento;
     String correo;
-    String foto;
+    String? foto;
     List<AutorizacionEstudianteModel>? estudiantes;
 
   factory AssignChargerModel.fromJson(Map<String, dynamic> json) => AssignChargerModel(
