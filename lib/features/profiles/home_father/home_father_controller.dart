@@ -69,7 +69,9 @@ class HomeFatherController extends GetxController {
 
   Future<void> closeSession() async {
     UserRepository repoUsuario = UserRepositoryImpl();
+    QRRepository repoQR = QRRepositoryImpl();
     await repoUsuario.clearDataUser();
+    await repoQR.clearQR();
     _authenticationController.signOut();
   }
 }

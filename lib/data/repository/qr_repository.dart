@@ -18,6 +18,7 @@ abstract class QRRepository {
   Future<String?> getQRPrincipal(int idApoderado);
   Future<String?> getQRDetail(int idApoderado);
   Future<AssignChargerModel> getInfoFromQR(String iv, String codigo);
+  Future<void> clearQR();
 
 }
 
@@ -142,6 +143,15 @@ class QRRepositoryImpl extends QRRepository {
     } catch (e){
       throw QRRepositoryException(message: 'Error en el repository QR Detail');
     }
+  }
+
+  @override
+  Future<void> clearQR() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(keyQRPrincipal);
+    await prefs.remove(keyIdToken);
+    await prefs.remove(keyQRDate);
   }
 }
 

@@ -3,6 +3,7 @@ import 'package:clean_app/data/model/assign_child.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/assign_child_repository.dart';
+import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/data/response/assignChild/assign_child_response.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
@@ -84,7 +85,9 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   
   Future closeSession() async {
     UserRepository repoUsuario = UserRepositoryImpl();
+    QRRepository repoQR = QRRepositoryImpl();
     await repoUsuario.clearDataUser();
+    await repoQR.clearQR();
     _authenticationController.signOut();
   }
 }

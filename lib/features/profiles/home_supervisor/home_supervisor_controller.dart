@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:clean_app/data/model/user.dart';
+import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
@@ -40,7 +41,9 @@ class HomeSupervisorController extends GetxController {
 
   Future<void> closeSession() async {
     UserRepository repoUsuario = UserRepositoryImpl();
+    QRRepository repoQR = QRRepositoryImpl();
     await repoUsuario.clearDataUser();
+    await repoQR.clearQR();
     _authenticationController.signOut();
   }
 }

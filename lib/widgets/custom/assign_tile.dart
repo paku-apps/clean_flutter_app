@@ -34,7 +34,7 @@ class AssignTile extends StatelessWidget {
             Column(
               children: [
                 Center(
-                  child: AvatarCircleInitials(firstName: assign.charger!.nombres!, lastName: assign.charger!.apMaterno!),
+                  child: AvatarCircleInitials(firstName: assign.charger!.nombres!, lastName: assign.charger!.apPaterno!),
                 )
               ],
             ),
@@ -67,10 +67,7 @@ class AssignTile extends StatelessWidget {
           Column(
             children: [
               Center(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(assign.charger!.foto!),
-                  radius: 28,
-                ),
+                child: validateFoto(assign)
               )
             ],
           ),
@@ -104,9 +101,6 @@ class AssignTile extends StatelessWidget {
           );
        }
     }
-    return const CircleAvatar(
-      backgroundImage: AssetImage("assets/images/avatar.png"),
-      radius: 28,
-    );
+    return AvatarCircleInitials(firstName: assign.charger!.nombres!, lastName: assign.charger!.apPaterno!);
   }
 }
