@@ -4,7 +4,6 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/widgets/avatars/avatar_initials.dart';
-import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_normal_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +26,7 @@ class ChildTile extends StatelessWidget {
     
     if(isForDevice){
       return Container(
-        margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
+        margin: const EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,7 +34,7 @@ class ChildTile extends StatelessWidget {
             AvatarCircleInitials(firstName: child.nombres, lastName: child.apPaterno),
             Expanded(
               child: Container(
-                padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
+                padding: const EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +50,7 @@ class ChildTile extends StatelessWidget {
       );
     } else {
       return Container(
-        margin: EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
+        margin: const EdgeInsets.fromLTRB(dimenSmall, dimenLittle, dimenSmall, dimenLittle),
         alignment: Alignment.center,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +60,7 @@ class ChildTile extends StatelessWidget {
             Container(
               width: hasCheckBox ? getResponsiveWidthContainerCheckbox(deviceData) : getResponsiveWidthContainer(deviceData),
               alignment: Alignment.center,
-              padding: EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
+              padding: const EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

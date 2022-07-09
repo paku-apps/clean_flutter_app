@@ -1,7 +1,6 @@
 
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextLabelTap extends StatelessWidget {
@@ -9,7 +8,7 @@ class TextLabelTap extends StatelessWidget {
   final String textLabel;
   final Function press;
 
-  TextLabelTap({
+  const TextLabelTap({
     Key? key,
     required this.press,
     required this.textLabel
@@ -21,7 +20,7 @@ class TextLabelTap extends StatelessWidget {
       onTap: () => press(),
       child: Text(
         textLabel,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: textSizeNormalLabel,
           color: textPrimaryColor
         ),

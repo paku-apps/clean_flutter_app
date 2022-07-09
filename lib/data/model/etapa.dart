@@ -14,8 +14,8 @@ class Etapa {
   }
 
   Map<String, dynamic> toJson() => {
-      "id": id == null ? null : id,
-      "nombre": nombre == null ? null : nombre,
+      "id": id,
+      "nombre": nombre,
   };
 
 }

@@ -21,7 +21,7 @@ Charger getChargerFromChargerResponse(ChargerResponse chargerResponse){
 List<Charger> getListChargerResponseToListCharger(List<ChargerResponse> list){
   
   List<Charger> listChargers = [];
-  list.forEach((chargerData) {
+  for (var chargerData in list) {
     var charger =  Charger();
     charger.id = chargerData.id;
     charger.nombres = chargerData.nombres;
@@ -31,7 +31,7 @@ List<Charger> getListChargerResponseToListCharger(List<ChargerResponse> list){
     charger.correo = chargerData.correo;
     charger.foto = chargerData.foto;
     listChargers.add(charger);
-  });
+  }
 
   return listChargers;
 }

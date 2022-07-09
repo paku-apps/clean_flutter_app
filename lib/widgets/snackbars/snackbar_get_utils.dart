@@ -12,16 +12,16 @@ void showSuccessSnackbar(
   Get.snackbar(
     title, 
     message,
-    icon: Icon(Icons.check_circle_sharp, color: whiteColor),
+    icon: const Icon(Icons.check_circle_sharp, color: whiteColor),
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: successfulSnackbar,
     borderRadius: 10,
-    margin: EdgeInsets.all(8),
+    margin: const EdgeInsets.all(8),
     snackStyle: SnackStyle.GROUNDED,
     colorText: whiteColor,
-    duration: Duration(seconds: 3),
+    duration: const Duration(seconds: 3),
     isDismissible: false,
-    dismissDirection: SnackDismissDirection.HORIZONTAL,
+    dismissDirection: DismissDirection.horizontal,
     forwardAnimationCurve: Curves.easeOutBack
   );
 }
@@ -33,16 +33,16 @@ void showErrorSnackbar(
   Get.snackbar(
     title, 
     message,
-    icon: Icon(Icons.cancel_outlined, color: whiteColor),
+    icon: const Icon(Icons.cancel_outlined, color: whiteColor),
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: errorSnackbar,
     snackStyle: SnackStyle.GROUNDED,
     borderRadius: 10,
-    margin: EdgeInsets.all(8),
+    margin: const EdgeInsets.all(8),
     colorText: whiteColor,
-    duration: Duration(seconds: 3),
+    duration: const Duration(seconds: 3),
     isDismissible: false,
-    dismissDirection: SnackDismissDirection.HORIZONTAL,
+    dismissDirection: DismissDirection.horizontal,
     forwardAnimationCurve: Curves.easeOutBack
   );
 }

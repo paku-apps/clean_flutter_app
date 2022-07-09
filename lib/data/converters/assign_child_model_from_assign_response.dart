@@ -15,20 +15,20 @@ AutorizacionModel getAutorizacionModelFromAutorizacionResponse(Autorizacion auto
 List<AutorizacionModel> getListAutorizacionModelFromListAutorizacionResponse(List<Autorizacion> list){
 
   List<AutorizacionModel> listautorizaciones = [];
-  list.forEach((authorizacionData) {
+  for (var authorizacionData in list) {
     var autorizacionModel =  AutorizacionModel();
     autorizacionModel.id = authorizacionData.id;
     autorizacionModel.fechaInicio = authorizacionData.fechaInicio;
     autorizacionModel.fechaFin = authorizacionData.fechaFin;
     listautorizaciones.add(autorizacionModel);
-  });
+  }
   return listautorizaciones;
 }
 
 List<AssignChildModel> getListAssignChildResponseToListAssignChild(List<AssignChild> list){
   
   List<AssignChildModel> listAssigns = [];
-  list.forEach((assignChildData) {
+  for (var assignChildData in list) {
     var assignChild =  AssignChildModel();
     assignChild.id = assignChildData.id;
     assignChild.nombres = assignChildData.nombres;
@@ -38,7 +38,7 @@ List<AssignChildModel> getListAssignChildResponseToListAssignChild(List<AssignCh
     assignChild.charger = getChargerFromChargerResponse(assignChildData.apoderado!);
     assignChild.autorizaciones = getListAutorizacionModelFromListAutorizacionResponse(assignChildData.autorizaciones!);
     listAssigns.add(assignChild);
-  });
+  }
 
   return listAssigns;
 }

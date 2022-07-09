@@ -36,10 +36,6 @@ class LoginController extends GetxController {
     loadRememberAccount();
   }
 
-  @override 
-  void onReady(){
-    super.onReady();
-  }
 
   @override 
   void onClose(){

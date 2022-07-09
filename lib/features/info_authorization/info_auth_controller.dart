@@ -6,7 +6,6 @@ import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/supervisor_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
-import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +17,7 @@ class InfoAuthorizationController extends GetxController {
   var mainCharger = AssignChargerModel().obs;
   var isLoading = true.obs;
   var isLoadingRegister = false.obs;
+  var isCheckForAll = false.obs;
   var listAuthConfirm = List<AuthorizationConfirmation>.empty().obs;
 
   @override
@@ -52,6 +52,7 @@ class InfoAuthorizationController extends GetxController {
         mainCharger.value =assignCharger;
         mainCharger.value.estudiantes?.forEach((student) { 
           listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+          validateCheckForAll();
         });
         isLoading.value = false;
         return assignCharger;
@@ -64,6 +65,7 @@ class InfoAuthorizationController extends GetxController {
       isLoading.value = false;
       return null;
     }
+    return null;
   }
 
   void checkChild(int position){
@@ -78,6 +80,7 @@ class InfoAuthorizationController extends GetxController {
         listAuthConfirm.removeAt(indexFounded);
       }
     }
+    validateCheckForAll();
     update();
   }
 
@@ -105,5 +108,30 @@ class InfoAuthorizationController extends GetxController {
     var listCheckedEstudiantes = mainCharger.value.estudiantes!.where((estudiante) => estudiante.checked == false).toList();
     return listCheckedEstudiantes.length == mainCharger.value.estudiantes!.length;
   }
+  
+  void validateCheckForAll() {
+    isCheckForAll.value = (listAuthConfirm.length == mainCharger.value.estudiantes?.length);
+    update();
+  }
+
+  void checkAllChildren(){
+    // Marcar todos los childs
+    if(!isCheckForAll.value && mainCharger.value.estudiantes != null){
+      mainCharger.value.estudiantes?.forEach((child) { 
+        for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
+          if(!mainCharger.value.estudiantes![pos].checked){
+            checkChild(pos);
+          }
+        }
+      });
+    } else if(isCheckForAll.value && mainCharger.value.estudiantes != null) {
+        for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
+          if(mainCharger.value.estudiantes![pos].checked){
+            checkChild(pos);
+          }
+        }
+      }
+  }
+  
   
 }

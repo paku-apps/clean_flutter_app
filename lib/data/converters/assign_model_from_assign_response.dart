@@ -22,7 +22,7 @@ Assign getAssignFromAssignResponse(AssignResponse assignResponse){
 List<Assign> getListAssignResponseToListAssign(List<AssignResponse> list){
   
   List<Assign> listAssigns = [];
-  list.forEach((assignData) {
+  for (var assignData in list) {
     var charger =  Assign();
     charger.id = assignData.id;
     charger.fechaInicio = transformDateTimeToFormat(assignData.fechaInicio!);
@@ -31,7 +31,7 @@ List<Assign> getListAssignResponseToListAssign(List<AssignResponse> list){
     charger.charger = getChargerFromChargerResponse(assignData.autorizado!);
     charger.estudiantes = getListChildResponseToListChild(assignData.estudiantes!);
     listAssigns.add(charger);
-  });
+  }
 
   return listAssigns;
 }

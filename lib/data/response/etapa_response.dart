@@ -8,12 +8,12 @@ class EtapaResponse {
     String? nombre;
 
     factory EtapaResponse.fromJson(Map<String, dynamic> json) => EtapaResponse(
-        id: json["id"] == null ? null : json["id"],
-        nombre: json["nombre"] == null ? null : json["nombre"],
+        id: json["id"],
+        nombre: json["nombre"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "nombre": nombre == null ? null : nombre,
+        "id": id,
+        "nombre": nombre,
     };
 }

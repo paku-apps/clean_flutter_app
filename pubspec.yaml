@@ -14,7 +14,7 @@ dependencies:
 
   # GetX
   # https://pub.dev/packages/get
-  get: ^4.3.8
+  get: ^4.6.5
 
   # Equatable
   # https://pub.dev/packages/equatable
@@ -54,7 +54,7 @@ dependencies:
 
   # Scannable QR
   # https://pub.dev/packages/qr_code_scanner
-  qr_code_scanner: ^0.6.1
+  qr_code_scanner: ^1.0.0
 
   # Scan QR
   # https://pub.dev/packages/flutter_barcode_scanner
@@ -62,7 +62,7 @@ dependencies:
 
   # TypeAhead
   # https://pub.dev/packages/flutter_typeahead
-  flutter_typeahead: ^3.2.4
+  flutter_typeahead: ^4.0.0
 
   # Calendar Sync
   # https://pub.dev/packages/syncfusion_flutter_datepicker

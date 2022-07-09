@@ -22,12 +22,12 @@ class AssignChargerModel{
 
   factory AssignChargerModel.fromJson(Map<String, dynamic> json) => AssignChargerModel(
     idAutorizado: json["id"] == null ? null : json["idAutorizado"],
-    nombres: json["nombres"] == null ? null : json["nombres"],
-    apPaterno: json["apPaterno"] == null ? null : json["apPaterno"],
-    apMaterno: json["apMaterno"] == null ? null : json["apMaterno"],
-    numeroDocumento: json["numeroDocumento"] == null ? null : json["numeroDocumento"],
-    correo: json["correo"] == null ? null : json["correo"],
-    foto: json["foto"] == null ? null : json["foto"],
+    nombres: json["nombres"],
+    apPaterno: json["apPaterno"],
+    apMaterno: json["apMaterno"],
+    numeroDocumento: json["numeroDocumento"],
+    correo: json["correo"],
+    foto: json["foto"],
     estudiantes: json["autorizaciones"] == null ? null : List<AutorizacionEstudianteModel>.from(json["autorizaciones"].map((x) => AutorizacionEstudianteModel.fromJson(x))),
   );
 
@@ -38,9 +38,9 @@ class AssignChargerModel{
       "nombres": nombres,
       "ap_paterno": apPaterno,
       "ap_materno": apMaterno,
-      "numeroDocumento": numeroDocumento == null ? null : numeroDocumento,
-      "correo": correo == null ? null : correo,
-      "foto": foto == null ? null : foto,
+      "numeroDocumento": numeroDocumento,
+      "correo": correo,
+      "foto": foto,
       "autorizaciones": estudiantes == null ? null : List<dynamic>.from(estudiantes!.map((x) => x.toJson()))
     };
   }
@@ -69,21 +69,21 @@ class AutorizacionEstudianteModel{
     bool checked;
 
     factory AutorizacionEstudianteModel.fromJson(Map<String, dynamic> json) => AutorizacionEstudianteModel(
-        idAutorizacion: json["idAutorizacion"] == null ? null : json["idAutorizacion"],
-        idEstudiante: json["idEstudiante"] == null ? null : json["idEstudiante"],
-        nombres: json["nombres"] == null ? null : json["nombres"],
-        apPaterno: json["apPaterno"] == null ? null : json["apPaterno"],
-        apMaterno: json["apMaterno"] == null ? null : json["apMaterno"],
-        grado: json["grado"] == null ? null : json["grado"],
+        idAutorizacion: json["idAutorizacion"],
+        idEstudiante: json["idEstudiante"],
+        nombres: json["nombres"],
+        apPaterno: json["apPaterno"],
+        apMaterno: json["apMaterno"],
+        grado: json["grado"],
     );
 
     Map<String, dynamic> toJson() => {
-        "idAutorizacion": idAutorizacion == null ? null : idAutorizacion,
-        "idEstudiante": idEstudiante == null ? null : idEstudiante,
-        "nombres": nombres == null ? null : nombres,
-        "apPaterno": apPaterno == null ? null : apPaterno,
-        "apMaterno": apMaterno == null ? null : apMaterno,
-        "grado": grado == null ? null : grado
+        "idAutorizacion": idAutorizacion,
+        "idEstudiante": idEstudiante,
+        "nombres": nombres,
+        "apPaterno": apPaterno,
+        "apMaterno": apMaterno,
+        "grado": grado
     };
 
 }

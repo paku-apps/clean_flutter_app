@@ -69,7 +69,7 @@ class QRRepositoryImpl extends QRRepository {
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
         prefs.setString(keyQRPrincipal, dataResponse.iv+ separatorQR + dataResponse.qrCode); 
-        prefs.setString(keyQRDate, DateTime.now().add(Duration(hours: 12)).toString());
+        prefs.setString(keyQRDate, DateTime.now().add(const Duration(hours: 12)).toString());
         return dataResponse.iv+ separatorQR + dataResponse.qrCode;
 
       } else {
@@ -115,6 +115,43 @@ class QRRepositoryImpl extends QRRepository {
 
     var pathService = pathServer+stage+pathDecodeQR;    
     
+    /*
+        var alumno1 = AutorizacionEstudianteModel();
+        alumno1.idAutorizacion = 1515;
+        alumno1.idEstudiante = 3001;
+        alumno1.nombres = "Alumno01";
+        alumno1.apPaterno = "Paterno01";
+        alumno1.apMaterno = "Materno01";
+        alumno1.grado = "5to";
+        alumno1.checked = true;
+
+        var alumno2 = AutorizacionEstudianteModel();
+        alumno2.idAutorizacion = 1515;
+        alumno2.idEstudiante = 3002;
+        alumno2.nombres = "Alumno02";
+        alumno2.apPaterno = "Paterno02";
+        alumno2.apMaterno = "Materno02";
+        alumno2.grado = "5to";
+        alumno2.checked = true;
+        
+        var alumno3 = AutorizacionEstudianteModel();
+        alumno3.idAutorizacion = 1515;
+        alumno3.idEstudiante = 3003;
+        alumno3.nombres = "Alumno03";
+        alumno3.apPaterno = "Paterno03";
+        alumno3.apMaterno = "Materno03";
+        alumno3.grado = "5to";
+        alumno3.checked = true;
+        var demo = AssignChargerModel();
+        demo.idAutorizado = 2323;
+        demo.apPaterno = "AMAO";
+        demo.apMaterno = "QUIJANDRIA";
+        demo.numeroDocumento = "555555";
+        demo.correo = "ulises@gmail.com";
+        demo.foto = "";
+        demo.estudiantes = [alumno1, alumno2, alumno3];
+        return demo;
+        */
     try {
       var response = await httpService.request(
         method: Method.POST,
@@ -125,7 +162,6 @@ class QRRepositoryImpl extends QRRepository {
         }
       );
       if(response.statusCode == 200){
-
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         if(apiResultResponse.data != ""){    
           var dataResponse = assignChargerFromJson(json.encode(apiResultResponse.data));
@@ -134,7 +170,6 @@ class QRRepositoryImpl extends QRRepository {
         } else {
           return AssignChargerModel(idAutorizado: 999999);
         }
-
       } else if(response.statusCode == 500){
         return AssignChargerModel();
       } else {

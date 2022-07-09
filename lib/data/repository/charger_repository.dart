@@ -4,7 +4,6 @@ import 'package:clean_app/data/converters/charger_model_from_carguer_response.da
 import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
-import 'package:clean_app/data/response/auth/authentication_data.dart';
 import 'package:clean_app/data/response/charger_response.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/services/dio_services.dart';

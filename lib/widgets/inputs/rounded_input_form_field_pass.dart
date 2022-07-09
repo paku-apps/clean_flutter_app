@@ -1,6 +1,5 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -66,7 +65,7 @@ class RoundedTextFormFieldPass extends StatelessWidget {
               color: primaryColor
             ),
             onPressed: () => functionTapIcon(),
-          ) : SizedBox(),
+          ) : const SizedBox(),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(25.0),
             borderSide: const BorderSide(

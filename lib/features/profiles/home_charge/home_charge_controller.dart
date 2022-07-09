@@ -1,11 +1,8 @@
-import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/data/model/assign_child.dart';
-import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/data/repository/assign_child_repository.dart';
 import 'package:clean_app/data/repository/qr_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
-import 'package:clean_app/data/response/assignChild/assign_child_response.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,8 +20,8 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   late TabController tabBarcontroller;
 
   final List<Tab> tabCharger = <Tab>[
-    Tab(text: 'Hoy'),
-    Tab(text: 'Programados'),
+    const Tab(text: 'Hoy'),
+    const Tab(text: 'Programados'),
   ];
 
   @override
@@ -55,9 +52,7 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     var currentUser = await repoUsuario.getCurrentUser();
     AssignChildRepository repo = AssignChildRepositoryImpl();
     List<AssignChildModel>? list = await repo.getListAssignChildToday(currentUser!.id);
-    if(list!=null){
-      listAssignChildrenToday.value = list;
-    }
+    listAssignChildrenToday.value = list;
     loadingToday.value = false;
     update();
     return list;
@@ -69,9 +64,7 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     var currentUser = await repoUsuario.getCurrentUser();
     AssignChildRepository repo = AssignChildRepositoryImpl();
     List<AssignChildModel>? list = await repo.getListAssignChildFuture(currentUser!.id);
-    if(list!=null){
-      listAssignChildrenProgram.value = list;
-    }
+    listAssignChildrenProgram.value = list;
     loadingFuture.value = false;
     update();
     return list;

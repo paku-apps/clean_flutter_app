@@ -18,17 +18,17 @@ class AppRoutes {
 
   static final pages = [
     GetPage(name: AppLinks.MAIN_PAGE, page: () => MyApp()),
-    GetPage(name: AppLinks.DEMO, page: () => DemoPage()),
-    GetPage(name: AppLinks.LOGIN, page: () => LoginPage()),
-    GetPage(name: AppLinks.HOME_FATHER, page: () => HomeFatherPage()),
-    GetPage(name: AppLinks.HOME_CHARGE, page: () => HomeChargePage()),
-    GetPage(name: AppLinks.HOME_SUPERVISOR, page: () => HomeSupervisorPage()),
+    GetPage(name: AppLinks.DEMO, page: () => const DemoPage()),
+    GetPage(name: AppLinks.LOGIN, page: () => const LoginPage()),
+    GetPage(name: AppLinks.HOME_FATHER, page: () => const HomeFatherPage()),
+    GetPage(name: AppLinks.HOME_CHARGE, page: () => const HomeChargePage()),
+    GetPage(name: AppLinks.HOME_SUPERVISOR, page: () => const HomeSupervisorPage()),
     GetPage(name: AppLinks.NEW_ASSIGN, page: () => AssignPage()),
-    GetPage(name: AppLinks.LIST_ASSIGNS, page: () => ListAssignPage()),
-    GetPage(name: AppLinks.INFO_AUTH, page: () => InfoAuthorizationPage()),
-    GetPage(name: AppLinks.REGISTER_CHARGER, page: () => RegisterChargerPage()),
+    GetPage(name: AppLinks.LIST_ASSIGNS, page: () => const ListAssignPage()),
+    GetPage(name: AppLinks.INFO_AUTH, page: () => const InfoAuthorizationPage()),
+    GetPage(name: AppLinks.REGISTER_CHARGER, page: () => const RegisterChargerPage()),
     GetPage(name: AppLinks.DETAIL_ASSIGN, page: () => DetailAssignPage()),
-    GetPage(name: AppLinks.CHARGER_QR, page: () => DetailChargerQrPage()),
+    GetPage(name: AppLinks.CHARGER_QR, page: () => const DetailChargerQrPage()),
     GetPage(name: AppLinks.FORGOT_PAGE, page: () => ForgotPasswordPage()),
     GetPage(name: AppLinks.RESET_PASSWORD, page: () => EmailForgotPage())
   ];

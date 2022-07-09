@@ -3,13 +3,11 @@ import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/features/login/login_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
-import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/background_color.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_normal.dart';
 import 'package:clean_app/widgets/inputs/rounded_input_form_field_pass.dart';
 import 'package:clean_app/widgets/labels/label_tap.dart';
-import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import 'dart:html' as html;
@@ -58,7 +56,7 @@ class LoginPage extends StatelessWidget {
                     valueData: controller.password,
                   ),
                   const SizedBox(height: dimenMedium),
-                  Container(
+                  SizedBox(
                     width: 400,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -67,11 +65,11 @@ class LoginPage extends StatelessWidget {
                         Checkbox(value: controller.checkRemember, onChanged: (value) {
                            controller.tapRememberAccount();
                         },),
-                        Text("Recordar Usuario/Contraseña")
+                        const Text("Recordar Usuario/Contraseña")
                       ],
                     ),
                   ),
-                  controller.isLoading? CircularProgressIndicator() : RoundedButton(
+                  controller.isLoading? const CircularProgressIndicator() : RoundedButton(
                     text: loginPageButtonLogin,
                     color: accentColor, 
                     press: () => controller.checkLogin() 
@@ -108,8 +106,8 @@ class LoginPage extends StatelessWidget {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Aviso"),
-            content: Text(dialogDesktopApp),
+            title: const Text("Aviso"),
+            content: const Text(dialogDesktopApp),
             actions: [
               TextButton(onPressed: () {
                 //html.window.open('https://www.google.com',"_self");

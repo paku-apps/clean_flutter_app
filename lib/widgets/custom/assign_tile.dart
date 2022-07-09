@@ -8,7 +8,6 @@ import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_normal_avatar.dart';
 import 'package:clean_app/widgets/texts/text_app_title.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AssignTile extends StatelessWidget {
@@ -26,7 +25,7 @@ class AssignTile extends StatelessWidget {
     if(isMobile()){
       return Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.fromLTRB(dimenSmall, dimenTiny, dimenSmall, dimenTiny),
+        margin: const EdgeInsets.fromLTRB(dimenSmall, dimenTiny, dimenSmall, dimenTiny),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,7 +40,7 @@ class AssignTile extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.fromLTRB(0, dimenLittle, dimenMedium, dimenLittle),
+                padding: const EdgeInsets.fromLTRB(0, dimenLittle, dimenMedium, dimenLittle),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +58,7 @@ class AssignTile extends StatelessWidget {
     } else {
       return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.fromLTRB(dimenSmall, dimenTiny, dimenSmall, dimenTiny),
+      margin: const EdgeInsets.fromLTRB(dimenSmall, dimenTiny, dimenSmall, dimenTiny),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +72,7 @@ class AssignTile extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.fromLTRB(0, dimenLittle, dimenMedium, dimenLittle),
+            padding: const EdgeInsets.fromLTRB(0, dimenLittle, dimenMedium, dimenLittle),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

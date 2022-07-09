@@ -20,24 +20,24 @@ class Charger{
     String? foto;
 
   factory Charger.fromJson(Map<String, dynamic> json) => Charger(
-    id: json["id"] == null ? null : json["id"],
-    nombres: json["nombres"] == null ? null : json["nombres"],
-    apPaterno: json["ap_paterno"] == null ? null : json["ap_paterno"],
-    apMaterno: json["ap_materno"] == null ? null : json["ap_materno"],
-    numeroDocumento: json["numero_documento"] == null ? null : json["numero_documento"],
-    correo: json["correo"] == null ? null : json["correo"],
-    foto: json["foto"] == null ? null : json["foto"],
+    id: json["id"],
+    nombres: json["nombres"],
+    apPaterno: json["ap_paterno"],
+    apMaterno: json["ap_materno"],
+    numeroDocumento: json["numero_documento"],
+    correo: json["correo"],
+    foto: json["foto"],
   );
 
 
   Map<String, dynamic> toJson() => {
-    "id": id == null ? null : id,
-    "nombres": nombres == null ? null : nombres,
-    "ap_paterno": apPaterno == null ? null : apPaterno,
-    "ap_materno": apMaterno == null ? null : apMaterno,
-    "numero_documento": numeroDocumento == null ? null : numeroDocumento,
-    "correo": correo == null ? null : correo,
-    "foto": foto == null ? null : foto,
+    "id": id,
+    "nombres": nombres,
+    "ap_paterno": apPaterno,
+    "ap_materno": apMaterno,
+    "numero_documento": numeroDocumento,
+    "correo": correo,
+    "foto": foto,
   };
 
 }

@@ -42,11 +42,11 @@ final controller = Get.put(EmailForgotController());
                       validatorFunction: (value) => controller.validateEmail(value),
                       valueData: controller.email
                     ),
-                    SizedBox(height: dimenBig,),
+                    const SizedBox(height: dimenBig,),
                     Container(
                       child: Obx(() {
                         if(controller.isLoading.value) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else {
                           return RoundedButton(
                             text: homeResetPassword,

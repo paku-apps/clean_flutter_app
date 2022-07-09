@@ -35,7 +35,7 @@ class UserBd {
         apellidoMaterno: json["ap_materno"],
         numDocumento: json["numero_documento"],
         correo: json["correo"],
-        foto: json["foto"] ?? null,
+        foto: json["foto"],
         fechaRegistro: json["fecha_registro"],
         fechaUpdate: json["fecha_update"],
         activo: json["activo"],

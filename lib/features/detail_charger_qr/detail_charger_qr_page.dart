@@ -3,7 +3,6 @@ import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/features/detail_charger_qr/detail_charger_qr_controller.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
-import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +35,7 @@ class DetailChargerQrPage extends StatelessWidget {
                 children: [
                   SizedBox(height: size.height * 0.01),
                   TextAppNormal(text: homeFatherPageTextQr, color: textPrimaryColor),
-                  Container(
+                  SizedBox(
                     width: size.width,
                     height: 300,
                     child: Column(
@@ -51,9 +50,9 @@ class DetailChargerQrPage extends StatelessWidget {
                               size: 280
                             );
                           } if(controllerChargerDetailQR.showQRLoading == true) {
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           } else{
-                            return Text("Cargando Autorización");
+                            return const Text("Cargando Autorización");
                           }
                         }),
                       ],

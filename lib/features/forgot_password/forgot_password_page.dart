@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
@@ -47,7 +46,7 @@ class ForgotPasswordPage extends StatelessWidget {
                       validatorFunction: (value) => controller.validatePass(value),
                       valueData: controller.password,
                     ),
-                    SizedBox(height: dimenMedium,),
+                    const SizedBox(height: dimenMedium,),
                     RoundedTextFormFieldPass(
                       onChanged: (value) {},
                       functionTapIcon: () => {}, 
@@ -59,11 +58,11 @@ class ForgotPasswordPage extends StatelessWidget {
                       validatorFunction: (value) => controller.validateRePass(value),
                       valueData: controller.repassword,
                     ), 
-                    SizedBox(height: dimenBig,),
+                    const SizedBox(height: dimenBig,),
                     Container(
                       child: Obx(() {
                         if(controller.isLoading.value) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else {
                           return RoundedButton(
                             text: homeChangePassword,

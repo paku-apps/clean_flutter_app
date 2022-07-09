@@ -1,5 +1,4 @@
 
-import 'dart:convert';
 
 List<dynamic> authConfirmationToJson(List<AuthorizationConfirmation> data) => List<dynamic>.from(data.map((x) => x.toJsonAuthConfirm()));
 
@@ -16,7 +15,7 @@ class AuthorizationConfirmation{
   );
 
   Map<String, dynamic> toJsonAuthConfirm() => {
-    "id_autorizacion": id_authorizacion == null ? null : id_authorizacion,
+    "id_autorizacion": id_authorizacion,
     "id_estudiante": id_estudiante,
     "check": check
   };

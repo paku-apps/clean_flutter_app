@@ -38,7 +38,7 @@ DateTime getTimeByString(String dateString){
 }
 
 String transformSimpleDateTimeToAppFormat(DateTime rangeDateTime){
-  return DateFormat('dd MMMM, yyyy', "es_US").format(rangeDateTime);;
+  return DateFormat('dd MMMM, yyyy', "es_US").format(rangeDateTime);
 }
 
 String transformDateTimeToAppFormat(DateTime startDateTime, DateTime endDateTime){
@@ -51,11 +51,11 @@ String getRangeOfChildAuthorizations(List<AutorizacionModel> listAssigns){
   initializeDateFormatting();
   var maxRangeChild = "";
   var maxDate = DateTime.now();
-  listAssigns.forEach((assignChild) { 
+  for (var assignChild in listAssigns) { 
     if(getTimeByString(assignChild.fechaFin!).isAfter(maxDate)){
       maxDate = getTimeByString(assignChild.fechaFin!);
     }
-  });
+  }
   return "Hasta el " + transformSimpleDateTimeToAppFormat(maxDate);
 }
 

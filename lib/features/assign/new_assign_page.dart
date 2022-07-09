@@ -4,28 +4,26 @@ import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/charger.dart';
-import 'package:clean_app/features/assign/data_demo.dart';
 import 'package:clean_app/features/assign/new_assign_controller.dart';
-import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
-import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
+import 'package:clean_app/widgets/chips/chip_option.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
-import 'package:clean_app/widgets/inputs/input_icon_form_fielld_normal.dart';
-import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class AssignPage extends StatelessWidget {
   
   AssignPage({Key? key}) : super(key: key);
   final TextEditingController _typeAheadController = TextEditingController();
+
+  final assignController = Get.put(AssignController());
+  var assignToEdit = null;
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +32,14 @@ class AssignPage extends StatelessWidget {
     String _selectedCity;
     var deviceData = MediaQuery.of(context);
 
-    final assignController = Get.put(AssignController());
-    var assignToEdit = null;
     var listChildCheked = <int>[];
 
     var argumentitos = Get.arguments;
-    if(argumentitos!=null){
+    if(argumentitos!=null && assignToEdit == null){
       assignController.isToEditAssign.value = true;
       assignToEdit = json.decode(argumentitos[0]);
-      _typeAheadController.text = assignToEdit["charger"]["ap_paterno"] + emptySpace + assignToEdit["charger"]["ap_materno"]+", "+assignToEdit["charger"]["nombres"];
+      assignController.chargerSelectedName.value = assignToEdit["charger"]["ap_paterno"] + emptySpace + assignToEdit["charger"]["ap_materno"]+", "+assignToEdit["charger"]["nombres"];
+      assignController.isChargerSelected.value = true;
       assignController.rangeFrecuencyStart.value = assignToEdit["fechaInicio"];
       assignController.rangeFrecuencyEnd.value = assignToEdit["fechaFin"];
       assignController.rangoFrecuenciaCadena.value = assignToEdit["fechaInicio"] +emptySpace+ separatorLine + emptySpace + assignToEdit["fechaFin"];
@@ -62,7 +59,7 @@ class AssignPage extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56), 
         child: AppBarBackNav(
-          title: assignToEdit==null ? assignPageTitle : editAssignPageTitle
+          title: argumentitos==null ? assignPageTitle : editAssignPageTitle
         )
       ),
       body: SafeArea(
@@ -80,79 +77,89 @@ class AssignPage extends StatelessWidget {
                     Center(
                       child: Container( //FormAutocompletado
                         width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                        margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+                        margin: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
                         child: Stack(
                           alignment: AlignmentDirectional.centerStart,
                           children: [
                             const Icon(Icons.account_box, size: 36),
                             Container(
                               padding: const EdgeInsets.only(left: 36),
-                              child: TypeAheadFormField(
-                                keepSuggestionsOnLoading: false,
-                                minCharsForSuggestions: 3,
-                                loadingBuilder: (context) =>
-                                  Container(
-                                    padding:const EdgeInsets.only(left: 36),
-                                    height: 60,
-                                    width: 300,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: const [
-                                        CircularProgressIndicator()
-                                      ]
-                                    ),
-                                  ),
-                                // ignore: prefer_const_constructors
-                                textFieldConfiguration: TextFieldConfiguration(
-                                  controller: _typeAheadController,
-                                  style: const TextStyle(color: textPrimaryColor, fontSize: 16),
-                                  decoration: const InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: assignInputCharge),
-                                ),
-                                suggestionsCallback: (pattern) async {
-                                  return assignController.searchChargerByPattern(pattern);
-                                },
-                                itemBuilder: (context, Charger charger) {
-                                   if(charger.foto!=null){
-                                      return ListTile(
-                                        leading: Image.network(charger.foto!, height: 48, width: 48,) ,
-                                        title: Text(charger.nombres!),
-                                        subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
-                                      );
-                                   } else {
-                                     return ListTile(
-                                        leading: AvatarCircleInitials(firstName: charger.nombres!, lastName: charger.apPaterno!,),
-                                        title: Text(charger.nombres!),
-                                        subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
-                                      ); 
-                                   }
-                                },
-                                noItemsFoundBuilder: (context) => Container(
-                                  padding: EdgeInsets.all(8),
-                                  child:Text("No se encontraron responsables")
-                                  ),
-                                onSuggestionSelected: (Charger charger) {
-                                    _typeAheadController.text = charger.apPaterno! + separatorComma + emptySpace+ charger.nombres!;
-                                    assignController.idCharger.value = charger.id!;
-                                },
-                              ),
+                              child: Obx(() { 
+                                if (!assignController.isChargerSelected.value && assignController.chargerSelectedName.value.isEmpty) {
+                                    return TypeAheadFormField(
+                                      keepSuggestionsOnLoading: false,
+                                      minCharsForSuggestions: 3,
+                                      loadingBuilder: (context) =>
+                                        Container(
+                                          padding:const EdgeInsets.only(left: 36),
+                                          height: 60,
+                                          width: 300,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: const [
+                                              CircularProgressIndicator()
+                                            ]
+                                          ),
+                                        ),
+                                      // ignore: prefer_const_constructors
+                                      textFieldConfiguration: TextFieldConfiguration(
+                                        controller: _typeAheadController,
+                                        style: const TextStyle(color: textPrimaryColor, fontSize: 16),
+                                        decoration: const InputDecoration(
+                                          border: OutlineInputBorder(),
+                                          hintText: assignInputCharge),
+                                      ),
+                                      suggestionsCallback: (pattern) async {
+                                        return assignController.searchChargerByPattern(pattern);
+                                      },
+                                      itemBuilder: (context, Charger charger) {
+                                        if(charger.foto!=null){
+                                            return ListTile(
+                                              leading: Image.network(charger.foto!, height: 48, width: 48,) ,
+                                              title: Text(charger.nombres!),
+                                              subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
+                                            );
+                                        } else {
+                                          return ListTile(
+                                              leading: AvatarCircleInitials(firstName: charger.nombres!, lastName: charger.apPaterno!,),
+                                              title: Text(charger.nombres!),
+                                              subtitle: Text('${charger.apPaterno} ${charger.apMaterno}'),
+                                            ); 
+                                        }
+                                      },
+                                      noItemsFoundBuilder: (context) => Container(
+                                        padding: const EdgeInsets.all(8),
+                                        child: const Text("No se encontraron responsables")
+                                        ),
+                                      onSuggestionSelected: (Charger charger) {
+                                          _typeAheadController.text = charger.apPaterno! + separatorComma + emptySpace+ charger.nombres!;
+                                          assignController.selectedCharger(charger.id!, _typeAheadController.text);
+                                          //assignController.idCharger.value = charger.id!;
+                                      },
+                                    );
+                                  } else {
+                                    return ChipOption(text: assignController.chargerSelectedName.value , press: () {
+                                      _typeAheadController.text = emptyString;
+                                      assignController.clearCharger();
+                                    });
+                                  }
+                              })
                             ),
                           ],
                         ),
                       ),
                     ),
-                    Container(//Frecuencia
+                    SizedBox(//Frecuencia
                       width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
                       child: Obx((){
                         return Row(
                           children: [
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Checkbox(value: assignController.checkForever.value, onChanged: (value) {
                               assignController.checkForeverRange();
                             },),
-                            Text(assignForever),
+                            const Text(assignForever),
                           ],
                         );
                       })
@@ -161,8 +168,8 @@ class AssignPage extends StatelessWidget {
                     Obx((){
                       return Container(//Frecuencia
                         width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                        margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-                        child: assignController.checkForever.value ? SizedBox(height: 8) : Row(
+                        margin: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+                        child: assignController.checkForever.value ? const SizedBox(height: 8) : Row(
                           children: [
                             const Icon(Icons.calendar_today, size: 36),
                             Expanded(
@@ -181,7 +188,7 @@ class AssignPage extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       border: Border.all(color: Colors.black38),
-                                      borderRadius: BorderRadius.all(Radius.circular(4))
+                                      borderRadius: const BorderRadius.all(Radius.circular(4))
                                     ),
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
@@ -211,9 +218,9 @@ class AssignPage extends StatelessWidget {
                         ),
                       );
                     }),
-                    Text("Seleccione a quién recogerá:", textAlign: TextAlign.start, style: TextStyle(fontSize: textSizeNormalLabel)),
+                    const Text("Seleccione a quién recogerá:", textAlign: TextAlign.start, style: TextStyle(fontSize: textSizeNormalLabel)),
                     Container(//Lista de niño
-                      margin: EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
+                      margin: const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
                       child: GetBuilder<AssignController>(
                         init: AssignController(),
                         builder: (assignController) =>

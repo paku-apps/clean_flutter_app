@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/repository/assign_repository.dart';
@@ -7,7 +6,6 @@ import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class DetailAssignController extends GetxController {

@@ -1,6 +1,5 @@
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
-import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/texts/text_app_avatar.dart';
 import 'package:flutter/material.dart';
 

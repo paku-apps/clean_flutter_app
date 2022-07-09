@@ -18,7 +18,7 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class HomeFatherPage extends StatelessWidget {
-  HomeFatherPage({Key? key}) : super(key: key);
+  const HomeFatherPage({Key? key}) : super(key: key);
 
 
   @override
@@ -39,7 +39,7 @@ class HomeFatherPage extends StatelessWidget {
       drawer: Obx((){
         return HeaderFooterDrawerApp(
           user: controllerPage.usuarioLogged.value,
-          listIcons: [Icon(Icons.home), Icon(Icons.list)],
+          listIcons: const [Icon(Icons.home), Icon(Icons.list)],
           listNames: const [draweroptionsHome, drawerOptionAuthorizations],
           listFunctions: [
             () {controllerPage.currentPage.value = "HOMEPAGE"; controllerPage.reloadData();Navigator.pop(context);},
@@ -60,7 +60,7 @@ class HomeFatherPage extends StatelessWidget {
                     children: [
                       SizedBox(height: size.height * 0.01),
                       TextAppNormal(text: homeFatherPageTextQr, color: textPrimaryColor),
-                      Container(
+                      SizedBox(
                         width: size.width,
                         height: 300,
                         child: Column(
@@ -75,7 +75,7 @@ class HomeFatherPage extends StatelessWidget {
                                   size: 280
                                 );
                               } if(controllerPage.showQRLoading == true) {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               } else {
                                 return RoundedButton(
                                   text: homeFatherPageGenerateQrButton,
@@ -119,7 +119,7 @@ class HomeFatherPage extends StatelessWidget {
                               separatorBuilder: (context, index) => const Divider(
                                 color: Colors.black,
                               ),
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(4),
@@ -168,7 +168,7 @@ class HomeFatherPage extends StatelessWidget {
                   controllerListAssign.getListAssignByUser();
                 }
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               FloatingActionButton(
                 heroTag: "btnDetailNew",
                 backgroundColor: primaryColor,

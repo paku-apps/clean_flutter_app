@@ -1,5 +1,4 @@
 import 'package:clean_app/data/repository/user_repository.dart';
-import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';

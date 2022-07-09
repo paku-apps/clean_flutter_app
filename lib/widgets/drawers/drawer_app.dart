@@ -5,7 +5,6 @@ import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/features/profiles/home_charge/home_charge_controller.dart';
 import 'package:clean_app/features/profiles/home_father/home_father_controller.dart';
 import 'package:clean_app/features/profiles/home_supervisor/home_supervisor_controller.dart';
-import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/widgets/avatars/avatar_initials.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_title.dart';
@@ -32,17 +31,17 @@ class HeaderFooterDrawerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    int sizeElements = this.listIcons.length;
+    int sizeElements = listIcons.length;
 
     return Drawer(
       child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
-            Container(
+            SizedBox(
               height: 220,
               child: DrawerHeader(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: primaryColor,
                 ),
                 child: Column(

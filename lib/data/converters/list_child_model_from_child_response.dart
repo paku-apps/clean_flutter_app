@@ -4,7 +4,7 @@ import 'package:clean_app/data/response/child/child_response.dart';
 List<Child> getListChildResponseToListChild(List<ChildResponse> list){
   
   List<Child> listChild = [];
-  list.forEach((childData) {
+  for (var childData in list) {
     var child =  Child();
     child.id = childData.id;
     child.nombres = childData.nombres;
@@ -14,7 +14,7 @@ List<Child> getListChildResponseToListChild(List<ChildResponse> list){
     child.isChecked = childData.estado == null ? false : childData.estado!.check;
     child.grado = childData.grado;
     listChild.add(child);
-  });
+  }
 
   return listChild;
 }

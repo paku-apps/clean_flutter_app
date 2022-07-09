@@ -9,13 +9,10 @@ import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/assign_charger_tile.dart';
 import 'package:clean_app/widgets/custom/charger_tile.dart';
-import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:clean_app/widgets/texts/text_app_normal_bold.dart';
-import 'package:clean_app/widgets/texts/text_app_title.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 class InfoAuthorizationPage extends StatelessWidget {
   const InfoAuthorizationPage({Key? key}) : super(key: key);
@@ -47,8 +44,8 @@ class InfoAuthorizationPage extends StatelessWidget {
             child: Obx(() {
               if(infoController.isLoading.value){
                 return Container(
-                  margin: EdgeInsets.fromLTRB(dimenMedium, dimenMedium, dimenMedium, dimenMedium),
-                  child: Center(child: CircularProgressIndicator(),)
+                  margin: const EdgeInsets.fromLTRB(dimenMedium, dimenMedium, dimenMedium, dimenMedium),
+                  child: const Center(child: CircularProgressIndicator(),)
                 );
               } else if (infoController.isLoading.value == false && infoController.mainCharger.value.idAutorizado == 0) {
                 return Column(
@@ -80,10 +77,42 @@ class InfoAuthorizationPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: ChargerTile(name: infoController.mainCharger.value.nombres, lastName: infoController.mainCharger.value.apPaterno+emptySpace+infoController.mainCharger.value.apMaterno),
                   ),
-                  TextAppNormalBold(
-                    text: infoAuthorizationChildren,
-                    color: textPrimaryColor,
-                    noPaddingVertical: false
+                  Row(
+                    children: [
+                      TextAppNormalBold(
+                        text: infoAuthorizationChildren,
+                        color: textPrimaryColor,
+                        noPaddingVertical: false
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        infoController.listAuthConfirm.length.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          background: Paint()
+                            ..color = primaryColor
+                            ..strokeWidth = 20
+                            ..strokeJoin = StrokeJoin.round
+                            ..strokeCap = StrokeCap.round
+                            ..style = PaintingStyle.stroke,
+                            color: whiteColor
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                        child: Checkbox(value: infoController.isCheckForAll.value, onChanged: (value) {
+                               infoController.checkAllChildren();
+                        })
+                      )
+                    ]
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(8,0,8,0),
+                    child: const Divider(
+                      thickness: 2,
+                      color: disableColor,
+                    ),
                   ),
                   ListView.builder(
                       primary: false,
@@ -108,7 +137,7 @@ class InfoAuthorizationPage extends StatelessWidget {
                   ),
                   Obx((){
                     if(infoController.isLoadingRegister.value){
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else {
                       return Center(child: RoundedButton(text: infoAuthorizationConfirm, press: () {
                         infoController.registerAuthorization();

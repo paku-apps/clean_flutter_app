@@ -1,16 +1,13 @@
 
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/text_constants.dart';
-import 'package:clean_app/data/model/user.dart';
 import 'package:clean_app/features/profiles/home_charge/home_charge_controller.dart';
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/extension_utils.dart';
-import 'package:clean_app/widgets/appBars/app_bar_drawer.dart';
 import 'package:clean_app/widgets/appBars/app_bar_drawer_tab.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/buttons/rounded_button.dart';
 import 'package:clean_app/widgets/custom/assign_children_tile.dart';
-import 'package:clean_app/widgets/custom/children_tile.dart';
 import 'package:clean_app/widgets/drawers/drawer_app.dart';
 import 'package:clean_app/widgets/states/empty_state.dart';
 import 'package:flutter/material.dart';
@@ -44,13 +41,13 @@ class HomeChargePage extends StatelessWidget {
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorColor: Colors.indigo,
                 tabs: [
-                  Container(
+                  SizedBox(
                     width: isMobile() ? size.width * 0.5 : size.width*0.4,
-                    child: Tab(text: 'Hoy'),
+                    child: const Tab(text: 'Hoy'),
                   ),
-                  Container(
+                  SizedBox(
                     width: isMobile() ? size.width * 0.5 : size.width*0.4,
-                    child: Tab(text: 'Futuras')
+                    child: const Tab(text: 'Futuras')
                   )
                   ],
                 onTap: (value) {
@@ -69,14 +66,14 @@ class HomeChargePage extends StatelessWidget {
         ),
         drawer: HeaderFooterDrawerApp(
           user: homeChargeController.usuarioLogged.value,
-          listIcons: [Icon(Icons.home)],
+          listIcons: const [Icon(Icons.home)],
           listNames: const [draweroptionsHome],
           listFunctions: [() => {Navigator.pop(context)}],
           closeFunction: homeChargeController.closeSession,
         ),
         body: TabBarView(
           controller: homeChargeController.tabBarcontroller,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           children: [
             //Hoy programacion
             SafeArea(

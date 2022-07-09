@@ -47,9 +47,7 @@ class ListAssignController extends GetxController {
     AssignRepository repo = AssignRepositoryImpl();
     var idApoderado = usuarioLogged.value.id;
     List<Assign>? list = await repo.getListAssignByApoderado(tokenStored, idApoderado);
-    if(list!=null){
-      listAssign.value = list;
-    }
+    listAssign.value = list;
     isLoading.value = false;
     return list;
   }

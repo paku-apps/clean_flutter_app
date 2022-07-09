@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/constants/text_constants.dart';
-import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/features/detail_assign/detail_assign_controller.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
-import 'package:clean_app/widgets/appBars/app_bar_back_nav.dart';
 import 'package:clean_app/widgets/appBars/app_bar_back_nav_options.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
 import 'package:clean_app/widgets/custom/children_tile.dart';
@@ -36,7 +34,7 @@ class DetailAssignPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(56), 
         child:  AppBarBackNavOptions(
           title: listAssignsTitle,
-          listIcons: [Icon(Icons.edit), Icon(Icons.delete)],
+          listIcons: const [Icon(Icons.edit), Icon(Icons.delete)],
           listFunctions: [
             () {detailAssignController.goToUpdateAssign(assign);}, 
             () {
@@ -48,12 +46,12 @@ class DetailAssignPage extends StatelessWidget {
                   actions: [
                     Obx((){
                       if(detailAssignController.isLoading.value){
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       } else {
                         return TextButton(onPressed: () {
                           detailAssignController.deleteAssign(assign);  
                         }, 
-                        child: Text(listAssignsEditOk),);
+                        child: const Text(listAssignsEditOk),);
                       }
                     }),
                     TextButton(onPressed: () {Navigator.pop(context);}, child: const Text(listAssignsEditCancel),)
@@ -74,11 +72,11 @@ class DetailAssignPage extends StatelessWidget {
                   children: [
                     Container( //FormAutocompletado
                       width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                      margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
+                      margin: const EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(dimenSmall),
+                            margin: const EdgeInsets.all(dimenSmall),
                             child: const Icon(Icons.account_box, size: 36),
                           ),
                           Expanded(child: SizedBox(
@@ -89,11 +87,11 @@ class DetailAssignPage extends StatelessWidget {
                     ),
                     Container( //FormAutocompletado
                       width: isMobile() ? deviceData.size.width : getResponsiveWidthContainer(deviceData),
-                      margin: EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
+                      margin: const EdgeInsets.fromLTRB(dimenLarge, dimenSmall, dimenLarge, dimenSmall),
                       child: Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(dimenSmall),
+                            margin: const EdgeInsets.all(dimenSmall),
                             child: const Icon(Icons.calendar_today, size: 36),
                           ),
                           Expanded(child: SizedBox(

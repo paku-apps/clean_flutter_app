@@ -24,21 +24,21 @@ class ChildResponse {
     EstadoEstudiante? estado;
 
     factory ChildResponse.fromJson(Map<String, dynamic> json) => ChildResponse(
-        id: json["id"] == null ? null : json["id"],
-        nombres: json["nombres"] == null ? null : json["nombres"],
-        apPaterno: json["ap_paterno"] == null ? null : json["ap_paterno"],
-        apMaterno: json["ap_materno"] == null ? null : json["ap_materno"],
-        numeroDocumento: json["numero_documento"] == null ? null : json["numero_documento"],
+        id: json["id"],
+        nombres: json["nombres"],
+        apPaterno: json["ap_paterno"],
+        apMaterno: json["ap_materno"],
+        numeroDocumento: json["numero_documento"],
         grado: json["grado"] == null ? null : Grado.fromJson(json["grado"]),
         estado: json["estado"] == null ? null : EstadoEstudiante.fromJson(json["estado"])
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "nombres": nombres == null ? null : nombres,
-        "ap_paterno": apPaterno == null ? null : apPaterno,
-        "ap_materno": apMaterno == null ? null : apMaterno,
-        "numero_documento": numeroDocumento == null ? null : numeroDocumento,
+        "id": id,
+        "nombres": nombres,
+        "ap_paterno": apPaterno,
+        "ap_materno": apMaterno,
+        "numero_documento": numeroDocumento,
         "grado": grado == null ? null : grado?.toJson(),
         "estado": estado == null ? null : estado?.toJson()
     };

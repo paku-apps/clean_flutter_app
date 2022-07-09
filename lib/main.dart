@@ -9,7 +9,6 @@ import 'package:clean_app/features/profiles/home_supervisor/home_supervisor_page
 import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/features/demo/demo_page.dart';
 import 'package:clean_app/widgets/background/background_color_safe.dart';
-import 'package:clean_app/widgets/background_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,20 +43,20 @@ class MyApp extends StatelessWidget {
       home: Obx(() {
         if(controller.state is Authenticated){
           if((controller.state as Authenticated).user.perfil == 1){
-            return DemoPage();
+            return const DemoPage();
           }
           if((controller.state as Authenticated).user.perfil == 2){
-            return HomeFatherPage();
+            return const HomeFatherPage();
           }
           if((controller.state as Authenticated).user.perfil == 3){
-            return HomeChargePage();
+            return const HomeChargePage();
           }
           if((controller.state as Authenticated).user.perfil == 4){
-            return HomeSupervisorPage();
+            return const HomeSupervisorPage();
           }
         }
         if(controller.state is UnAuthenticated){
-          return LoginPage();
+          return const LoginPage();
         }
         return const SafeArea(
           child: BackgroundColorSafe(

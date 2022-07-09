@@ -1,5 +1,4 @@
 import 'package:clean_app/features/demo/demo_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +10,7 @@ class DemoPage extends StatelessWidget {
     return GetBuilder<DemoController>(
       init: DemoController(),
       builder: (controller) => Scaffold(
-        body: Center(
+        body: const Center(
           child: Text("Por favor ingrese con otro perfil")
         ),
         floatingActionButton: FloatingActionButton(

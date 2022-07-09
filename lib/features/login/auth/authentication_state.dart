@@ -1,6 +1,5 @@
 import 'package:clean_app/data/model/user.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 
 class AuthenticationState extends Equatable {
 
@@ -19,7 +18,7 @@ class Authenticated extends AuthenticationState {
 
   final User user;
 
-  Authenticated({required this.user});
+  const Authenticated({required this.user});
 
   @override
   List<Object> get props => [user];
@@ -30,7 +29,7 @@ class AuthenticationFailure extends AuthenticationState {
 
   final String message;
 
-  AuthenticationFailure({required this.message});
+  const AuthenticationFailure({required this.message});
 
   @override
   List<Object> get props => [message];

@@ -2,7 +2,7 @@ import 'dart:math';
 
 class BackendService {
   static Future<List<Map<String, String>>> getSuggestions(String query) async {
-    await Future<void>.delayed(Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 3));
 
     return List.generate(3, (index) {
       return {
@@ -35,7 +35,7 @@ class CitiesService {
     matches.addAll(cities);
 
     matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
-    await Future<void>.delayed(Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 3));
     return matches;
   }
 }

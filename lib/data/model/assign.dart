@@ -22,9 +22,9 @@ class Assign{
     List<Child>? estudiantes;
 
   factory Assign.fromJson(Map<String, dynamic> json) => Assign(
-    id: json["id"] == null ? null : json["id"],
-    fechaInicio: json["fechaInicio"] == null ? null : json["fechaInicio"],
-    fechaFin: json["fechaFin"] == null ? null : json["fechaFin"],
+    id: json["id"],
+    fechaInicio: json["fechaInicio"],
+    fechaFin: json["fechaFin"],
     etapa: json["etapa"] == null ? null : Etapa.fromJson(json["etapa"]),
     charger: json["charger"] == null ? null : Charger.fromJson(json["charger"]),
     estudiantes: json["estudiantes"] == null ? null : List<Child>.from(json["estudiantes"].map((x) => Child.fromJson(x))),

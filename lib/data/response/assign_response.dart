@@ -25,7 +25,7 @@ class AssignResponse {
     List<ChildResponse>? estudiantes;
 
     factory AssignResponse.fromJson(Map<String, dynamic> json) => AssignResponse(
-        id: json["id"] == null ? null : json["id"],
+        id: json["id"],
         fechaInicio: json["fecha_inicio"] == null ? null : DateTime.parse(json["fecha_inicio"]),
         fechaFin: json["fecha_fin"] == null ? null : DateTime.parse(json["fecha_fin"]),
         etapa: json["etapa"] == null ? null : EtapaResponse.fromJson(json["etapa"]),
@@ -34,7 +34,7 @@ class AssignResponse {
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
+        "id": id,
         "fecha_inicio": fechaInicio == null ? null : "${fechaInicio?.year.toString().padLeft(4, '0')}-${fechaInicio?.month.toString().padLeft(2, '0')}-${fechaInicio?.day.toString().padLeft(2, '0')}",
         "fecha_fin": fechaFin == null ? null : "${fechaFin?.year.toString().padLeft(4, '0')}-${fechaFin?.month.toString().padLeft(2, '0')}-${fechaFin?.day.toString().padLeft(2, '0')}",
         "etapa": etapa == null ? null : etapa?.toJson(),

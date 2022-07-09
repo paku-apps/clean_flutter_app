@@ -92,3 +92,8 @@ const registerChargerFieldHintRePass = "Repetir contraseña";
 
 const registerChargerButton = "Registrar";
 
+//Errors
+
+const errorMessageSameUser = "Los Padres no necesitan realizar autorizaciones a si mismos.";
+const errorMessageNoChilsSelected = "Para registrar una autorización debe seleccionar una alumna.";
+const errorMessageNoChargerSelected = "Para registrar una autorización debe seleccionar Responsable.";

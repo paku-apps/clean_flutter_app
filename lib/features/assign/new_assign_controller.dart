@@ -1,3 +1,4 @@
+import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/model/charger.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/model/user.dart';
@@ -6,7 +7,6 @@ import 'package:clean_app/data/repository/charger_repository.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
 import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
-import 'package:clean_app/navigation/app_routes.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +21,9 @@ class AssignController extends GetxController {
   String tokenStored = "";
   //UI
   var isLoading = false.obs;
+  var isChargerSelected = false.obs;
+  var chargerSelectedName = "".obs;
+  var isLoadedFromEdit = false.obs;
   
   final GlobalKey<FormState> assignFormKey = GlobalKey<FormState>().obs();
   var responsable = "".obs();
@@ -92,11 +95,11 @@ class AssignController extends GetxController {
 
   void validateIsForEdit(){
     if(isToEditAssign.value) {
-      listChildren.value.forEach((child) { 
+      for (var child in listChildren.value) { 
         if(listChildrenToEdit.contains(child.id)){
           child.isChecked = true;
         }
-      });
+      }
     }
   }
 
@@ -107,16 +110,24 @@ class AssignController extends GetxController {
 
   void submitNewAssign() async {
     isLoading.value = true;
-    var listaChilds = listChildren.value;
-    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : this.rangeFrecuencyStart.value;
-    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : this.rangeFrecuencyEnd.value;
-    var apoderado = this.idApoderado.value;
-    var responsable = this.idCharger.value;
-    this.tokenStored;
+    var listaChilds = listChildren.value.where((child) => child.isChecked);
+    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : rangeFrecuencyStart.value;
+    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : rangeFrecuencyEnd.value;
+    var apoderado = idApoderado.value;
+    var responsable = idCharger.value;
+    tokenStored;
     
-    //var childrenSelected = listaChilds.where((child) => child.isChecked == true);
     var assignRepository = AssignRepositoryImpl();
     try{
+      if(apoderado == responsable) {
+        throw AssignRepositoryException(message: errorMessageSameUser);
+      }
+      if(responsable == 0){
+        throw AssignRepositoryException(message: errorMessageNoChargerSelected);
+      }
+      if(listaChilds.isEmpty){
+        throw AssignRepositoryException(message: errorMessageNoChilsSelected);
+      }
       var responseSubmit = await assignRepository.submitAssign(tokenStored, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
       Get.back();
@@ -131,17 +142,25 @@ class AssignController extends GetxController {
 
   void updateAssign() async {
     isLoading.value = true;
-    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : this.rangeFrecuencyStart.value;
-    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : this.rangeFrecuencyEnd.value;
-    var apoderado = this.idApoderado.value;
-    var listaChilds = listChildren.value;
-    var responsable = this.idCharger.value;
+    var start = checkForever.value ? transformDateTimeToFormatBackend(DateTime.now()) : rangeFrecuencyStart.value;
+    var end = checkForever.value ? transformDateTimeToFormatForeverBackend(DateTime.now()) : rangeFrecuencyEnd.value;
+    var apoderado = idApoderado.value;
+    var listaChilds = listChildren.value.where((child) => child.isChecked);
+    var responsable = idCharger.value;
     
     var assignRepository = AssignRepositoryImpl();
     try{
+      if(apoderado == responsable) {
+        throw AssignRepositoryException(message: errorMessageSameUser);
+      }
+      if(responsable == 0){
+        throw AssignRepositoryException(message: errorMessageNoChargerSelected);
+      }
+      if(listaChilds.isEmpty){
+        throw AssignRepositoryException(message: errorMessageNoChilsSelected);
+      }
       var responseUpdated = await assignRepository.updateAssign(tokenStored, idAssignToUpdate.value, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
-      //Get.offAllNamed(AppLinks.LIST_ASSIGNS);
       listAssignController.reloadData();
       Get.back();
       Get.back();
@@ -152,5 +171,23 @@ class AssignController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  void selectedCharger(int i, String nameCharger) {
+    idCharger.value = i;
+    isChargerSelected.value = true;
+    chargerSelectedName.value = nameCharger;
+    update();
+  }
+
+  void clearCharger() {
+    idCharger.value = 0;
+    isChargerSelected.value = false;
+    chargerSelectedName.value = emptyString;
+    if(isToEditAssign.value){
+
+    }
+    update();
+  }
+
 
 }

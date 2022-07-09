@@ -1,4 +1,3 @@
-import 'package:clean_app/constants/constants.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:flutter/material.dart';
 

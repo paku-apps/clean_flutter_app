@@ -18,7 +18,7 @@ AssignChargerModel getAssignChargerModelFromAssignCharger(AssignCharger assignCh
 
 List<AutorizacionEstudianteModel> getAutorizacionEstudiantesFromAssignEstudiantes(List<EstudianteAutorizacion> listAutorizaciones) {
     List<AutorizacionEstudianteModel> listAssigns = [];
-    listAutorizaciones.forEach((assignChargerData) {
+    for (var assignChargerData in listAutorizaciones) {
     var assignCharger =  AutorizacionEstudianteModel();
     assignCharger.idAutorizacion = assignChargerData.idAutorizacion;
     assignCharger.idEstudiante = assignChargerData.idEstudiante;
@@ -27,7 +27,7 @@ List<AutorizacionEstudianteModel> getAutorizacionEstudiantesFromAssignEstudiante
     assignCharger.apMaterno =assignChargerData.apMaterno;
     assignCharger.grado = assignChargerData.grado;
     listAssigns.add(assignCharger);
-  });
+  }
 
   return listAssigns;
 }
