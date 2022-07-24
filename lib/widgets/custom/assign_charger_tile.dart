@@ -23,7 +23,7 @@ class AssignChargerTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AvatarCircleInitials(firstName: assignEstudiante.nombres, lastName: assignEstudiante.apPaterno),
+          AvatarCircleInitials(firstName: assignEstudiante.nombres, lastName: assignEstudiante.apPaterno, isEnabled: assignEstudiante.visible),
           Expanded(
             child: Container(
               padding: const EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),

@@ -26,6 +26,7 @@ List<AutorizacionEstudianteModel> getAutorizacionEstudiantesFromAssignEstudiante
     assignCharger.apPaterno = assignChargerData.apPaterno;
     assignCharger.apMaterno =assignChargerData.apMaterno;
     assignCharger.grado = assignChargerData.grado;
+    assignCharger.visible = assignChargerData.visible;
     listAssigns.add(assignCharger);
   }
 

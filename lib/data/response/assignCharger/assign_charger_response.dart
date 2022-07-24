@@ -60,6 +60,7 @@ class EstudianteAutorizacion {
         this.apPaterno = "",
         this.apMaterno = "",
         this.grado = "",
+        this.visible = true,
     });
 
     int idAutorizacion;
@@ -68,6 +69,7 @@ class EstudianteAutorizacion {
     String apPaterno;
     String apMaterno;
     String grado;
+    bool visible;
 
     factory EstudianteAutorizacion.fromJson(Map<String, dynamic> json) => EstudianteAutorizacion(
         idAutorizacion: json["id_autorizacion"],
@@ -76,6 +78,7 @@ class EstudianteAutorizacion {
         apPaterno: json["ap_paterno"],
         apMaterno: json["ap_materno"],
         grado: json["grado"],
+        visible: json["id_estudiante"] == 1003,
     );
 
     Map<String, dynamic> toJson() => {
@@ -85,5 +88,6 @@ class EstudianteAutorizacion {
         "ap_paterno": apPaterno,
         "ap_materno": apMaterno,
         "grado": grado,
+        "visible": visible
     };
 }

@@ -7,11 +7,13 @@ class AvatarCircleInitials extends StatelessWidget {
 
   String firstName;
   String lastName;
+  bool isEnabled ;
 
   AvatarCircleInitials({
     Key? key,
     required this.firstName,
-    required this.lastName
+    required this.lastName,
+    this.isEnabled = true
   }) : super(key: key);
 
   @override
@@ -20,8 +22,8 @@ class AvatarCircleInitials extends StatelessWidget {
       height: 60,
       width: 60,
       padding: const EdgeInsets.all(dimenSmall),
-      decoration: const BoxDecoration(
-            color: accentColor,
+      decoration: BoxDecoration(
+            color: isEnabled ? accentColor : textPrimaryColorDisable,
             shape: BoxShape.circle
       ),
       child: FittedBox(

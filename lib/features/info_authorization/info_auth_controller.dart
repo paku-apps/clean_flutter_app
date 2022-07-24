@@ -51,7 +51,9 @@ class InfoAuthorizationController extends GetxController {
       if(assignCharger.idAutorizado != null){
         mainCharger.value =assignCharger;
         mainCharger.value.estudiantes?.forEach((student) { 
-          listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+          if(student.visible) {
+            listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+          }
           validateCheckForAll();
         });
         isLoading.value = false;
@@ -70,6 +72,8 @@ class InfoAuthorizationController extends GetxController {
 
   void checkChild(int position){
     mainCharger.value.estudiantes![position].checked = !mainCharger.value.estudiantes![position].checked;
+    //mainCharger.value.estudiantes![position].checked = mainCharger.value.estudiantes![position].visible ? !mainCharger.value.estudiantes![position].checked : false;
+    
     var idAuth = mainCharger.value.estudiantes![position].idAutorizacion;
     var idEstudiante =  mainCharger.value.estudiantes![position].idEstudiante;
     if(mainCharger.value.estudiantes![position].checked == true){
@@ -110,7 +114,7 @@ class InfoAuthorizationController extends GetxController {
   }
   
   void validateCheckForAll() {
-    isCheckForAll.value = (listAuthConfirm.length == mainCharger.value.estudiantes?.length);
+    isCheckForAll.value = (listAuthConfirm.length == mainCharger.value.estudiantes?.where((student) => student.visible).length);
     update();
   }
 
@@ -119,19 +123,17 @@ class InfoAuthorizationController extends GetxController {
     if(!isCheckForAll.value && mainCharger.value.estudiantes != null){
       mainCharger.value.estudiantes?.forEach((child) { 
         for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
-          if(!mainCharger.value.estudiantes![pos].checked){
+          if(!mainCharger.value.estudiantes![pos].checked && mainCharger.value.estudiantes![pos].visible){
             checkChild(pos);
           }
         }
       });
     } else if(isCheckForAll.value && mainCharger.value.estudiantes != null) {
         for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
-          if(mainCharger.value.estudiantes![pos].checked){
+          if(mainCharger.value.estudiantes![pos].checked && mainCharger.value.estudiantes![pos].visible){
             checkChild(pos);
           }
         }
       }
   }
-  
-  
 }

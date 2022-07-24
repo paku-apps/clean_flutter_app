@@ -57,7 +57,8 @@ class AutorizacionEstudianteModel{
     this.apPaterno = "",
     this.apMaterno = "",
     this.grado = "",
-    this.checked = true
+    this.checked = true,
+    this.visible = true
   });
 
     int idAutorizacion;
@@ -67,6 +68,7 @@ class AutorizacionEstudianteModel{
     String apMaterno;
     String grado;
     bool checked;
+    bool visible;
 
     factory AutorizacionEstudianteModel.fromJson(Map<String, dynamic> json) => AutorizacionEstudianteModel(
         idAutorizacion: json["idAutorizacion"],
@@ -75,6 +77,7 @@ class AutorizacionEstudianteModel{
         apPaterno: json["apPaterno"],
         apMaterno: json["apMaterno"],
         grado: json["grado"],
+        visible: json["visible"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -83,7 +86,8 @@ class AutorizacionEstudianteModel{
         "nombres": nombres,
         "apPaterno": apPaterno,
         "apMaterno": apMaterno,
-        "grado": grado
+        "grado": grado,
+        "visible": visible
     };
 
 }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:clean_app/constants/dimensions.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class TextAppNormal extends StatelessWidget {
     if(isForDevice){
       return Container(
         padding: noPaddingVertical ? const EdgeInsets.fromLTRB(dimenSmall, 0, dimenSmall, 0) : const EdgeInsets.fromLTRB(dimenSmall, dimenSmall, dimenSmall, dimenSmall),
-        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color), textAlign: textAlign,),
+        child: Text(text, style: TextStyle(fontSize: textSize, fontWeight: FontWeight.normal, color: color), textAlign: textAlign, maxLines: 2, overflow: TextOverflow.ellipsis),
       );
     } else {
       var deviceData = MediaQuery.of(context);

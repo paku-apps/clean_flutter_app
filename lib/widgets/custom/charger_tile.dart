@@ -26,7 +26,6 @@ class ChargerTile extends StatelessWidget {
         children: [
           AvatarCircleInitials(firstName: name, lastName: lastName),
           Container(
-            padding: const EdgeInsets.fromLTRB(0, dimenMedium, dimenMedium, dimenMedium),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

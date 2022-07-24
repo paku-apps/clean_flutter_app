@@ -126,11 +126,14 @@ class InfoAuthorizationPage extends StatelessWidget {
                             Expanded(
                               child: AssignChargerTile(
                                   assignEstudiante: infoController.mainCharger.value.estudiantes![index],
+                                  //isEnable: index>1 ? true : false
                                 ),
                             ),
-                            Checkbox(value: infoController.mainCharger.value.estudiantes![index].checked, onChanged: (value) {
-                              infoController.checkChild(index);
-                            })
+                            infoController.mainCharger.value.estudiantes![index].visible ?
+                              Checkbox(value: infoController.mainCharger.value.estudiantes![index].checked, onChanged: (value) {
+                                infoController.checkChild(index);
+                              })
+                              : const SizedBox(width: 5)
                           ]
                         );
                       }
