@@ -45,7 +45,7 @@ class LoginController extends GetxController {
   }
 
   String? validateEmail(String value){
-    if(!GetUtils.isEmail(value)){
+    if(!GetUtils.isEmail(value.trim())){
       return "Ingresar un Email Valido";
     }
     return null;
@@ -66,7 +66,7 @@ class LoginController extends GetxController {
       return;
     }
     loginFormkey.currentState!.save();
-    login(emailController.text, passwordController.text);
+    login(emailController.text.trim(), passwordController.text);
   }
 
   void tapRememberAccount(){
