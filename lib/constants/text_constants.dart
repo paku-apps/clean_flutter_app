@@ -97,3 +97,4 @@ const registerChargerButton = "Registrar";
 const errorMessageSameUser = "Los Padres no necesitan realizar autorizaciones a si mismos.";
 const errorMessageNoChilsSelected = "Para registrar una autorización debe seleccionar una alumna.";
 const errorMessageNoChargerSelected = "Para registrar una autorización debe seleccionar Responsable.";
+const errorMessageToTimeSelected = "Para registrar una autorización debe ingresar un periodo de tiempo.";

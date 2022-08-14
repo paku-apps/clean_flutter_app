@@ -78,7 +78,7 @@ class EstudianteAutorizacion {
         apPaterno: json["ap_paterno"],
         apMaterno: json["ap_materno"],
         grado: json["grado"],
-        visible: json["id_estudiante"] == 1003,
+        visible: json["visible"] ?? true,
     );
 
     Map<String, dynamic> toJson() => {

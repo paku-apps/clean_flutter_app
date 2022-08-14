@@ -6,6 +6,7 @@ import 'package:clean_app/data/repository/assign_repository.dart';
 import 'package:clean_app/data/repository/charger_repository.dart';
 import 'package:clean_app/data/repository/child_repository.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/data/response/exception_app.dart';
 import 'package:clean_app/features/list_assigns/list_assign_controller.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/snackbars/snackbar_get_utils.dart';
@@ -128,6 +129,9 @@ class AssignController extends GetxController {
       if(listaChilds.isEmpty){
         throw AssignRepositoryException(message: errorMessageNoChilsSelected);
       }
+      if(start.isEmpty || end.isEmpty) {
+        throw AssignRepositoryException(message: errorMessageToTimeSelected);
+      }
       var responseSubmit = await assignRepository.submitAssign(tokenStored, responsable, apoderado, start, end, listaChilds);
       isLoading.value = false;
       Get.back();
@@ -137,7 +141,7 @@ class AssignController extends GetxController {
     } on AssignRepositoryException catch(e){
       showErrorSnackbar("Aviso", e.message);
       isLoading.value = false;
-    }
+    } 
   }
 
   void updateAssign() async {

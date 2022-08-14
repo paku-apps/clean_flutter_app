@@ -23,9 +23,9 @@ samples, guidance on mobile development, and a full API reference.
   > flutter pub run flutter_native_splash:create --path=splash_screen/flutter_native_splash.yaml
 
 ## Generate APK Flutter - PathServer
-
+- Change or comment openBrowser in loginpage
 - flutter build apk
 
 ## Generate Web Flutter - PathServer
-
+- Change or comment openBrowser in loginpage
 - flutter build web

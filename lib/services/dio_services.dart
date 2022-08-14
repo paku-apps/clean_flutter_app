@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:clean_app/constants/text_constants.dart';
 import 'package:clean_app/data/repository/user_repository.dart';
+import 'package:clean_app/data/response/exception_app.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/features/login/auth/authentication_controller.dart';
 import 'package:dio/dio.dart';
@@ -48,7 +49,6 @@ class HttpDioService {
         },
         onError: (error, handler) async {
           print("Error[${error.response?.statusCode}]");
-
           //Validate the unauthorized
           //if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
           if (error.response?.statusCode == 401 || error.response?.statusCode == 403) {
@@ -111,7 +111,11 @@ class HttpDioService {
       throw Exception("Bad response format");
     } on DioError catch (e) {
       print(e);
-      throw Exception(e);
+      if(e.response!.statusCode == 500){
+        throw ExceptionApp(500, e.response!.data['message']);
+      }else {
+        throw Exception("Dio Error");
+      }
     } catch (e) {
       print(e);
       throw Exception("Something wen't wrong");

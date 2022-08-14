@@ -5,6 +5,7 @@ import 'package:clean_app/data/model/assign.dart';
 import 'package:clean_app/data/model/child.dart';
 import 'package:clean_app/data/response/api_result_response.dart';
 import 'package:clean_app/data/response/assign_response.dart';
+import 'package:clean_app/data/response/exception_app.dart';
 import 'package:clean_app/data/response/path_services.dart';
 import 'package:clean_app/services/dio_services.dart';
 import 'package:http/http.dart' as http;
@@ -75,11 +76,19 @@ class AssignRepositoryImpl extends AssignRepository {
           return "ERROR";
         }
 
+      } else if(response.statusCode == 500) {
+        throw AssignRepositoryException(message: response.data.message);
       } else {
-        throw AssignRepositoryException(message: 'Error en el repository Submit Assign');
+        throw AssignRepositoryException(message: 'Error en el repository Submit Assign 0');
       }
-    } catch (e){
-      throw AssignRepositoryException(message: 'Error en el repository Submit Assign');
+    } on ExceptionApp catch (e){
+        throw AssignRepositoryException(message: e.message);
+    } on Exception catch (e){
+      if(e is ExceptionApp){
+        throw AssignRepositoryException(message: e.message, code: 500);
+      } else {
+        throw AssignRepositoryException(message: 'Error en el repository Submit Assign 3');
+      }
     }
   }
 
