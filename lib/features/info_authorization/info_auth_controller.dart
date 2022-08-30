@@ -91,6 +91,7 @@ class InfoAuthorizationController extends GetxController {
   Future<String> registerAuthorization() async {
     isLoadingRegister.value = true;
     if(isNotSelectedChildren()){
+      isLoadingRegister.value = false;
       showErrorSnackbar("Tiene que recoger un niñ@", "Por favor seleccione como minimo a un niñ@");
     } else {
       var supervisorRepo = SupervisorRepositoryImpl();
