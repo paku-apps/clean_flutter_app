@@ -86,7 +86,7 @@ class InfoAuthorizationPage extends StatelessWidget {
                       ),
                       SizedBox(width: 10),
                       Text(
-                        infoController.listAuthConfirm.length.toString(),
+                        infoController.listAuthConfirm.where((i) => i.check == true).length.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           background: Paint()
@@ -130,7 +130,7 @@ class InfoAuthorizationPage extends StatelessWidget {
                                 ),
                             ),
                             infoController.mainCharger.value.estudiantes![index].visible ?
-                              Checkbox(value: infoController.mainCharger.value.estudiantes![index].checked, onChanged: (value) {
+                              Checkbox(value: infoController.mainCharger.value.estudiantes![index].marcar, onChanged: (value) {
                                 infoController.checkChild(index);
                               })
                               : const SizedBox(width: 5)

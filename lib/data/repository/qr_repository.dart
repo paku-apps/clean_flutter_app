@@ -17,7 +17,8 @@ abstract class QRRepository {
 
   Future<String?> getQRPrincipal(int idApoderado);
   Future<String?> getQRDetail(int idApoderado);
-  Future<AssignChargerModel> getInfoFromQR(String iv, String codigo);
+  //Future<AssignChargerModel> getInfoFromQR(String iv, String codigo);
+  Future<AssignChargerModel> getInfoFromQR(String codigo);
   Future<void> clearQR();
 
 }
@@ -68,9 +69,9 @@ class QRRepositoryImpl extends QRRepository {
 
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
-        prefs.setString(keyQRPrincipal, dataResponse.iv+ separatorQR + dataResponse.qrCode); 
+        prefs.setString(keyQRPrincipal, dataResponse.qrCode.toString()); 
         prefs.setString(keyQRDate, DateTime.now().add(const Duration(hours: 12)).toString());
-        return dataResponse.iv+ separatorQR + dataResponse.qrCode;
+        return dataResponse.qrCode.toString();
 
       } else {
         throw QRRepositoryException(message: 'Wrong username or password');
@@ -98,7 +99,7 @@ class QRRepositoryImpl extends QRRepository {
 
         var apiResultResponse =  ApiResultResponse.fromJson(response.data);
         var dataResponse = qrPermissionFromJson(json.encode(apiResultResponse.data));
-        return dataResponse.iv+ separatorQR + dataResponse.qrCode;
+        return dataResponse.qrCode.toString();
 
       } else {
         throw QRRepositoryException(message: 'Error en el repository QR Detail');
@@ -109,7 +110,7 @@ class QRRepositoryImpl extends QRRepository {
   }
 
   @override
-  Future<AssignChargerModel> getInfoFromQR(String iv, String codigoQr) async {
+  Future<AssignChargerModel> getInfoFromQR(String codigo) async {
     HttpDioService httpService = HttpDioService();
     httpService.init();
 
@@ -157,8 +158,7 @@ class QRRepositoryImpl extends QRRepository {
         method: Method.POST,
         url: pathService,
         params: {
-          "iv": iv,
-          "codigoqr": codigoQr
+          "codigoqr": codigo
         }
       );
       if(response.statusCode == 200){

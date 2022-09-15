@@ -42,17 +42,18 @@ class InfoAuthorizationController extends GetxController {
 
   Future<AssignChargerModel?> getDetailFromQR() async {
     isLoading.value = true;
+    /*
     var partsQr = qrToDecoded.value.split(separatorQR);
     var iv = partsQr[0];
-    var codigoqr = partsQr[1];
+    var codigoqr = partsQr[1];*/
     QRRepository qrRepository = QRRepositoryImpl();
     try {
-      var assignCharger = await qrRepository.getInfoFromQR(iv, codigoqr);
+      var assignCharger = await qrRepository.getInfoFromQR(qrToDecoded.value);
       if(assignCharger.idAutorizado != null){
         mainCharger.value =assignCharger;
         mainCharger.value.estudiantes?.forEach((student) { 
-          if(student.visible) {
-            listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, true));
+          if(student.visible && student.marcar) {
+            listAuthConfirm.add(AuthorizationConfirmation(student.idAutorizacion, student.idEstudiante, student.marcar));
           }
           validateCheckForAll();
         });
@@ -71,12 +72,12 @@ class InfoAuthorizationController extends GetxController {
   }
 
   void checkChild(int position){
-    mainCharger.value.estudiantes![position].checked = !mainCharger.value.estudiantes![position].checked;
+    mainCharger.value.estudiantes![position].marcar = !mainCharger.value.estudiantes![position].marcar;
     //mainCharger.value.estudiantes![position].checked = mainCharger.value.estudiantes![position].visible ? !mainCharger.value.estudiantes![position].checked : false;
     
     var idAuth = mainCharger.value.estudiantes![position].idAutorizacion;
     var idEstudiante =  mainCharger.value.estudiantes![position].idEstudiante;
-    if(mainCharger.value.estudiantes![position].checked == true){
+    if(mainCharger.value.estudiantes![position].marcar == true){
       listAuthConfirm.add(AuthorizationConfirmation(idAuth, idEstudiante, true));
     } else {
       var indexFounded = listAuthConfirm.indexWhere((authValidate) => authValidate.id_estudiante == mainCharger.value.estudiantes![position].idEstudiante);
@@ -110,7 +111,7 @@ class InfoAuthorizationController extends GetxController {
   }
 
   bool isNotSelectedChildren(){
-    var listCheckedEstudiantes = mainCharger.value.estudiantes!.where((estudiante) => estudiante.checked == false).toList();
+    var listCheckedEstudiantes = mainCharger.value.estudiantes!.where((estudiante) => estudiante.marcar == false).toList();
     return listCheckedEstudiantes.length == mainCharger.value.estudiantes!.length;
   }
   
@@ -124,14 +125,14 @@ class InfoAuthorizationController extends GetxController {
     if(!isCheckForAll.value && mainCharger.value.estudiantes != null){
       mainCharger.value.estudiantes?.forEach((child) { 
         for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
-          if(!mainCharger.value.estudiantes![pos].checked && mainCharger.value.estudiantes![pos].visible){
+          if(!mainCharger.value.estudiantes![pos].marcar && mainCharger.value.estudiantes![pos].visible){
             checkChild(pos);
           }
         }
       });
     } else if(isCheckForAll.value && mainCharger.value.estudiantes != null) {
         for(var pos = 0; pos < mainCharger.value.estudiantes!.length ; pos++){
-          if(mainCharger.value.estudiantes![pos].checked && mainCharger.value.estudiantes![pos].visible){
+          if(mainCharger.value.estudiantes![pos].marcar && mainCharger.value.estudiantes![pos].visible){
             checkChild(pos);
           }
         }

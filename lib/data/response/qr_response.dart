@@ -6,20 +6,16 @@ String qrPermissionToJson(QrPermission data) => json.encode(data.toJson());
 
 class QrPermission {
     QrPermission({
-        this.iv = "",
-        this.qrCode = "",
+        this.qrCode = 0,
     });
 
-    String iv;
-    String qrCode;
+    int qrCode;
 
     factory QrPermission.fromJson(Map<String, dynamic> json) => QrPermission(
-        iv: json["iv"],
         qrCode: json["codigoqr"],
     );
 
     Map<String, dynamic> toJson() => {
-        "iv": iv,
         "codigoqr": qrCode,
     };
 }
