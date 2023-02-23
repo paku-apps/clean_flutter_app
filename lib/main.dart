@@ -42,16 +42,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Obx(() {
         if(controller.state is Authenticated){
-          if((controller.state as Authenticated).user.perfil == 1){
+          if((controller.state as Authenticated).user.perfil == PERFIL_EMPTY){
             return const DemoPage();
           }
-          if((controller.state as Authenticated).user.perfil == 2){
+          if((controller.state as Authenticated).user.perfil == PERFIL_APODERADO){
             return const HomeFatherPage();
           }
-          if((controller.state as Authenticated).user.perfil == 3){
+          if((controller.state as Authenticated).user.perfil == PERFIL_RESPONSABLE || (controller.state as Authenticated).user.perfil == PERFIL_RESPONSABLE_PLUS){
             return const HomeChargePage();
           }
-          if((controller.state as Authenticated).user.perfil == 4){
+          if((controller.state as Authenticated).user.perfil == PERFIL_SUPERVISOR){
             return const HomeSupervisorPage();
           }
         }

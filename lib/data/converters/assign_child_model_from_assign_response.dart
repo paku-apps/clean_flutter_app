@@ -37,6 +37,7 @@ List<AssignChildModel> getListAssignChildResponseToListAssignChild(List<AssignCh
     assignChild.grado = assignChildData.grado;
     assignChild.charger = getChargerFromChargerResponse(assignChildData.apoderado!);
     assignChild.autorizaciones = getListAutorizacionModelFromListAutorizacionResponse(assignChildData.autorizaciones!);
+    assignChild.priorizado = assignChildData.priorizado ?? false;
     listAssigns.add(assignChild);
   }
 

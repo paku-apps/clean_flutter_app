@@ -5,17 +5,21 @@ import 'package:clean_app/data/model/assign_child.dart';
 import 'package:clean_app/utils/extension_utils.dart';
 import 'package:clean_app/utils/function_utils.dart';
 import 'package:clean_app/widgets/avatars/avatar_initials.dart';
+import 'package:clean_app/widgets/custom/priority_lock_tile.dart';
 import 'package:clean_app/widgets/texts/text_app_normal.dart';
 import 'package:flutter/material.dart';
 
 class AssignChildTile extends StatelessWidget {
 
   AssignChildModel assignChild;
-  
+  Function actionPriority;
+  bool visibleForRolePlus;
 
   AssignChildTile({
     Key? key,
-    required this.assignChild
+    required this.assignChild,
+    required this.actionPriority,
+    required this.visibleForRolePlus
   }) : super(key: key);
 
   @override
@@ -44,7 +48,8 @@ class AssignChildTile extends StatelessWidget {
                   ],
                 )
               )
-            )
+            ),
+            visibleForRolePlus ? IconCheckPriority(child: assignChild, enabled: assignChild.priorizado, action:() => {actionPriority()}) : Container(),
           ],
         )
       ); 
@@ -68,12 +73,11 @@ class AssignChildTile extends StatelessWidget {
                   TextAppNormal(text: getRangeOfChildAuthorizations(assignChild.autorizaciones!) , color: textPrimaryColorDisable, noPaddingVertical: true, textSize: textSizeMinimunLabel,)
                 ],
               )
-            )
+            ),
+            visibleForRolePlus ? IconCheckPriority(child: assignChild, enabled: assignChild.priorizado, action:() => {actionPriority()}) : Container(),
           ],
         )
       );
     }
-
-    
   }
 }

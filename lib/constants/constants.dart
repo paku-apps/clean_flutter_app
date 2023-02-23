@@ -20,3 +20,9 @@ const errorSnackbar = Color(0xFFCF3232);
 const textPrimaryColor = Color(0xFF0E0F0F);
 const textPrimaryColorDisable = Color(0xFF4F5050);
 const textPrimaryColorUnselected = Color(0xFF787A7A);
+
+const PERFIL_EMPTY = 1;
+const PERFIL_APODERADO = 2;
+const PERFIL_RESPONSABLE = 3;
+const PERFIL_SUPERVISOR = 4;
+const PERFIL_RESPONSABLE_PLUS = 6;

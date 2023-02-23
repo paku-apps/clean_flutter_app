@@ -53,9 +53,11 @@ class HomeChargePage extends StatelessWidget {
                 onTap: (value) {
                   if(value == 0){
                     homeChargeController.getauthorizationsForToday();
+                    homeChargeController.tabIndex.value = 0;
                   }
                   if(value == 1){
                     homeChargeController.getauthorizationsForFuture();
+                    homeChargeController.tabIndex.value = 1;
                   }
                 },
                 
@@ -106,9 +108,12 @@ class HomeChargePage extends StatelessWidget {
                                 itemBuilder: (BuildContext context, int index) {
                                   return AssignChildTile(
                                     assignChild: homeChargeController.listAssignChildrenToday[index],
+                                    actionPriority: () => homeChargeController.changePriorityAction(index),
+                                    visibleForRolePlus: homeChargeController.usuarioLogged.value.perfil == PERFIL_RESPONSABLE_PLUS,
                                   );
                                 }
                             ),
+                            //controllerPage.usuarioLogged.value.perfil == PERFIL_RESPONSABLE_PLUS ? RoundedButton(text: homeChargerPageSavePriority, press: () { controllerPage.savePositionForChildren();}) : Container()
                           ]
                         )
                       );
@@ -142,6 +147,8 @@ class HomeChargePage extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return AssignChildTile(
                               assignChild: homeChargeController.listAssignChildrenProgram[index],
+                              actionPriority: () => homeChargeController.changePriorityAction(index),
+                              visibleForRolePlus: false,
                             );
                           }
                         )
@@ -151,7 +158,17 @@ class HomeChargePage extends StatelessWidget {
                 )
               )
           ]
-        )
+        ),
+        floatingActionButton: Visibility(
+          child: FloatingActionButton(
+            backgroundColor: primaryColor,
+            child: const Icon(Icons.save, size: 36),
+            onPressed: () {
+               controllerPage.savePositionForChildren();
+            }
+          ),
+          visible: (homeChargeController.usuarioLogged.value.perfil == PERFIL_RESPONSABLE_PLUS && homeChargeController.tabIndex.value == 0),
+          ),
       )
     );     
   }

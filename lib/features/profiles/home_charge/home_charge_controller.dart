@@ -13,9 +13,12 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
   var usuarioLogged = User().obs;
   var listAssignChildrenToday = List<AssignChildModel>.empty().obs;
   var listAssignChildrenProgram = List<AssignChildModel>.empty().obs;
+  var listOriginalPriority = List<int>.empty().obs;
 
   var loadingToday = false.obs;
   var loadingFuture = false.obs;
+
+  var tabIndex = 0.obs;
   
   late TabController tabBarcontroller;
 
@@ -52,7 +55,11 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     var currentUser = await repoUsuario.getCurrentUser();
     AssignChildRepository repo = AssignChildRepositoryImpl();
     List<AssignChildModel>? list = await repo.getListAssignChildToday(currentUser!.id);
-    listAssignChildrenToday.value = list;
+    
+    List<AssignChildModel> listPriorized = list.where((child) => child.priorizado).toList();
+    List<AssignChildModel> listNotPriorized = list.where((child) => !child.priorizado).toList();
+
+    listAssignChildrenToday.value = listPriorized + listNotPriorized;
     loadingToday.value = false;
     update();
     return list;
@@ -68,6 +75,34 @@ class HomeChargeController extends GetxController with SingleGetTickerProviderMi
     loadingFuture.value = false;
     update();
     return list;
+  }
+
+  Future<void> savePositionForChildren() async {
+    loadingToday.value = true;
+    var listCheckPriority = [];
+    for (var e in listAssignChildrenToday.value) {
+      {
+      if(e.priorizado){
+        listCheckPriority.add(e.id);
+      }
+    }
+    }
+    
+    if(listCheckPriority != listOriginalPriority.value){
+      loadingToday.value = true;
+      UserRepository repoUsuario = UserRepositoryImpl();
+      var currentUser = await repoUsuario.getCurrentUser();
+      AssignChildRepository repo = AssignChildRepositoryImpl();
+      bool responseSavePosition = await repo.savePositionForChildren(currentUser!.id, listAssignChildrenToday.value);
+      getauthorizationsForToday();
+    }
+  }
+
+  void changePriorityAction(int indexChild) {
+    listAssignChildrenToday.value[indexChild].priorizado = !listAssignChildrenToday.value[indexChild].priorizado;
+    var newValue = listAssignChildrenToday.value;
+    listAssignChildrenToday.value = newValue;
+    update();
   }
 
   @override

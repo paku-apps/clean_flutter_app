@@ -11,22 +11,25 @@ class AssignChildModel{
     this.apMaterno = "",
     this.grado,
     this.charger,
-    this.autorizaciones
+    this.autorizaciones,
+    this.priorizado = false
   });
 
-    int? id;
+    int id;
     String nombres;
     String apPaterno;
     String apMaterno;
     Grado? grado;
     Charger? charger;
     List<AutorizacionModel>? autorizaciones;
+    bool priorizado;
 
   factory AssignChildModel.fromJson(Map<String, dynamic> json) => AssignChildModel(
     id: json["id"],
     nombres: json["nombres"],
     apPaterno: json["fechaInicio"],
     apMaterno: json["fechaFin"],
+    priorizado: json["priorizado"],
     grado: json["etapa"] == null ? null : Grado.fromJson(json["etapa"]),
     charger: json["charger"] == null ? null : Charger.fromJson(json["charger"]),
     autorizaciones: json["autorizaciones"] == null ? null : List<AutorizacionModel>.from(json["autorizaciones"].map((x) => AutorizacionModel.fromJson(x))),
@@ -39,11 +42,19 @@ class AssignChildModel{
       "nombres": nombres,
       "ap_paterno": apPaterno,
       "ap_materno": apMaterno,
+      "priorizado": priorizado,
       "etapa": grado == null ? null : grado!.toJson(),
       "charger": charger == null ? null : charger!.toJson(),
       "autorizaciones": autorizaciones == null ? null : List<dynamic>.from(autorizaciones!.map((x) => x.toJson()))
     };
   }
+
+  List<dynamic> requestChildPriorityToJson(List<AssignChildModel> data) => List<dynamic>.from(data.map((x) => x.toJsonRequestPriority()));
+
+  Map<String, dynamic> toJsonRequestPriority() => {
+    "id": id,
+    "priorizado": priorizado
+  };
 
 }
 

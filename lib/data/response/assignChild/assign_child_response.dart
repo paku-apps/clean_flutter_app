@@ -17,6 +17,7 @@ class AssignChild {
         this.nombres = "",
         this.apPaterno = "",
         this.apMaterno = "",
+        this.priorizado = false,
         this.grado,
         this.apoderado,
         this.autorizaciones,
@@ -29,12 +30,14 @@ class AssignChild {
     Grado? grado;
     ChargerResponse? apoderado;
     List<Autorizacion>? autorizaciones;
+    bool? priorizado;
 
     factory AssignChild.fromJson(Map<String, dynamic> json) => AssignChild(
         id: json["id"],
         nombres: json["nombres"],
         apPaterno: json["ap_paterno"],
         apMaterno: json["ap_materno"],
+        priorizado: json["priorizado"] ?? false,
         grado: json["grado"] == null ? null : Grado.fromJson(json["grado"]),
         apoderado: json["apoderado"] == null ? null : ChargerResponse.fromJson(json["apoderado"]),
         autorizaciones: json["autorizaciones"] == null ? null : List<Autorizacion>.from(json["autorizaciones"].map((x) => Autorizacion.fromJson(x))),
@@ -45,6 +48,7 @@ class AssignChild {
         "nombres": nombres,
         "ap_paterno": apPaterno,
         "ap_materno": apMaterno,
+        "priorizado": priorizado ?? false,
         "grado": grado == null ? null : grado?.toJson(),
         "apoderado": apoderado == null ? null : apoderado?.toJson(),
         "autorizaciones": autorizaciones == null ? null : List<dynamic>.from(autorizaciones!.map((x) => x.toJson())),
