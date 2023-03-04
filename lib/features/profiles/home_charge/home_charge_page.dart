@@ -113,6 +113,7 @@ class HomeChargePage extends StatelessWidget {
                                   );
                                 }
                             ),
+                            Container(height: 72)
                             //controllerPage.usuarioLogged.value.perfil == PERFIL_RESPONSABLE_PLUS ? RoundedButton(text: homeChargerPageSavePriority, press: () { controllerPage.savePositionForChildren();}) : Container()
                           ]
                         )
